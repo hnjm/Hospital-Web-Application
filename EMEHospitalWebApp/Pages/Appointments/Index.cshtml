@@ -1,4 +1,4 @@
-﻿@page
+﻿@page "{searchString?}"
 @model EMEHospitalWebApp.Pages.Appointments.IndexModel
 
 @{
@@ -8,8 +8,16 @@
 <h1>Index</h1>
 
 <p>
-    <a asp-page="Create">Create New</a>
+	<a asp-page="Create">Create New</a>
 </p>
+
+<form>
+	<p>
+		Patient: <input type="text" asp-for="SearchString" />
+		<input type="submit" value="Filter" />
+	</p>
+</form>
+
 <table class="table">
     <thead>
         <tr>
@@ -22,9 +30,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Appointment[0].DateTime)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Appointment[0].DiagnosisId)
-            </th>
+	        <th>
+		        @Html.DisplayNameFor(model => model.Appointment[0].DiagnosisId)
+	        </th>
             <th></th>
         </tr>
     </thead>
@@ -40,9 +48,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.DateTime)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DiagnosisId)
-            </td>
+	        <td>
+		        @Html.DisplayFor(modelItem => item.DiagnosisId)
+	        </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |

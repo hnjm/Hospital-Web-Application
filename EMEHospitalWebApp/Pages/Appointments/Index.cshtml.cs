@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using EMEHospitalWebApp.Data;
 
@@ -20,10 +21,19 @@ namespace EMEHospitalWebApp.Pages.Appointments
         }
 
         public IList<Appointment> Appointment { get;set; }
+        [BindProperty(SupportsGet = true)]
+        public string SearchString { get; set; }
 
         public async Task OnGetAsync()
         {
-            Appointment = await _context.Appointment.ToListAsync();
+            var patient = from m in _context.Appointment
+                select m;
+            if (!string.IsNullOrEmpty(SearchString))
+            {
+                patient = patient.Where(s => s.PatientsId.Contains(SearchString));
+            }
+
+            Appointment = await patient.ToListAsync();
         }
     }
 }
