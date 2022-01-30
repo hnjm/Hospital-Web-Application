@@ -1,0 +1,54 @@
+﻿@page
+@model EMEHospitalWebApp.Pages.Appointments.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Appointment[0].PatientsId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Appointment[0].DoctorsId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Appointment[0].DateTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Appointment[0].DiagnosisId)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Appointment) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.PatientsId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DoctorsId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DiagnosisId)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
