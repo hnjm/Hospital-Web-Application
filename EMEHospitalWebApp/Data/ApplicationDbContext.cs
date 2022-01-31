@@ -11,5 +11,6 @@ namespace EMEHospitalWebApp.Data
         {
         }
         public DbSet<EMEHospitalWebApp.Data.Appointment>? Appointment { get; set; }
+        public DbSet<EMEHospitalWebApp.Data.Patient>? Patient { get; set; }
     }
 }
