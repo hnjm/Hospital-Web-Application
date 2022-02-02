@@ -15,7 +15,7 @@ namespace EMEHospitalWebApp.Data
                     throw new ArgumentNullException("Null ApplicationDbContext");
                 }
 
-                // Look for any movies.
+                //Look for any movies.
                 if (context.Appointment.Any())
                 {
                     return;   // DB has been seeded
