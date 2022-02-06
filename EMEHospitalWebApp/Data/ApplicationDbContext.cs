@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using EMEHospitalWebApp.Data;
+using EMEHospitalWebApp.Data.Party;
 
 namespace EMEHospitalWebApp.Data
 {
@@ -11,6 +11,6 @@ namespace EMEHospitalWebApp.Data
         {
         }
         public DbSet<EMEHospitalWebApp.Data.Appointment>? Appointment { get; set; }
-        public DbSet<EMEHospitalWebApp.Data.Patient>? Patient { get; set; }
+        public DbSet<PatientData>? Patients { get; set; }
     }
 }

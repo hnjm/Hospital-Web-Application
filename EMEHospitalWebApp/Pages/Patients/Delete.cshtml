@@ -1,5 +1,5 @@
 ﻿@page
-@model EMEHospitalWebApp.Pages.Patients.DeleteModel
+@model EMEHospitalWebApp.Pages.Patients.PatientsPage
 
 @{
     ViewData["Title"] = "Delete";
@@ -13,40 +13,16 @@
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Patient.FirstName)
+            @Html.DisplayNameFor(model => model.Patient.FullName)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Patient.FirstName)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Patient.LastName)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Patient.LastName)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Patient.Gender)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Patient.Gender)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Patient.BirthDate)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Patient.BirthDate)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Patient.IdCode)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Patient.IdCode)
+            @Html.DisplayFor(model => model.Patient.FullName)
         </dd>
     </dl>
     
     <form method="post">
         <input type="hidden" asp-for="Patient.Id" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-page="./Index">Back to List</a>
+        <input type="submit" value="Delete" handler="Delete" class="btn btn-danger" /> |
+        <a asp-page="./Index" asp-page-handler="Index">Back to List</a>
     </form>
 </div>
