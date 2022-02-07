@@ -1,4 +1,5 @@
-﻿using EMEHospitalWebApp.Data;
+﻿#nullable disable
+using EMEHospitalWebApp.Data;
 using EMEHospitalWebApp.Domain.Party;
 using EMEHospitalWebApp.Facade.Party;
 using Microsoft.AspNetCore.Mvc;
@@ -17,9 +18,7 @@ namespace EMEHospitalWebApp.Pages.Patients
         [BindProperty]
         public PatientView Patient { get; set; }
         public IList<PatientView> Patients { get; set; }
-
         public PatientsPage(ApplicationDbContext c) => context = c;
-
         public IActionResult OnGetCreate()
         {
             return Page();
@@ -37,13 +36,11 @@ namespace EMEHospitalWebApp.Pages.Patients
 
             return RedirectToPage("./Index", "Index");
         }
-
         public async Task<IActionResult> OnGetDetailsAsync(string id)
         {
             Patient = await GetPatient(id);
             return Patient == null ? NotFound() : Page();
         }
-
         private async Task<PatientView> GetPatient(string id)
         {
             if (id == null) return null;
@@ -52,7 +49,6 @@ namespace EMEHospitalWebApp.Pages.Patients
        
             return new PatientViewFactory().Create(new Patient(d));
         }
-
         public async Task<IActionResult> OnGetDeleteAsync(string id)
         {
             Patient = await GetPatient(id);
@@ -75,7 +71,6 @@ namespace EMEHospitalWebApp.Pages.Patients
 
             return RedirectToPage("./Index", "Index");
         }
-
         public async Task<IActionResult> OnGetEditAsync(string id)
         {
             Patient = await GetPatient(id);
@@ -109,10 +104,8 @@ namespace EMEHospitalWebApp.Pages.Patients
 
             return RedirectToPage("./Index", "Index");
         }
-
         private bool PatientExists(string id) => 
             context.Patients.Any(e => e.Id == id);
-
         public async Task OnGetIndexAsync()
         {
             var list = await context.Patients.ToListAsync();

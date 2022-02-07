@@ -16,7 +16,6 @@ namespace EMEHospitalWebApp.Facade.Party
                 BirthDate = v.BirthDate,
                 IdCode = v.IdCode
             };
-
             return new Patient(d);
         }
 

@@ -22,9 +22,5 @@ namespace EMEHospitalWebApp.Domain.Party
         public override string ToString() => $"{FirstName} {LastName} ({Gender}, {BirthDate})";
 
         public PatientData Data => data;
-
-
-
-
     }
 }

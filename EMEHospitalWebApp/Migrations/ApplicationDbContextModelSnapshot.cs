@@ -22,7 +22,7 @@ namespace EMEHospitalWebApp.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("EMEHospitalWebApp.Data.Appointment", b =>
+            modelBuilder.Entity("EMEHospitalWebApp.Data.Party.AppointmentData", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -41,7 +41,7 @@ namespace EMEHospitalWebApp.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Appointment");
+                    b.ToTable("Appointments");
                 });
 
             modelBuilder.Entity("EMEHospitalWebApp.Data.Party.PatientData", b =>

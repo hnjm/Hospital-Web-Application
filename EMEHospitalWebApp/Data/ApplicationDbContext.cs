@@ -10,7 +10,7 @@ namespace EMEHospitalWebApp.Data
             : base(options)
         {
         }
-        public DbSet<EMEHospitalWebApp.Data.Appointment>? Appointment { get; set; }
+        public DbSet<AppointmentData>? Appointments { get; set; }
         public DbSet<PatientData>? Patients { get; set; }
     }
 }
