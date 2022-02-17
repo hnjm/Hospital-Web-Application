@@ -12,16 +12,16 @@ public abstract class BaseTests<TClass>: AssertTests where TClass : class, new()
     {
         var memberName = getCallingMember(nameof(isProperty)).Replace("Test", string.Empty);
         var propertyInfo = obj.GetType().GetProperty(memberName);
-        isNotNull(propertyInfo);
+        IsNotNull(propertyInfo);
         if (isNullOrDefault(value)) value = random<T>();
         if (canWrite(propertyInfo, isReadOnly)) propertyInfo.SetValue(obj, value);
-        areEqual(value, propertyInfo.GetValue(obj));
+        AreEqual(value, propertyInfo.GetValue(obj));
     }
     private static bool isNullOrDefault<T>(T? value) => value?.Equals(default(T)) ?? true;
     private static bool canWrite(PropertyInfo i, bool isReadOnly)
     {
         var canWrite = i?.CanWrite?? false;
-        areEqual(canWrite, !isReadOnly);
+        AreEqual(canWrite, !isReadOnly);
         return canWrite;
     }
     private static T random<T>() => GetRandom.Value<T>();
