@@ -2,54 +2,9 @@
 @model EMEHospitalWebApp.Pages.Patients.PatientsPage
 
 @{
-    ViewData["Title"] = "Edit";
+	Layout = "_Edit";
 }
 
-<h1>Edit</h1>
-
-<h4>Patient</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form method="post" asp-page-handler = "Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Patient.Id" />
-            <div class="form-group">
-                <label asp-for="Patient.FirstName" class="control-label"></label>
-                <input asp-for="Patient.FirstName" class="form-control" />
-                <span asp-validation-for="Patient.FirstName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Patient.LastName" class="control-label"></label>
-                <input asp-for="Patient.LastName" class="form-control" />
-                <span asp-validation-for="Patient.LastName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Patient.Gender" class="control-label"></label>
-                <input asp-for="Patient.Gender" class="form-control" />
-                <span asp-validation-for="Patient.Gender" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Patient.BirthDate" class="control-label"></label>
-                <input asp-for="Patient.BirthDate" class="form-control" />
-                <span asp-validation-for="Patient.BirthDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Patient.IdCode" class="control-label"></label>
-                <input asp-for="Patient.IdCode" class="form-control" />
-                <span asp-validation-for="Patient.IdCode" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
-
-<div>
-    <a asp-page="./Index" asp-page-handler="Index">Back to List</a>
-</div>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+<body>
+	<partial name="_EditPatient"/>
+</body>
