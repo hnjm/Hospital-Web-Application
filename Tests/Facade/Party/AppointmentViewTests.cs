@@ -1,6 +1,5 @@
 ﻿using System;
 using EMEHospitalWebApp.Facade.Party;
-using EMEHospitalWebApp.Tests.Data.Party;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace EMEHospitalWebApp.Tests.Facade.Party

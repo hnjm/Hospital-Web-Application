@@ -1,0 +1,7 @@
+﻿@using EMEHospitalWebApp.Pages.Extensions
+@model EMEHospitalWebApp.Pages.Appointments.AppointmentsPage
+
+@Html.MyEditorFor(m => m.Appointment.PatientsId)
+@Html.MyEditorFor(m => m.Appointment.DoctorsId)
+@Html.MyEditorFor(m => m.Appointment.DateTime)
+@Html.MyEditorFor(m => m.Appointment.DiagnosisId)

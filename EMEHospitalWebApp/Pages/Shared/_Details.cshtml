@@ -1,0 +1,19 @@
+﻿@model Microsoft.AspNetCore.Mvc.RazorPages.PageModel;
+
+@{
+	ViewData["Title"] = "Details";
+	ViewData["SubTitle"] = Model?.GetType()?.Name?.Replace("Page", string.Empty)??"Unspecified";
+	Layout = "_Layout";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<h4>@ViewData["SubTitle"]</h4>
+<hr />
+<form method="post">
+	@RenderBody()
+</form>
+
+@section Scripts {
+	@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

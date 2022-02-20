@@ -2,45 +2,9 @@
 @model EMEHospitalWebApp.Pages.Appointments.AppointmentsPage
 
 @{
-    ViewData["Title"] = "Delete";
+	Layout = "_Delete";
 }
 
-<h1>Delete</h1>
-
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>Appointment</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Appointment.PatientsId)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Appointment.PatientsId)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Appointment.DoctorsId)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Appointment.DoctorsId)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Appointment.DateTime)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Appointment.DateTime)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Appointment.DiagnosisId)
-        </dt>
-	    <dd class="col-sm-10">
-		    @Html.DisplayFor(model => model.Appointment.DiagnosisId)
-	    </dd>
-    </dl>
-    
-    <form method="post">
-        <input type="hidden" asp-for="Appointment.Id" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-page="./Index" asp-page-handler="Index">Back to List</a>
-    </form>
-</div>
+<body>
+	<partial name="_EditAppointment" />
+</body>
