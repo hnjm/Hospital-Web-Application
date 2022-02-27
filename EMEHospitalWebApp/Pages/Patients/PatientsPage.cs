@@ -2,9 +2,9 @@
 using EMEHospitalWebApp.Data;
 using EMEHospitalWebApp.Domain.Party;
 using EMEHospitalWebApp.Facade.Party;
+using EMEHospitalWebApp.Infra.Party;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
 
 namespace EMEHospitalWebApp.Pages.Patients
 {
@@ -13,108 +13,56 @@ namespace EMEHospitalWebApp.Pages.Patients
     // For more details, see https://aka.ms/RazorPagesCRUD.
     public class PatientsPage : PageModel
     {
-        private readonly ApplicationDbContext context;
-        
-        [BindProperty]
-        public PatientView Patient { get; set; }
+        private readonly IPatientRepo repo;
+        [BindProperty] public PatientView BindData { get; set; }
         public IList<PatientView> Patients { get; set; }
-        public PatientsPage(ApplicationDbContext c) => context = c;
-        public IActionResult OnGetCreate()
-        {
-            return Page();
-        }
-        public async Task<IActionResult> OnPostCreateAsync()
-        {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
-
-            var d = new PatientViewFactory().Create(Patient).Data;
-            context.Patients.Add(d);
-            await context.SaveChangesAsync();
-
+        public PatientsPage(ApplicationDbContext c) => repo = new PatientsRepo(c, c.Patients);
+        public IActionResult OnGetCreate() => Page();
+        public async Task<IActionResult> OnPostCreateAsync() {
+            if (!ModelState.IsValid) return Page();
+            await repo.AddAsync(new PatientViewFactory().Create(BindData));
             return RedirectToPage("./Index", "Index");
         }
         public async Task<IActionResult> OnGetDetailsAsync(string id)
         {
-            Patient = await GetPatient(id);
-            return Patient == null ? NotFound() : Page();
-        }
-        private async Task<PatientView> GetPatient(string id)
-        {
-            if (id == null) return null;
-            var d = await context.Patients.FirstOrDefaultAsync(m => m.Id == id);
-            if (d == null) return null;
-       
-            return new PatientViewFactory().Create(new Patient(d));
+            BindData = await GetPatient(id);
+            return BindData == null ? NotFound() : Page();
         }
         public async Task<IActionResult> OnGetDeleteAsync(string id)
         {
-            Patient = await GetPatient(id);
-            return Patient == null ? NotFound() : Page();
+            BindData = await GetPatient(id);
+            return BindData == null ? NotFound() : Page();
         }
         public async Task<IActionResult> OnPostDeleteAsync(string id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var d = await context.Patients.FindAsync(id);
-
-            if (d != null)
-            {
-                context.Patients.Remove(d);
-                await context.SaveChangesAsync();
-            }
-
+            if (id == null) return NotFound();
+            await repo.DeleteAsync(id);
             return RedirectToPage("./Index", "Index");
         }
         public async Task<IActionResult> OnGetEditAsync(string id)
         {
-            Patient = await GetPatient(id);
-            return Patient == null ? NotFound() : Page();
+            BindData = await GetPatient(id);
+            return BindData == null ? NotFound() : Page();
         }
         public async Task<IActionResult> OnPostEditAsync()
         {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
-
-            var d = new PatientViewFactory().Create(Patient).Data;
-            context.Attach(d).State = EntityState.Modified;
-
-            try
-            {
-                await context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!PatientExists(Patient.Id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
+            if (!ModelState.IsValid) return Page();
+            var obj = new PatientViewFactory().Create(BindData);
+            var updated = await repo.UpdateAsync(obj);
+            if (!updated) return NotFound();
             return RedirectToPage("./Index", "Index");
         }
-        private bool PatientExists(string id) => 
-            context.Patients.Any(e => e.Id == id);
-        public async Task OnGetIndexAsync()
-        {
-            var list = await context.Patients.ToListAsync();
+        public async Task<IActionResult> OnGetIndexAsync() {
+            var list = await repo.GetAsync();
             Patients = new List<PatientView>();
-            foreach (var d in list)
+            foreach (var obj in list)
             {
-                var v = new PatientViewFactory().Create(new Patient(d));
+                var v = new PatientViewFactory().Create(obj);
                 Patients.Add(v);
             }
+            return Page();
         }
+        private async Task<PatientView> GetPatient(string id) 
+            => new PatientViewFactory().Create(await repo.GetAsync(id));
     }
 }

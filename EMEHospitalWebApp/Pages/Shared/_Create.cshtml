@@ -1,8 +1,6 @@
-﻿@model Microsoft.AspNetCore.Mvc.RazorPages.PageModel;
-
-@{
-	ViewData["Title"] = "Create";
+﻿@{
 	ViewData["SubTitle"] = Model?.GetType()?.Name?.Replace("Page", string.Empty)??"Unspecified";
+	ViewData["Title"] = "Create";
 	Layout = "_Layout";
 }
 

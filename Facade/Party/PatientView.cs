@@ -5,7 +5,7 @@ namespace EMEHospitalWebApp.Facade.Party
 {
     public class PatientView
     {
-        [Required] public string Id { get; set; }
+        [Required] public string? Id { get; set; }
         [DisplayName("First name")] public string? FirstName { get; set; }
         [DisplayName("Last name")] [Required] public string? LastName { get; set; }
         [DisplayName("Gender")] public string? Gender { get; set; }

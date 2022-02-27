@@ -2,25 +2,17 @@
 
 namespace EMEHospitalWebApp.Domain.Party
 {
-    public class Patient 
-    {
-        private const string defaultSrt = "Undefined";
-        private DateTime defaultDate = DateTime.MinValue;
-
-        private PatientData data;
-
+    public class Patient : Entity<PatientData> {
+        private const string DefaultSrt = "Undefined";
+        private DateTime _defaultDate = DateTime.MinValue;
         public Patient() : this(new PatientData()) { }
-        public Patient (PatientData d) => data = d;
-
-        public string Id => data?.Id?? defaultSrt;
-        public string FirstName => data?.FirstName ?? defaultSrt;
-        public string LastName => data?.LastName ?? defaultSrt;
-        public string Gender => data?.Gender ?? defaultSrt; 
-        public DateTime BirthDate => data?.BirthDate ?? defaultDate;   
-        public string IdCode => data?.IdCode ?? defaultSrt;
-
+        public Patient(PatientData d) : base(d) { }
+        public string Id => Data?.Id?? DefaultSrt;
+        public string FirstName => Data?.FirstName ?? DefaultSrt;
+        public string LastName => Data?.LastName ?? DefaultSrt;
+        public string Gender => Data?.Gender ?? DefaultSrt; 
+        public DateTime BirthDate => Data?.BirthDate ?? _defaultDate;   
+        public string IdCode => Data?.IdCode ?? DefaultSrt;
         public override string ToString() => $"{FirstName} {LastName} ({Gender}, {BirthDate})";
-
-        public PatientData Data => data;
     }
 }

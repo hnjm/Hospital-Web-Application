@@ -6,26 +6,26 @@ namespace EMEHospitalWebApp.Tests;
 
 public abstract class BaseTests<TClass>: AssertTests where TClass : class, new()
 {
-    protected TClass obj;
-    protected BaseTests() => obj = new TClass();
-    protected void isProperty<T>(T? value = default, bool isReadOnly = false)
+    protected TClass Obj;
+    protected BaseTests() => Obj = new TClass();
+    protected void IsProperty<T>(T? value = default, bool isReadOnly = false)
     {
-        var memberName = getCallingMember(nameof(isProperty)).Replace("Test", string.Empty);
-        var propertyInfo = obj.GetType().GetProperty(memberName);
+        var memberName = GetCallingMember(nameof(IsProperty)).Replace("Test", string.Empty);
+        var propertyInfo = Obj.GetType().GetProperty(memberName);
         IsNotNull(propertyInfo);
-        if (isNullOrDefault(value)) value = random<T>();
-        if (canWrite(propertyInfo, isReadOnly)) propertyInfo.SetValue(obj, value);
-        AreEqual(value, propertyInfo.GetValue(obj));
+        if (IsNullOrDefault(value)) value = Random<T>();
+        if (CanWrite(propertyInfo, isReadOnly)) propertyInfo.SetValue(Obj, value);
+        AreEqual(value, propertyInfo.GetValue(Obj));
     }
-    private static bool isNullOrDefault<T>(T? value) => value?.Equals(default(T)) ?? true;
-    private static bool canWrite(PropertyInfo i, bool isReadOnly)
+    private static bool IsNullOrDefault<T>(T? value) => value?.Equals(default(T)) ?? true;
+    private static bool CanWrite(PropertyInfo i, bool isReadOnly)
     {
         var canWrite = i?.CanWrite?? false;
         AreEqual(canWrite, !isReadOnly);
         return canWrite;
     }
-    private static T random<T>() => GetRandom.Value<T>();
-    private string getCallingMember(string memberName)
+    private static T Random<T>() => GetRandom.Value<T>();
+    private string GetCallingMember(string memberName)
     {
         var s = new StackTrace();
         var isNext = false;

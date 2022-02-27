@@ -1,8 +1,8 @@
 ﻿@using EMEHospitalWebApp.Pages.Extensions
 @model EMEHospitalWebApp.Pages.Patients.PatientsPage
 
-@Html.MyEditorFor(m => m.Patient.FirstName)
-@Html.MyEditorFor(m => m.Patient.LastName)
-@Html.MyEditorFor(m => m.Patient.Gender)
-@Html.MyEditorFor(m => m.Patient.BirthDate)
-@Html.MyEditorFor(m => m.Patient.IdCode)
+@Html.MyEditorForCRUD(m => m.BindData.FirstName)
+@Html.MyEditorForCRUD(m => m.BindData.LastName)
+@Html.MyEditorForCRUD(m => m.BindData.Gender)
+@Html.MyEditorForCRUD(m => m.BindData.BirthDate)
+@Html.MyEditorForCRUD(m => m.BindData.IdCode)

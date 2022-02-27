@@ -1,18 +1,20 @@
-﻿@model Microsoft.AspNetCore.Mvc.RazorPages.PageModel;
-
-@{
-	ViewData["Title"] = "Details";
+﻿@{
 	ViewData["SubTitle"] = Model?.GetType()?.Name?.Replace("Page", string.Empty)??"Unspecified";
+	ViewData["Title"] = "Details";
 	Layout = "_Layout";
+	var itemId = Model?.BindData?.Id ?? string.Empty;
 }
 
 <h1>@ViewData["Title"]</h1>
 
-<h4>@ViewData["SubTitle"]</h4>
-<hr />
-<form method="post">
+<div>
+	<h4>@ViewData["SubTitle"]</h4>
+	<hr />
 	@RenderBody()
-</form>
+
+	<a asp-page="./Edit" asp-page-handler = "Edit" asp-route-id="@itemId">Edit</a> |
+	<a asp-page="./Index" asp-page-handler="Index">Back to List</a>
+</div>
 
 @section Scripts {
 	@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

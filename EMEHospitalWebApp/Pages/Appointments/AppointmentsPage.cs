@@ -2,113 +2,61 @@
 using EMEHospitalWebApp.Data;
 using EMEHospitalWebApp.Domain.Party;
 using EMEHospitalWebApp.Facade.Party;
+using EMEHospitalWebApp.Infra.Party;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
 
 namespace EMEHospitalWebApp.Pages.Appointments
 {
-    public class AppointmentsPage : PageModel
-    {
-        private readonly ApplicationDbContext context;
-        [BindProperty] public AppointmentView Appointment { get; set; }
+    public class AppointmentsPage : PageModel {
+        private readonly IAppointmentRepo repo;
+        [BindProperty] public AppointmentView BindData { get; set; }
         public IList<AppointmentView> Appointments { get; set; }
-        public AppointmentsPage(ApplicationDbContext c) => context = c;
-        public IActionResult OnGetCreate()
-        {
-            return Page();
-        }
-        public async Task<IActionResult> OnPostCreateAsync()
-        {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
-
-            var d = new AppointmentViewFactory().Create(Appointment).Data;
-            context.Appointments.Add(d);
-            await context.SaveChangesAsync();
-
+        public AppointmentsPage(ApplicationDbContext c) => repo = new AppointmentsRepo(c, c.Appointments);
+        public IActionResult OnGetCreate() => Page();
+        public async Task<IActionResult> OnPostCreateAsync() {
+            if (!ModelState.IsValid) return Page();
+            await repo.AddAsync(new AppointmentViewFactory().Create(BindData));
             return RedirectToPage("./Index", "Index");
         }
         public async Task<IActionResult> OnGetDetailsAsync(string id)
         {
-            Appointment = await GetAppointment(id);
-            return Appointment == null ? NotFound() : Page();
-        }
-        private async Task<AppointmentView> GetAppointment(string id)
-        {
-            if (id == null) return null;
-            var d = await context.Appointments.FirstOrDefaultAsync(m => m.Id == id);
-            if (d == null) return null;
-
-            return new AppointmentViewFactory().Create(new Appointment(d));
+            BindData = await GetAppointment(id);
+            return BindData == null ? NotFound() : Page();
         }
         public async Task<IActionResult> OnGetDeleteAsync(string id)
         {
-            Appointment = await GetAppointment(id);
-            return Appointment == null ? NotFound() : Page();
+            BindData = await GetAppointment(id);
+            return BindData == null ? NotFound() : Page();
         }
-        public async Task<IActionResult> OnPostDeleteAsync(string id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var d = await context.Appointments.FindAsync(id);
-
-            if (d != null)
-            {
-                context.Appointments.Remove(d);
-                await context.SaveChangesAsync();
-            }
-
+        public async Task<IActionResult> OnPostDeleteAsync(string id) {
+            if (id == null) return NotFound();
+            await repo.DeleteAsync(id);
             return RedirectToPage("./Index", "Index");
         }
         public async Task<IActionResult> OnGetEditAsync(string id)
         {
-            Appointment = await GetAppointment(id);
-            return Appointment == null ? NotFound() : Page();
+            BindData = await GetAppointment(id);
+            return BindData == null ? NotFound() : Page();
         }
-        public async Task<IActionResult> OnPostEditAsync()
-        {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
-
-            var d = new AppointmentViewFactory().Create(Appointment).Data;
-            context.Attach(d).State = EntityState.Modified;
-
-            try
-            {
-                await context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!PatientExists(Appointment.Id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
+        public async Task<IActionResult> OnPostEditAsync() {
+            if (!ModelState.IsValid) return Page();
+            var obj = new AppointmentViewFactory().Create(BindData);
+            var updated = await repo.UpdateAsync(obj);
+            if (!updated) return NotFound();
             return RedirectToPage("./Index", "Index");
         }
-        private bool PatientExists(string id) => context.Appointments.Any(e => e.Id == id);
-        public async Task OnGetIndexAsync()
-        {
-            var list = await context.Appointments.ToListAsync();
+        public async Task<IActionResult> OnGetIndexAsync() {
+            var list = await repo.GetAsync();
             Appointments = new List<AppointmentView>();
-            foreach (var d in list)
+            foreach (var obj in list)
             {
-                var v = new AppointmentViewFactory().Create(new Appointment(d));
+                var v = new AppointmentViewFactory().Create(obj);
                 Appointments.Add(v);
             }
+            return Page();
         }
+        private async Task<AppointmentView> GetAppointment(string id)
+            => new AppointmentViewFactory().Create(await repo.GetAsync(id));
     }
 }

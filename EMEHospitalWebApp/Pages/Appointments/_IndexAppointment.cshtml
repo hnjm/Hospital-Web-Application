@@ -1,0 +1,18 @@
+﻿@using EMEHospitalWebApp.Pages.Extensions
+@model EMEHospitalWebApp.Pages.Appointments.AppointmentsPage
+
+<thead>
+	@Html.MyEditorForLabel(m => m.BindData.PatientsId) 
+	@Html.MyEditorForLabel(m => m.BindData.DoctorsId)
+	@Html.MyEditorForLabel(m => m.BindData.DateTime)
+	@Html.MyEditorForLabel(m => m.BindData.DiagnosisId)
+	<th></th>
+</thead>
+<tbody>
+	@foreach (var item in Model.Appointments) { 
+		@Html.MyEditorForTable(modelItem => item.PatientsId) 
+		@Html.MyEditorForTable(modelItem => item.DoctorsId)
+		@Html.MyEditorForTable(modelItem => item.DateTime)
+		@Html.MyEditorForTable(modelItem => item.DiagnosisId, item.Id) 
+	}
+</tbody>

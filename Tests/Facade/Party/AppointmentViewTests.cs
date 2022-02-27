@@ -7,10 +7,10 @@ namespace EMEHospitalWebApp.Tests.Facade.Party
     [TestClass]
     public class AppointmentViewTests: BaseTests<AppointmentView>
     {
-        [TestMethod] public void IdTest() => isProperty<string>();
-        [TestMethod] public void PatientsIdTest() => isProperty<string?>();
-        [TestMethod] public void DoctorsIdTest() => isProperty<string?>();
-        [TestMethod] public void DateTimeTest() => isProperty<DateTime?>();
-        [TestMethod] public void DiagnosisIdTest() => isProperty<string?>();
+        [TestMethod] public void IdTest() => IsProperty<string>();
+        [TestMethod] public void PatientsIdTest() => IsProperty<string?>();
+        [TestMethod] public void DoctorsIdTest() => IsProperty<string?>();
+        [TestMethod] public void DateTimeTest() => IsProperty<DateTime?>();
+        [TestMethod] public void DiagnosisIdTest() => IsProperty<string?>();
     }
 }

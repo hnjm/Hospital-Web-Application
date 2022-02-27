@@ -1,54 +1,10 @@
-﻿@page "{searchString?}"
+﻿@page
 @model EMEHospitalWebApp.Pages.Appointments.AppointmentsPage
 
 @{
-    ViewData["Title"] = "Appointments";
+	Layout = "_Index";
 }
 
-<h1>Appointments</h1>
-
-<p>
-	<a asp-page="Create" asp-page-handler="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Appointments[0].PatientsId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Appointments[0].DoctorsId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Appointments[0].DateTime)
-            </th>
-	        <th>
-		        @Html.DisplayNameFor(model => model.Appointments[0].DiagnosisId)
-	        </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model.Appointments) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.PatientsId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DoctorsId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DateTime)
-            </td>
-	        <td>
-		        @Html.DisplayFor(modelItem => item.DiagnosisId)
-	        </td>
-            <td>
-                <a asp-page="./Edit" asp-page-handler = "Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-page="./Details" asp-page-handler="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-page="./Delete" asp-page-handler="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<body>
+	<partial name="_IndexAppointment"/>
+</body>

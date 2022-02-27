@@ -1,0 +1,14 @@
+﻿@{
+	ViewData["SubTitle"] = Model?.GetType()?.Name?.Replace("Page", string.Empty)??"Unspecified";
+	Layout = "_Layout";
+}
+
+<h4>@ViewData["SubTitle"]</h4>
+
+<p>
+	<a asp-page="Create" asp-page-handler="Create">Create New</a>
+</p>
+
+<table class="table">
+	@RenderBody()
+</table>

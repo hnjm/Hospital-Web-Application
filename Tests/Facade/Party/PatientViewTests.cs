@@ -7,13 +7,13 @@ namespace EMEHospitalWebApp.Tests.Facade.Party
     [TestClass]
     public class PatientViewTests : BaseTests<PatientView>
     {
-        [TestMethod] public void IdTest() => isProperty<string>();
-        [TestMethod] public void FirstNameTest() => isProperty<string?>();
-        [TestMethod] public void LastNameTest() => isProperty<string?>();
-        [TestMethod] public void GenderTest() => isProperty<string?>();
-        [TestMethod] public void BirthDateTest() => isProperty<DateTime?>();
-        [TestMethod] public void IdCodeTest() => isProperty<string?>();
-        [TestMethod] public void FullNameTest() => isProperty<string>();
+        [TestMethod] public void IdTest() => IsProperty<string>();
+        [TestMethod] public void FirstNameTest() => IsProperty<string?>();
+        [TestMethod] public void LastNameTest() => IsProperty<string?>();
+        [TestMethod] public void GenderTest() => IsProperty<string?>();
+        [TestMethod] public void BirthDateTest() => IsProperty<DateTime?>();
+        [TestMethod] public void IdCodeTest() => IsProperty<string?>();
+        [TestMethod] public void FullNameTest() => IsProperty<string>();
         
     }
 }

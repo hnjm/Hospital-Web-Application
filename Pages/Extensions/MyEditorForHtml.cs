@@ -7,7 +7,7 @@ namespace EMEHospitalWebApp.Pages.Extensions
 {
     public static class MyEditorForHtml
     {
-        public static IHtmlContent MyEditorFor<TModel, TResult>(
+        public static IHtmlContentContainer MyEditorForCRUD<TModel, TResult>(
             this IHtmlHelper<TModel> h, Expression<Func<TModel, TResult>> e)
         {
             var s = HtmlStrings(h, e);

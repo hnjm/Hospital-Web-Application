@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using EMEHospitalWebApp.Data.Party;
+using EMEHospitalWebApp.Domain.Party;
 
 namespace EMEHospitalWebApp.Data
 {

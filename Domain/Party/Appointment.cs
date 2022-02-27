@@ -2,22 +2,15 @@
 
 namespace EMEHospitalWebApp.Domain.Party
 {
-    public class Appointment
-    {
-        private const string defaultSrt = "Undefined";
-        private DateTime defaultDate = DateTime.MinValue;
-
-        private AppointmentData data;
-
+    public class Appointment : Entity<AppointmentData> {
+        private const string DefaultSrt = "Undefined";
+        private DateTime _defaultDate = DateTime.MinValue;
         public Appointment() : this(new AppointmentData()) { }
-        public Appointment(AppointmentData d) => data = d;
-
-        public string Id => data?.Id ?? defaultSrt;
-        public string PatientsId => data?.PatientsId ?? defaultSrt;
-        public string DoctorsId => data?.DoctorsId ?? defaultSrt;
-        public DateTime DateTime => data?.DateTime ?? defaultDate;
-        public string DiagnosisId => data?.DiagnosisId ?? defaultSrt;
-
-        public AppointmentData Data => data;
+        public Appointment(AppointmentData d): base(d) { }
+        public string Id => Data?.Id ?? DefaultSrt;
+        public string PatientsId => Data?.PatientsId ?? DefaultSrt;
+        public string DoctorsId => Data?.DoctorsId ?? DefaultSrt;
+        public DateTime DateTime => Data?.DateTime ?? _defaultDate;
+        public string DiagnosisId => Data?.DiagnosisId ?? DefaultSrt;
     }
 }
