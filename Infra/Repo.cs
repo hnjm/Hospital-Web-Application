@@ -2,8 +2,7 @@
 using EMEHospitalWebApp.Domain;
 using Microsoft.EntityFrameworkCore;
 
-namespace EMEHospitalWebApp.Infra
-{
+namespace EMEHospitalWebApp.Infra {
     public abstract class Repo<TDomain, TData> : IRepo<TDomain> where TDomain : Entity<TData>, new() where TData: EntityData, new() {
         private readonly DbContext db;
         private readonly DbSet<TData> set;

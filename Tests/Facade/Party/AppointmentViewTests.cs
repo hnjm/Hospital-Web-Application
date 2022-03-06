@@ -4,9 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace EMEHospitalWebApp.Tests.Facade.Party
 {
-    [TestClass]
-    public class AppointmentViewTests: BaseTests<AppointmentView>
-    {
+    [TestClass] public class AppointmentViewTests: BaseTests<AppointmentView> {
         [TestMethod] public void IdTest() => IsProperty<string>();
         [TestMethod] public void PatientsIdTest() => IsProperty<string?>();
         [TestMethod] public void DoctorsIdTest() => IsProperty<string?>();

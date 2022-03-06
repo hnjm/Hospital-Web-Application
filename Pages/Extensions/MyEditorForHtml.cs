@@ -25,7 +25,7 @@ namespace EMEHospitalWebApp.Pages.Extensions
                 l.Add(new HtmlString("<dd class=\"col-sm-10\">"));
                     if (k.Contains("Details") || k.Contains("Delete"))
                     {
-                        l.Add(h.DisplayFor(e, null, new { @class = "form-control-plaintext" }));
+                        l.Add(h.DisplayFor(e));
                     }
                     else
                     {

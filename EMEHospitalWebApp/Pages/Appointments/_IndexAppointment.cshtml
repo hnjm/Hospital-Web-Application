@@ -9,10 +9,9 @@
 	<th></th>
 </thead>
 <tbody>
-	@foreach (var item in Model.Appointments) { 
-		@Html.MyEditorForTable(modelItem => item.PatientsId) 
-		@Html.MyEditorForTable(modelItem => item.DoctorsId)
-		@Html.MyEditorForTable(modelItem => item.DateTime)
-		@Html.MyEditorForTable(modelItem => item.DiagnosisId, item.Id) 
-	}
-</tbody>
+@foreach (var item in Model.Appointments) { 
+	@Html.MyEditorForTable(modelItem => item.PatientsId) 
+	@Html.MyEditorForTable(modelItem => item.DoctorsId)
+	@Html.MyEditorForTable(modelItem => item.DateTime)
+	@Html.MyEditorForTable(modelItem => item.DiagnosisId, item.Id) 
+}
