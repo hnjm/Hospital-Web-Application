@@ -1,17 +1,16 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using EMEHospitalWebApp.Infra;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using EMEHospitalWebApp.Data.Party;
-using EMEHospitalWebApp.Domain.Party;
 
-namespace EMEHospitalWebApp.Data
-{
-    public class ApplicationDbContext : IdentityDbContext
-    {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
-            : base(options)
-        {
+namespace EMEHospitalWebApp.Data {
+    public class ApplicationDbContext : IdentityDbContext {
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
+        protected override void OnModelCreating(ModelBuilder b) {
+            base.OnModelCreating(b);
+            InitializeTables(b);
         }
-        public DbSet<AppointmentData>? Appointments { get; set; }
-        public DbSet<PatientData>? Patients { get; set; }
+        private void InitializeTables(ModelBuilder b) {
+            EHEHospitalWebAppDb.InitializeTables(b);
+        }
     }
 }

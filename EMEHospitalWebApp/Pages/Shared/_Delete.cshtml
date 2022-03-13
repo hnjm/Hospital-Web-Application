@@ -14,7 +14,7 @@
 	@RenderBody()
 	
 	<form method="post">
-		<input type="hidden" asp-for-id="@Model?.BindData.Id"/>
+		<input type="hidden" asp-for-id="@Model?.ItemId"/>
 		<input type="submit" value="Delete" class="btn btn-danger"/> |
 		<a asp-page="./Index" asp-page-handler="Index">Back to List</a>
 	</form>

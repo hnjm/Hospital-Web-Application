@@ -2,8 +2,7 @@
 
 namespace EMEHospitalWebApp.Facade.Party
 {
-    public class AppointmentView
-    {
+    public class AppointmentView {
         [Required] public string? Id { get; set; }
         [Display(Name = "Patients ID")] [Required] public string? PatientsId { get; set; }
         [Display(Name = "Doctors ID")] [Required] public string? DoctorsId { get; set; }

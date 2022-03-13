@@ -2,16 +2,16 @@
 @model EMEHospitalWebApp.Pages.Patients.PatientsPage
 
 <thead>
-	@Html.MyEditorForLabel(m => m.BindData.FullName)
-	@Html.MyEditorForLabel(m => m.BindData.FirstName)
-	@Html.MyEditorForLabel(m => m.BindData.LastName)
-	@Html.MyEditorForLabel(m => m.BindData.Gender)
-	@Html.MyEditorForLabel(m => m.BindData.BirthDate)
-	@Html.MyEditorForLabel(m => m.BindData.IdCode)
+	@Html.MyEditorForLabel(m => m.Item.FullName)
+	@Html.MyEditorForLabel(m => m.Item.FirstName)
+	@Html.MyEditorForLabel(m => m.Item.LastName)
+	@Html.MyEditorForLabel(m => m.Item.Gender)
+	@Html.MyEditorForLabel(m => m.Item.BirthDate)
+	@Html.MyEditorForLabel(m => m.Item.IdCode)
 	<th></th>
 </thead>
 <tbody>
-	@foreach (var item in Model.Patients) {
+	@foreach (var item in Model.Items) {
 		@Html.MyEditorForTable(modelItem => item.FullName)
 		@Html.MyEditorForTable(modelItem => item.FirstName)
 		@Html.MyEditorForTable(modelItem => item.LastName)

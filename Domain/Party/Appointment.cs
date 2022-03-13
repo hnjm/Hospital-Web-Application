@@ -1,16 +1,13 @@
 ﻿using EMEHospitalWebApp.Data.Party;
 
-namespace EMEHospitalWebApp.Domain.Party
-{
+namespace EMEHospitalWebApp.Domain.Party {
+    public interface IAppointmentRepo : IRepo<Appointment> { }
     public class Appointment : Entity<AppointmentData> {
-        private const string DefaultSrt = "Undefined";
-        private DateTime _defaultDate = DateTime.MinValue;
         public Appointment() : this(new AppointmentData()) { }
         public Appointment(AppointmentData d): base(d) { }
-        public string Id => Data?.Id ?? DefaultSrt;
-        public string PatientsId => Data?.PatientsId ?? DefaultSrt;
-        public string DoctorsId => Data?.DoctorsId ?? DefaultSrt;
-        public DateTime DateTime => Data?.DateTime ?? _defaultDate;
-        public string DiagnosisId => Data?.DiagnosisId ?? DefaultSrt;
+        public string PatientsId => getValue(Data?.PatientsId);
+        public string DoctorsId => getValue(Data?.DoctorsId);
+        public DateTime DateTime => getValue(Data?.DateTime);
+        public string DiagnosisId => getValue(Data?.DiagnosisId);
     }
 }

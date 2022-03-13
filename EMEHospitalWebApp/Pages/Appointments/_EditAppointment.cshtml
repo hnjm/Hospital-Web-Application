@@ -1,7 +1,7 @@
 ﻿@using EMEHospitalWebApp.Pages.Extensions
 @model EMEHospitalWebApp.Pages.Appointments.AppointmentsPage
 
-@Html.MyEditorForCRUD(m => m.BindData.PatientsId)
-@Html.MyEditorForCRUD(m => m.BindData.DoctorsId)
-@Html.MyEditorForCRUD(m => m.BindData.DateTime)
-@Html.MyEditorForCRUD(m => m.BindData.DiagnosisId)
+@Html.MyEditorForCRUD(m => m.Item.PatientsId)
+@Html.MyEditorForCRUD(m => m.Item.DoctorsId)
+@Html.MyEditorForCRUD(m => m.Item.DateTime)
+@Html.MyEditorForCRUD(m => m.Item.DiagnosisId)

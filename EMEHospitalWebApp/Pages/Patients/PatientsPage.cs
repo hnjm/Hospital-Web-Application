@@ -1,37 +1,37 @@
 ﻿#nullable disable
-using EMEHospitalWebApp.Data;
 using EMEHospitalWebApp.Domain.Party;
 using EMEHospitalWebApp.Facade.Party;
+using EMEHospitalWebApp.Infra;
 using EMEHospitalWebApp.Infra.Party;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace EMEHospitalWebApp.Pages.Patients
-{
+namespace EMEHospitalWebApp.Pages.Patients {
     // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
     // To protect from overposting attacks, enable the specific properties you want to bind to.
     // For more details, see https://aka.ms/RazorPagesCRUD.
     public class PatientsPage : PageModel
     {
         private readonly IPatientRepo repo;
-        [BindProperty] public PatientView BindData { get; set; }
-        public IList<PatientView> Patients { get; set; }
-        public PatientsPage(ApplicationDbContext c) => repo = new PatientsRepo(c, c.Patients);
+        [BindProperty] public PatientView Item { get; set; }
+        public IList<PatientView> Items { get; set; }
+        public PatientsPage(EHEHospitalWebAppDb c) => repo = new PatientsRepo(c, c.Patients);
         public IActionResult OnGetCreate() => Page();
+        public string ItemId => Item?.Id ?? string.Empty;
         public async Task<IActionResult> OnPostCreateAsync() {
             if (!ModelState.IsValid) return Page();
-            await repo.AddAsync(new PatientViewFactory().Create(BindData));
+            await repo.AddAsync(new PatientViewFactory().Create(Item));
             return RedirectToPage("./Index", "Index");
         }
         public async Task<IActionResult> OnGetDetailsAsync(string id)
         {
-            BindData = await GetPatient(id);
-            return BindData == null ? NotFound() : Page();
+            Item = await GetPatient(id);
+            return Item == null ? NotFound() : Page();
         }
         public async Task<IActionResult> OnGetDeleteAsync(string id)
         {
-            BindData = await GetPatient(id);
-            return BindData == null ? NotFound() : Page();
+            Item = await GetPatient(id);
+            return Item == null ? NotFound() : Page();
         }
         public async Task<IActionResult> OnPostDeleteAsync(string id)
         {
@@ -41,24 +41,24 @@ namespace EMEHospitalWebApp.Pages.Patients
         }
         public async Task<IActionResult> OnGetEditAsync(string id)
         {
-            BindData = await GetPatient(id);
-            return BindData == null ? NotFound() : Page();
+            Item = await GetPatient(id);
+            return Item == null ? NotFound() : Page();
         }
         public async Task<IActionResult> OnPostEditAsync()
         {
             if (!ModelState.IsValid) return Page();
-            var obj = new PatientViewFactory().Create(BindData);
+            var obj = new PatientViewFactory().Create(Item);
             var updated = await repo.UpdateAsync(obj);
             if (!updated) return NotFound();
             return RedirectToPage("./Index", "Index");
         }
         public async Task<IActionResult> OnGetIndexAsync() {
             var list = await repo.GetAsync();
-            Patients = new List<PatientView>();
+            Items = new List<PatientView>();
             foreach (var obj in list)
             {
                 var v = new PatientViewFactory().Create(obj);
-                Patients.Add(v);
+                Items.Add(v);
             }
             return Page();
         }

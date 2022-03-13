@@ -1,4 +1,5 @@
 ﻿using EMEHospitalWebApp.Data.Party;
+using EMEHospitalWebApp.Infra;
 using Microsoft.EntityFrameworkCore;
 
 namespace EMEHospitalWebApp.Data
@@ -7,9 +8,9 @@ namespace EMEHospitalWebApp.Data
     {
         public static void Initialize(IServiceProvider serviceProvider)
         {
-            using (var context = new ApplicationDbContext(
+            using (var context = new EHEHospitalWebAppDb(
                        serviceProvider.GetRequiredService<
-                           DbContextOptions<ApplicationDbContext>>()))
+                           DbContextOptions<EHEHospitalWebAppDb>>()))
             {
                 if (context == null || context.Appointments == null || context.Patients == null)
                 {

@@ -13,7 +13,8 @@ public abstract class BaseTests<TClass> : TestAsserts where TClass : class, new(
         var propertyInfo = Obj.GetType().GetProperty(memberName);
         IsNotNull(propertyInfo);
         if (IsNullOrDefault(value)) value = Random<T>();
-        if (CanWrite(propertyInfo, isReadOnly)) propertyInfo.SetValue(Obj, value);
+        if (!CanWrite(propertyInfo, isReadOnly)) return; 
+        propertyInfo.SetValue(Obj, value);
         AreEqual(value, propertyInfo.GetValue(Obj));
     }
 

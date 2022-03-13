@@ -2,14 +2,14 @@
 @model EMEHospitalWebApp.Pages.Appointments.AppointmentsPage
 
 <thead>
-	@Html.MyEditorForLabel(m => m.BindData.PatientsId) 
-	@Html.MyEditorForLabel(m => m.BindData.DoctorsId)
-	@Html.MyEditorForLabel(m => m.BindData.DateTime)
-	@Html.MyEditorForLabel(m => m.BindData.DiagnosisId)
+	@Html.MyEditorForLabel(m => m.Item.PatientsId) 
+	@Html.MyEditorForLabel(m => m.Item.DoctorsId)
+	@Html.MyEditorForLabel(m => m.Item.DateTime)
+	@Html.MyEditorForLabel(m => m.Item.DiagnosisId)
 	<th></th>
 </thead>
 <tbody>
-@foreach (var item in Model.Appointments) { 
+@foreach (var item in Model.Items) { 
 	@Html.MyEditorForTable(modelItem => item.PatientsId) 
 	@Html.MyEditorForTable(modelItem => item.DoctorsId)
 	@Html.MyEditorForTable(modelItem => item.DateTime)
