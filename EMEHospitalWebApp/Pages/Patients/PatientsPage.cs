@@ -15,7 +15,7 @@ namespace EMEHospitalWebApp.Pages.Patients {
         private readonly IPatientRepo repo;
         [BindProperty] public PatientView Item { get; set; }
         public IList<PatientView> Items { get; set; }
-        public PatientsPage(EHEHospitalWebAppDb c) => repo = new PatientsRepo(c, c.Patients);
+        public PatientsPage(HospitalWebAppDb c) => repo = new PatientsRepo(c, c.Patients);
         public IActionResult OnGetCreate() => Page();
         public string ItemId => Item?.Id ?? string.Empty;
         public async Task<IActionResult> OnPostCreateAsync() {

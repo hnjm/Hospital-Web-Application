@@ -10,7 +10,7 @@ namespace EMEHospitalWebApp.Data {
             InitializeTables(b);
         }
         private void InitializeTables(ModelBuilder b) {
-            EHEHospitalWebAppDb.InitializeTables(b);
+            HospitalWebAppDb.InitializeTables(b);
         }
     }
 }

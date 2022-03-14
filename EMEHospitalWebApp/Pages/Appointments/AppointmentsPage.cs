@@ -11,7 +11,7 @@ namespace EMEHospitalWebApp.Pages.Appointments {
         private readonly IAppointmentRepo repo;
         [BindProperty] public AppointmentView Item { get; set; }
         public IList<AppointmentView> Items { get; set; }
-        public AppointmentsPage(EHEHospitalWebAppDb c) => repo = new AppointmentsRepo(c, c.Appointments);
+        public AppointmentsPage(HospitalWebAppDb c) => repo = new AppointmentsRepo(c, c.Appointments);
         public IActionResult OnGetCreate() => Page();
         public string ItemId => Item?.Id ?? string.Empty;
         public async Task<IActionResult> OnPostCreateAsync() {

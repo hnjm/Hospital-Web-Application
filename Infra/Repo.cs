@@ -42,7 +42,7 @@ namespace EMEHospitalWebApp.Infra {
             try {
                 var list = await set.ToListAsync();
                 var items = new List<TDomain>();
-                foreach (var d in list) items.Add(toDomain(d));
+                foreach (var d in list) items.Add(ToDomain(d));
                 return items;
             } catch { return new List<TDomain>(); }
         }
@@ -50,7 +50,7 @@ namespace EMEHospitalWebApp.Infra {
             try {
                 if (id == null) return new TDomain();
                 var d = await set.FirstOrDefaultAsync(x => x.Id == id);
-                return d == null ? new TDomain() : toDomain(d);
+                return d == null ? new TDomain() : ToDomain(d);
             } catch { return new TDomain(); }
         }
         public async Task<bool> UpdateAsync(TDomain obj)
@@ -64,6 +64,6 @@ namespace EMEHospitalWebApp.Infra {
                 return false;
             }
         }
-        protected abstract TDomain toDomain(TData d);
+        protected abstract TDomain ToDomain(TData d);
     };
 }

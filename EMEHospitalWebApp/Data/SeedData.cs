@@ -8,9 +8,9 @@ namespace EMEHospitalWebApp.Data
     {
         public static void Initialize(IServiceProvider serviceProvider)
         {
-            using (var context = new EHEHospitalWebAppDb(
+            using (var context = new HospitalWebAppDb(
                        serviceProvider.GetRequiredService<
-                           DbContextOptions<EHEHospitalWebAppDb>>()))
+                           DbContextOptions<HospitalWebAppDb>>()))
             {
                 if (context == null || context.Appointments == null || context.Patients == null)
                 {
