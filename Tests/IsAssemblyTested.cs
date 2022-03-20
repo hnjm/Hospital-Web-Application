@@ -39,8 +39,13 @@ namespace EMEHospitalWebApp.Tests {
         private static bool isCorrectTest(Type x) => isCorrectlyInherited(x) && isTestClass(x);
         private static bool isTestClass(Type x) => x?.HasAttribute<TestClassAttribute>() ?? false;
         private static bool isCorrectlyInherited(Type x) => x.IsInherited(typeof(IsTypeTested));
-        private static bool isTestFor(Type testingType, Type typeToBeTested)
-            => testingType.NameEnds(typeToBeTested.Name + "Tests");
+
+        private static bool isTestFor(Type testingType, Type typeToBeTested) {
+            var testName = typeToBeTested.Name;
+            var length = testName.IndexOf('`');
+            if (length >= 0) testName = testName[..length] + "Tests";
+            return testingType.NameEnds(testName);
+        }
         private void removeNotNeedTesting() => typesToBeTested?.Remove(x => !isTypeToBeTested(x));
         private bool isTypeToBeTested(Type x) => x?.BelongsTo(namespaceOfType) ?? false;
     }

@@ -41,7 +41,7 @@ namespace EMEHospitalWebApp.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Appointments", "EHEHospitalWebApp");
+                    b.ToTable("Appointments", "HospitalWebApp");
                 });
 
             modelBuilder.Entity("EMEHospitalWebApp.Data.Party.PatientData", b =>
@@ -66,7 +66,7 @@ namespace EMEHospitalWebApp.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Patients", "EHEHospitalWebApp");
+                    b.ToTable("Patients", "HospitalWebApp");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

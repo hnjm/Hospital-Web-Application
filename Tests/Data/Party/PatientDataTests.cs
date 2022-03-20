@@ -5,7 +5,7 @@ using System;
 namespace EMEHospitalWebApp.Tests.Data.Party
 {
     [TestClass]
-    public class PatientDataTests : BaseTests<PatientData>
+    public class PatientDataTests : SealedClassTests<PatientData>
     {
         [TestMethod] public void IdTest() => IsProperty<string>();
         [TestMethod] public void FirstNameTest() => IsProperty<string?>();

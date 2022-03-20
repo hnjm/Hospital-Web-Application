@@ -1,4 +1,0 @@
-﻿namespace EMEHospitalWebApp.Domain.Party
-{
-    
-}

@@ -3,14 +3,18 @@ using EMEHospitalWebApp.Domain;
 using Microsoft.EntityFrameworkCore;
 
 namespace EMEHospitalWebApp.Infra {
-    public abstract class Repo<TDomain, TData> : IRepo<TDomain> where TDomain : Entity<TData>, new() where TData: EntityData, new() {
-        private readonly DbContext db;
-        private readonly DbSet<TData> set;
-        protected Repo(DbContext c, DbSet<TData> s)
+    public abstract class Repo<TDomain, TData> : IRepo<TDomain> 
+        where TDomain : Entity<TData>, new() where TData: EntityData, new() {
+
+        private readonly DbContext? db;
+        private readonly DbSet<TData>? set;
+
+        protected Repo(DbContext? c, DbSet<TData>? s)
         {
             db = c;
             set = s;
         }
+
         public bool Add(TDomain obj) => AddAsync(obj).GetAwaiter().GetResult();
         public bool Delete(string id) => DeleteAsync(id).GetAwaiter().GetResult();
         public List<TDomain> Get() => GetAsync().GetAwaiter().GetResult();
@@ -20,8 +24,8 @@ namespace EMEHospitalWebApp.Infra {
         public async Task<bool> AddAsync(TDomain obj) {
             var d = obj.Data;
             try {
-                await set.AddAsync(d);
-                await db.SaveChangesAsync();
+                _ = (set is null) ? null : await set.AddAsync(d);
+                _ = (db is null) ? 0 : await db.SaveChangesAsync();
                 return true;
             } catch {
                 return false;
@@ -29,10 +33,10 @@ namespace EMEHospitalWebApp.Infra {
         }
         public async Task<bool> DeleteAsync(string id) {
             try {
-                var d = await set.FindAsync(id);
+                var d = (set is null) ? null : await set.FindAsync(id);
                 if (d == null) return false;
-                set.Remove(d);
-                await db.SaveChangesAsync();
+                _ = set?.Remove(d);
+                _ = (db is null) ? 0 : await db.SaveChangesAsync();
                 return true;
             } catch {
                 return false;
@@ -40,16 +44,16 @@ namespace EMEHospitalWebApp.Infra {
         }
         public async Task<List<TDomain>> GetAsync() {
             try {
-                var list = await set.ToListAsync();
+                var list = (set is null) ? new List<TData>() : await set.ToListAsync();
                 var items = new List<TDomain>();
                 foreach (var d in list) items.Add(ToDomain(d));
                 return items;
             } catch { return new List<TDomain>(); }
         }
-        public async Task<TDomain> GetAsync(string id) {
+        public async Task<TDomain> GetAsync(string? id) {
             try {
                 if (id == null) return new TDomain();
-                var d = await set.FirstOrDefaultAsync(x => x.Id == id);
+                var d = (set is null) ? null : await set.FirstOrDefaultAsync(x => x.Id == id);
                 return d == null ? new TDomain() : ToDomain(d);
             } catch { return new TDomain(); }
         }
@@ -57,8 +61,8 @@ namespace EMEHospitalWebApp.Infra {
         {
             try {
                 var d = obj.Data;
-                db.Attach(d).State = EntityState.Modified;
-                await db.SaveChangesAsync();
+                if (db is not null) db.Attach(d).State = EntityState.Modified;
+                _ = (db is null) ? 0 : await db.SaveChangesAsync();
                 return true;
             } catch {
                 return false;

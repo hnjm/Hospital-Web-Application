@@ -1,6 +1,6 @@
 ﻿namespace EMEHospitalWebApp.Data.Party
 {
-    public class PatientData : EntityData
+    public sealed class PatientData : EntityData
     {
         public string? FirstName { get; set; }
         public string? LastName { get; set; }

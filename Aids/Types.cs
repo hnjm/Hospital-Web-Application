@@ -17,7 +17,7 @@ public static class Types {
     public static bool NameStarts(this Type? t, string? name)
         => Safe.Run(() => name is not null && (t?.FullName?.StartsWith(name) ?? false));
     public static bool IsRealType(this Type? t)
-        => Safe.Run(() => t?.FullName?.IsRealTypeName() ?? false);
+        => Safe.Run(() => t?.FullName?.IsFullName() ?? false);
     public static string? GetName(Type? t) => t?.Name ?? string.Empty;
     public static List<string>? DeclaredMembers(this Type? t)
         => t?.GetMembers(allDeclaredOnly)?.ToList()?.Select(x => x.Name)?.ToList() ?? new();

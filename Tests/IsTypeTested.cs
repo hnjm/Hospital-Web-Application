@@ -40,15 +40,19 @@ namespace EMEHospitalWebApp.Tests {
         private static bool isTestFor(string testingMember, string memberToBeTested)
              => testingMember.Equals(memberToBeTested + "Test");
         private void removeNotNeedTesting() => membersOfType?.Remove(x => !isTypeToBeTested(x));
-        private static bool isTypeToBeTested(string x) => x?.IsRealTypeName() ?? false;
+        private static bool isTypeToBeTested(string x) => x?.IsTypeName() ?? false;
         private void removeNotTests(Type t) => membersOfTest?.Remove(x => !isCorrectTestMethod(x, t));
         private static bool isCorrectTestMethod(string x, Type t) => isCorrectlyInherited(t) && isTestClass(t) && isTestMethod(x, t);
         private static bool isTestClass(Type x) => x?.HasAttribute<TestClassAttribute>() ?? false;
         private static bool isTestMethod(string methodName, Type t) => t?.Method(methodName).HasAttribute<TestMethodAttribute>() ?? false;
         private static bool isCorrectlyInherited(Type x) => x.IsInherited(typeof(IsTypeTested));
-
         private static List<string>? getMembers(Type? t) => t?.DeclaredMembers();
-        private static Type? getType(Assembly? a, string? name) => a?.Type(name);
+        private static Type? getType(Assembly? a, string? name) {
+            if (string.IsNullOrWhiteSpace(name)) return null;
+            foreach (var t in a?.DefinedTypes ?? Array.Empty<TypeInfo>()) 
+                if (t.Name.StartsWith(name)) return t.AsType();
+            return null;
+        }
         private static Assembly? getAssembly(string? name) {
             while (!string.IsNullOrWhiteSpace(name)) {
                 var a = GetAssembly.ByName(name);

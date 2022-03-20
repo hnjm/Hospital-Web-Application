@@ -1,5 +1,7 @@
 using EMEHospitalWebApp.Data;
+using EMEHospitalWebApp.Domain.Party;
 using EMEHospitalWebApp.Infra;
+using EMEHospitalWebApp.Infra.Party;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,12 +13,12 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDbContext<HospitalWebAppDb>(options =>
     options.UseSqlServer(connectionString));
-
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
-
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddRazorPages();
+builder.Services.AddTransient<IAppointmentRepo, AppointmentsRepo>();
+builder.Services.AddTransient<IPatientRepo, PatientsRepo>();
 
 var app = builder.Build();
 

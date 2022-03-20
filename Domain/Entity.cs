@@ -4,7 +4,7 @@ namespace EMEHospitalWebApp.Domain
 {
     public abstract class Entity {
         private const string DefaultSrt = "Undefined";
-        private static DateTime defaultDate = DateTime.MinValue;
+        private static DateTime defaultDate => DateTime.MinValue;
         protected static string getValue(string? v) => v ?? DefaultSrt;
         protected static DateTime getValue(DateTime? v) => v ?? defaultDate;
     }
