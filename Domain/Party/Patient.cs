@@ -2,7 +2,7 @@
 
 namespace EMEHospitalWebApp.Domain.Party {
     public interface IPatientRepo : IRepo<Patient> { }
-    public class Patient : Entity<PatientData> {
+    public class Patient : UniqueEntity<PatientData> {
         public Patient() : this(new PatientData()) { }
         public Patient(PatientData d) : base(d) { }
         public string FirstName => getValue(Data?.FirstName);

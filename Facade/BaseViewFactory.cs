@@ -5,8 +5,8 @@ using EMEHospitalWebApp.Domain;
 namespace EMEHospitalWebApp.Facade {
     public abstract class BaseViewFactory<TView, TEntity, TData>
         where TView : class, new()
-        where TData : EntityData, new()
-        where TEntity : Entity<TData>
+        where TData : UniqueData, new()
+        where TEntity : UniqueEntity<TData>
     {
         protected abstract TEntity ToEntity(TData data);
         protected virtual void Copy(object? from, object? to) {

@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="EMEHospitalWebApp.Infra.Repo&lt;TDomain, TData&gt;">
+    <Position X="1.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Repo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EMEHospitalWebApp.Infra.PagedRepo&lt;TDomain, TData&gt;">
+    <Position X="3.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>PagedRepo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EMEHospitalWebApp.Infra.OrderedRepo&lt;TDomain, TData&gt;">
+    <Position X="5.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>OrderedRepo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EMEHospitalWebApp.Infra.FilteredRepo&lt;TDomain, TData&gt;">
+    <Position X="7.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>FilteredRepo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EMEHospitalWebApp.Infra.CrudRepo&lt;TDomain, TData&gt;">
+    <Position X="9.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAYAAAAAAAAAAABAAAAAEAEAAAEAAAgAAAAAIAAAAIA=</HashCode>
+      <FileName>CrudRepo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EMEHospitalWebApp.Infra.BaseRepo&lt;TDomain, TData&gt;">
+    <Position X="9.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAYAAAAAAAAQAABAAAQAAAEAAAEAAAgAAAAAIAAAAIA=</HashCode>
+      <FileName>BaseRepo.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

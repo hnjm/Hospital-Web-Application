@@ -4,7 +4,7 @@ using EMEHospitalWebApp.Data.Party;
 using EMEHospitalWebApp.Domain.Party;
 
 namespace EMEHospitalWebApp.Facade.Party {
-    public sealed class PatientView : BaseView {
+    public sealed class PatientView : UniqueView {
         [DisplayName("First name")] public string? FirstName { get; set; }
         [DisplayName("Last name")] [Required] public string? LastName { get; set; }
         [DisplayName("Gender")] public string? Gender { get; set; }

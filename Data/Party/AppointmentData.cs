@@ -1,6 +1,6 @@
 ﻿namespace EMEHospitalWebApp.Data.Party
 {
-    public sealed class AppointmentData : EntityData {
+    public sealed class AppointmentData : UniqueData {
         public string? PatientsId { get; set; }     
         public string? DoctorsId { get; set; }
         public DateTime? DateTime { get; set; }

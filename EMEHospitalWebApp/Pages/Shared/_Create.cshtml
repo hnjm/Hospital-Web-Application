@@ -8,14 +8,22 @@
 
 <h4>@ViewData["SubTitle"]</h4>
 <hr />
-<form method="post" asp-page-handler = "Create">
+<form method="post" 
+      asp-page-handler = "Create"
+      asp-route-order="@Model?.CurrentOrder" 
+      asp-route-idx="@Model?.PageIndex" 
+      asp-route-filter="@Model?.CurrentFilter">
 	<div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
 	@RenderBody()
 
 	<div class="form-group">
 		<input type="submit" value="Create" class="btn btn-primary" /> |
-		<a asp-page="Index" asp-page-handler="Index">Back to List</a>
+		<a asp-page="Index" 
+		   asp-page-handler="Index" 
+		   asp-route-order="@Model?.CurrentOrder" 
+		   asp-route-idx="@Model?.PageIndex" 
+		   asp-route-filter="@Model?.CurrentFilter">Back to List</a>
 	</div>
 </form>
 

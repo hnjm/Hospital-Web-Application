@@ -1,5 +1,6 @@
 ﻿namespace EMEHospitalWebApp.Data {
-    public class EntityData {
-        public string Id { get; set; } = Guid.NewGuid().ToString();
+    public class UniqueData {
+        public static string NewId => Guid.NewGuid().ToString();
+        public string Id { get; set; } = NewId;
     }
 }

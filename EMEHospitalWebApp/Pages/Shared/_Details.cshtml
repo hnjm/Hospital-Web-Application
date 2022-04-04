@@ -12,8 +12,15 @@
 	<hr />
 	@RenderBody()
 
-	<a asp-page="./Edit" asp-page-handler = "Edit" asp-route-id="@itemId">Edit</a> |
-	<a asp-page="./Index" asp-page-handler="Index">Back to List</a>
+	<a asp-page="./Edit" asp-page-handler = "Edit" asp-route-id="@itemId" 
+	   asp-route-order="@Model?.CurrentOrder" 
+	   asp-route-idx="@Model?.PageIndex" 
+	   asp-route-filter="@Model?.CurrentFilter">Edit</a> |
+	<a asp-page="Index" 
+	   asp-page-handler="Index" 
+	   asp-route-order="@Model?.CurrentOrder" 
+	   asp-route-idx="@Model?.PageIndex" 
+	   asp-route-filter="@Model?.CurrentFilter">Back to List</a>
 </div>
 
 @section Scripts {

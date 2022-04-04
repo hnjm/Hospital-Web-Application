@@ -1,0 +1,12 @@
+﻿@page
+@using EMEHospitalWebApp.Pages.Extensions
+@model EMEHospitalWebApp.Pages.Party.CurrencyPage
+
+@{
+	Layout = "_Create";
+}
+
+<body>
+	@Html.MyEditorForCRUD(x => x.Item.Id)
+	<partial name="_EditCurrency"/>
+</body>

@@ -1,10 +1,11 @@
 ﻿@page
-@model PatientsPage
+@using EMEHospitalWebApp.Pages.Extensions
+@model EMEHospitalWebApp.Pages.Party.PatientsPage
 
 @{
 	Layout = "_Index";
 }
 
 <body>
-	<partial name="_IndexPatient"/>
+	@Html.ShowTable(Model.Items)
 </body>

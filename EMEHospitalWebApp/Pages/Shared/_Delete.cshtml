@@ -13,10 +13,20 @@
 
 	@RenderBody()
 	
-	<form method="post">
-		<input type="hidden" asp-for-id="@Model?.ItemId"/>
+	<form method="post"
+	      asp-route-id="@Model?.ItemId"
+	      asp-route-handler="Delete"
+	      asp-route-order="@Model?.CurrentOrder"
+	      asp-route-idx="@Model?.PageIndex"
+	      asp-route-filter="@Model?.CurrentFilter">
+		  
 		<input type="submit" value="Delete" class="btn btn-danger"/> |
-		<a asp-page="./Index" asp-page-handler="Index">Back to List</a>
+
+		<a asp-page="Index"
+		   asp-page-handler="Index"
+		   asp-route-order="@Model?.CurrentOrder"
+		   asp-route-idx="@Model?.PageIndex"
+		   asp-route-filter="@Model?.CurrentFilter">Back to List</a>
 	</form>
 </div>
 

@@ -44,6 +44,46 @@ namespace EMEHospitalWebApp.Migrations
                     b.ToTable("Appointments", "HospitalWebApp");
                 });
 
+            modelBuilder.Entity("EMEHospitalWebApp.Data.Party.CountryData", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Countries", "HospitalWebApp");
+                });
+
+            modelBuilder.Entity("EMEHospitalWebApp.Data.Party.CurrencyData", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Currencies", "HospitalWebApp");
+                });
+
             modelBuilder.Entity("EMEHospitalWebApp.Data.Party.PatientData", b =>
                 {
                     b.Property<string>("Id")

@@ -1,6 +1,7 @@
 using EMEHospitalWebApp.Data;
 using EMEHospitalWebApp.Domain.Party;
 using EMEHospitalWebApp.Infra;
+using EMEHospitalWebApp.Infra.Initializers;
 using EMEHospitalWebApp.Infra.Party;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -19,14 +20,10 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
 builder.Services.AddRazorPages();
 builder.Services.AddTransient<IAppointmentRepo, AppointmentsRepo>();
 builder.Services.AddTransient<IPatientRepo, PatientsRepo>();
+builder.Services.AddTransient<ICountriesRepo, CountriesRepo>();
+builder.Services.AddTransient<ICurrenciesRepo, CurrenciesRepo>();
 
 var app = builder.Build();
-
-using (var scope = app.Services.CreateScope())
-{
-    var services = scope.ServiceProvider;
-    SeedData.Initialize(services);
-}
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
@@ -43,13 +40,10 @@ else
     app.UseHsts();
 }
 
-using (var scope = app.Services.CreateScope())
-{
-    var services = scope.ServiceProvider;
-
-    var context = services.GetRequiredService<ApplicationDbContext>();
-    context.Database.EnsureCreated();
-    // DbInitializer.Initialize(context);
+using (var scope = app.Services.CreateScope()) {
+    var db = scope.ServiceProvider.GetService<HospitalWebAppDb>();
+    db?.Database?.EnsureCreated();
+    HospitalDbInitializer.Init(db);
 }
 
 app.UseHttpsRedirection();

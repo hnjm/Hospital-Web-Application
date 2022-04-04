@@ -68,6 +68,34 @@ namespace EMEHospitalWebApp.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Countries",
+                schema: "HospitalWebApp",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Code = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Countries", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Currencies",
+                schema: "HospitalWebApp",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Currencies", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Patients",
                 schema: "HospitalWebApp",
                 columns: table => new
@@ -250,6 +278,14 @@ namespace EMEHospitalWebApp.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "Countries",
+                schema: "HospitalWebApp");
+
+            migrationBuilder.DropTable(
+                name: "Currencies",
+                schema: "HospitalWebApp");
 
             migrationBuilder.DropTable(
                 name: "Patients",

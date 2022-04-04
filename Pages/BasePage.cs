@@ -1,64 +1,59 @@
-﻿using EMEHospitalWebApp.Domain;
+﻿using EMEHospitalWebApp.Aids;
+using EMEHospitalWebApp.Domain;
 using EMEHospitalWebApp.Facade;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace EMEHospitalWebApp.Pages;
-
 public abstract class BasePage<TView, TEntity, TRepo> : PageModel 
-    where TView : BaseView
-    where TEntity : Entity
+    where TView : UniqueView
+    where TEntity : UniqueEntity
     where TRepo : IBaseRepo<TEntity> {
 
-    private readonly TRepo _repo;
+    protected readonly TRepo _repo;
     protected abstract TView ToView(TEntity? entity);
     protected abstract TEntity ToObject(TView? item);
-
+    protected abstract IActionResult redirectToIndex();
     [BindProperty] public TView? Item { get; set; }
     public IList<TView>? Items { get; set; }
-
     public string ItemId => Item?.Id ?? string.Empty;
-    public BasePage(TRepo r) => _repo = r;
-
-    public IActionResult OnGetCreate() => Page();
-    public async Task<IActionResult> OnPostCreateAsync() {
-        if (!ModelState.IsValid) return Page();
-        await _repo.AddAsync(ToObject(Item));
-        return RedirectToPage("./Index", "Index");
+    protected BasePage(TRepo r) => _repo = r;
+    protected abstract IActionResult getCreate();
+    protected abstract void setAttributes(int idx, string? filter, string? order);
+    protected virtual async Task<IActionResult> perform(Func<Task<IActionResult>>f, 
+        int idx, string? filter, string? order, bool removeKeys = false) {
+        setAttributes(idx, filter, order);
+        if (removeKeys) removeKey(nameof(filter), nameof(order));
+        return await f();
     }
-    public async Task<IActionResult> OnGetDetailsAsync(string id) {
-        Item = await GetItem(id);
-        return Item == null ? NotFound() : Page();
-    }
-    public async Task<IActionResult> OnGetDeleteAsync(string id) {
-        Item = await GetItem(id);
-        return Item == null ? NotFound() : Page();
-    }
-    public async Task<IActionResult> OnPostDeleteAsync(string? id) {
-        if (id == null) return NotFound();
-        await _repo.DeleteAsync(id);
-        return RedirectToPage("./Index", "Index");
-    }
-    public async Task<IActionResult> OnGetEditAsync(string id) {
-        Item = await GetItem(id);
-        return Item == null ? NotFound() : Page();
-    }
-    public async Task<IActionResult> OnPostEditAsync() {
-        if (!ModelState.IsValid) return Page();
-        var obj = ToObject(Item);
-        var updated = await _repo.UpdateAsync(obj);
-        if (!updated) return NotFound();
-        return RedirectToPage("./Index", "Index");
-    }
-    public async Task<IActionResult> OnGetIndexAsync() {
-        var list = await _repo.GetAsync();
-        Items = new List<TView>();
-        foreach (var obj in list) {
-            var v = ToView(obj);
-            Items.Add(v);
+    protected abstract Task<IActionResult> postCreateAsync();
+    protected abstract Task<IActionResult> getDetailsAsync(string id);
+    protected abstract Task<IActionResult> getDeleteAsync(string id);
+    protected abstract Task<IActionResult> postDeleteAsync(string? id);
+    protected abstract Task<IActionResult> getEditAsync(string id);
+    protected abstract Task<IActionResult> postEditAsync();
+    protected abstract Task<IActionResult> getIndexAsync();
+    internal virtual void removeKey(params string[] keys) {
+        foreach (var key in keys) {
+            Safe.Run(() => ModelState.Remove(key));
         }
-        return Page();
     }
-    private async Task<TView> GetItem(string id)
-        => ToView(await _repo.GetAsync(id));
+    public IActionResult OnGetCreate(int idx = 0, string? filter = null, string? order = null) {
+        setAttributes(idx, filter, order);
+        return getCreate();
+    }
+    public async Task<IActionResult> OnPostCreateAsync(int idx = 0, string? filter = null, string? order = null)
+        => await perform(postCreateAsync, idx, filter, order, true);
+    public async Task<IActionResult> OnGetDetailsAsync(string id, int idx = 0, string? filter = null, string? order = null) 
+        => await perform(() => getDetailsAsync(id), idx, filter, order);
+    public async Task<IActionResult> OnGetDeleteAsync(string id, int idx = 0, string? filter = null, string? order = null)
+        => await perform(() => getDeleteAsync(id), idx, filter, order);
+    public async Task<IActionResult> OnPostDeleteAsync(string? id, int idx = 0, string? filter = null, string? order = null)
+        => await perform(() => postDeleteAsync(id), idx, filter, order);
+    public async Task<IActionResult> OnGetEditAsync(string id, int idx = 0, string? filter = null, string? order = null)
+        => await perform(() => getEditAsync(id), idx, filter, order);
+    public async Task<IActionResult> OnPostEditAsync(int idx = 0, string? filter = null, string? order = null)
+        => await perform(postEditAsync, idx, filter, order, true);
+    public async Task<IActionResult> OnGetIndexAsync(int idx = 0, string? filter = null, string? order = null)
+        => await perform(getIndexAsync, idx, filter, order, true);
 }
