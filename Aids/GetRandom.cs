@@ -5,9 +5,7 @@ namespace EMEHospitalWebApp.Aids;
 public static class GetRandom {
     private static void minFirst<T>(ref T min, ref T max) where T : IComparable<T> {
         if (min.CompareTo(max) < 0) return;
-        var v = min;
-        min = max;
-        max = v;
+        (min, max) = (max, min);
     }
     public static int Int32(int? min = null, int? max = null) {
         var minVal = min ?? -1000;
@@ -73,11 +71,10 @@ public static class GetRandom {
         if (t == typeof(int?)) return Int32();
         if (t == typeof(char)) return Char();
         if (t == typeof(char?)) return Char();
-        if (t == typeof(string)) return String();
-        return null;
+        return t == typeof(string) ? String() : null;
     }
 
-    private static T TryGetObject<T>() {
+    private static T? TryGetObject<T>() {
         var o = TryCreate<T>();
         foreach (var pi in o?.GetType()?.GetProperties() ?? Array.Empty<PropertyInfo>()) {
             if (!pi.CanWrite) continue;
@@ -86,9 +83,9 @@ public static class GetRandom {
         }
         return o;
     }
-
-    private static T TryCreate<T>() {
-        var c = typeof(T).GetConstructor(Array.Empty<Type>());
-        return (T) c?.Invoke(null);
-    }
+    private static T? TryCreate<T>() =>
+        Safe.Run(() => {
+            var c = typeof(T).GetConstructor(Array.Empty<Type>());
+            return (c?.Invoke(null) is T t) ? t : default;
+        });
 }

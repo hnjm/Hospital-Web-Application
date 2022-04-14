@@ -10,6 +10,7 @@ namespace EMEHospitalWebApp.Facade.Party {
         [DisplayName("Gender")] public string? Gender { get; set; }
         [DisplayName("Birth Date")] public DateTime? BirthDate { get; set; }
         [DisplayName("ID code")] public string? IdCode { get; set; }
+        [DisplayName("Country")] public string? Country { get; set; }
         [DisplayName("Full name")] public string? FullName { get; set; }
     }
 

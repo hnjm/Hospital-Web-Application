@@ -22,11 +22,11 @@ namespace EMEHospitalWebApp.Tests.Facade.Party {
             var v = GetRandom.Value<AppointmentView>();
             var e = new AppointmentViewFactory().Create(v);
             IsNotNull(e);
-            AreEqual(e.Id, v.Id);
-            AreEqual(e.PatientsId, v.PatientsId);
-            AreEqual(e.DoctorsId, v.DoctorsId);
-            AreEqual(e.DateTime, v.DateTime);
-            AreEqual(e.DiagnosisId, v.DiagnosisId);
+            AreEqual(e.Id, v?.Id);
+            AreEqual(e.PatientsId, v?.PatientsId);
+            AreEqual(e.DoctorsId, v?.DoctorsId);
+            AreEqual(e.DateTime, v?.DateTime);
+            AreEqual(e.DiagnosisId, v?.DiagnosisId);
         }
     }
 }

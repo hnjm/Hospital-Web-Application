@@ -19,6 +19,7 @@
     public interface IBaseRepo<T> where T: UniqueEntity {
         bool Add(T obj);
         List<T> Get();
+        List<T> GetAll<TKey>(Func<T, TKey>? orderBy = null);
         T Get(string id);
         bool Update(T obj);
         bool Delete(string id);

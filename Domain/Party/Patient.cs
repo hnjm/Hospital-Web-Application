@@ -10,6 +10,7 @@ namespace EMEHospitalWebApp.Domain.Party {
         public string Gender => getValue(Data?.Gender); 
         public DateTime BirthDate => getValue(Data?.BirthDate);   
         public string IdCode => getValue(Data?.IdCode);
+        public string Country => getValue(Data?.Country);
         public override string ToString() => $"{FirstName} {LastName} ({Gender}, {BirthDate})";
     }
 }

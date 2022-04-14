@@ -1,4 +1,7 @@
-﻿namespace EMEHospitalWebApp.Pages {
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+
+namespace EMEHospitalWebApp.Pages {
     public interface IPageModel {
         public int PageIndex { get; }
         public string? CurrentFilter { get; }

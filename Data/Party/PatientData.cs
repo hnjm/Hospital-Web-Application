@@ -7,5 +7,6 @@
         public string? Gender { get; set; }
         public DateTime? BirthDate { get; set; }
         public string? IdCode { get; set; }
+        public string? Country { get; set; }
     }
 }

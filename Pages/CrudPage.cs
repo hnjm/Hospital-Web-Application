@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace EMEHospitalWebApp.Pages;
 
 public abstract class CrudPage<TView, TEntity, TRepo> : BasePage<TView, TEntity, TRepo>
-    where TView : UniqueView
+    where TView : UniqueView, new()
     where TEntity : UniqueEntity
     where TRepo : ICrudRepo<TEntity> {
     protected CrudPage(TRepo r) : base(r) { }

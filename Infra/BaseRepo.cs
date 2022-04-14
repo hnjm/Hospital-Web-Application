@@ -13,6 +13,7 @@ namespace EMEHospitalWebApp.Infra {
         }
         public abstract bool Add(TDomain obj);
         public abstract List<TDomain> Get();
+        public abstract List<TDomain> GetAll<TKey>(Func<TDomain, TKey>? orderBy = null);
         public abstract TDomain Get(string id);
         public abstract bool Update(TDomain obj);
         public abstract bool Delete(string id);

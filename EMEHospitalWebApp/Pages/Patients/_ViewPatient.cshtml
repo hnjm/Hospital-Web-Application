@@ -6,4 +6,4 @@
 @Html.MyEditorForCRUD(m => m.Item.Gender)
 @Html.MyEditorForCRUD(m => m.Item.BirthDate)
 @Html.MyEditorForCRUD(m => m.Item.IdCode)
-@Html.MyDropDownFor(x => x.Item.Country, Model.Countries)
+@Html.MyEditorForCRUD(m => m.Item.Country, Model.CountryName(Model.Item.Country))

@@ -27,10 +27,10 @@ namespace EMEHospitalWebApp.Tests {
 
         private static T Random<T>() => GetRandom.Value<T>();
 
-        private string GetCallingMember(string memberName) {
+        private static string GetCallingMember(string memberName) {
             var s = new StackTrace();
             var isNext = false;
-            for (int i = 0; i < s.FrameCount - 1; i++) {
+            for (var i = 0; i < s.FrameCount - 1; i++) {
                 var n = s.GetFrame(i)?.GetMethod()?.Name ?? string.Empty;
                 if (n is "MoveNext" or "Start") continue;
                 if (isNext) return n;

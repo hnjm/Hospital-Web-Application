@@ -90,6 +90,8 @@ namespace EMEHospitalWebApp.Tests.Aids {
         [TestMethod] public void ValueTest() {
             var x = GetRandom.Value<AppointmentData>();
             var y = GetRandom.Value<AppointmentData>();
+            IsNotNull(x);
+            IsNotNull(y);
             AreNotEqual(x.Id, y.Id, nameof(x.Id));
             AreNotEqual(x.PatientsId, y.PatientsId, nameof(x.PatientsId));
             AreNotEqual(x.DoctorsId, y.DoctorsId, nameof(x.DoctorsId));
