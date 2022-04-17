@@ -1,4 +1,6 @@
-﻿using EMEHospitalWebApp.Domain.Party;
+﻿using EMEHospitalWebApp.Aids;
+using EMEHospitalWebApp.Data;
+using EMEHospitalWebApp.Domain.Party;
 using EMEHospitalWebApp.Facade.Party;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -18,15 +20,23 @@ namespace EMEHospitalWebApp.Pages.Party {
             nameof(PatientView.Gender),
             nameof(PatientView.BirthDate),
             nameof(PatientView.IdCode),
-            nameof(PatientView.Country)
+            nameof(PatientView.CountryId)
         };
         public IEnumerable<SelectListItem> Countries
             => countries?.GetAll(x => x.Name)?.Select(x => new SelectListItem(x.Name, x.Id)) ?? new List<SelectListItem>();
         public string CountryName(string? countryId = null)
             => Countries?.FirstOrDefault(x => x.Value == (countryId ?? string.Empty))?.Text ?? "Undefined";
+        public IEnumerable<SelectListItem> Genders
+            => Enum.GetValues<IsoGender>()?.Select(x => new SelectListItem(x.Description(), x.ToString())) ?? new List<SelectListItem>();
+        public string GenderDescription(IsoGender? x)
+            => (x ?? IsoGender.NotApplicable).Description();
         public override object? GetValue(string name, PatientView v) {
             var r = base.GetValue(name, v);
-            return name == nameof(PatientView.Country) ? CountryName(r as string) : r;
+            //if (name == "CountryId") return name == nameof(PatientView.CountryId) ? CountryName(r as string) : r;
+            //return name == nameof(PatientView.Gender) ? GenderDescription((IsoGender) r) : r;
+            return name == nameof(PatientView.CountryId) ? CountryName(r as string)
+                : name == nameof(PatientView.Gender) ? GenderDescription((IsoGender)r)
+                : r;
         }
     }
 }

@@ -12,6 +12,12 @@ namespace EMEHospitalWebApp.Tests.Aids {
         {
             var x = GetRandom.Value(min, max);
             var y = GetRandom.Value(min, max);
+            var i = 0;
+            while (x == y) {
+                y = GetRandom.Value(min, max);
+                if (i == 2) AreNotEqual(x, y);
+                i++;
+            }
             IsInstanceOfType(x, typeof(T));
             IsInstanceOfType(y, typeof(T));
             IsTrue(x >= (min.CompareTo(max) < 0 ? min : max));
@@ -92,11 +98,11 @@ namespace EMEHospitalWebApp.Tests.Aids {
             var y = GetRandom.Value<AppointmentData>();
             IsNotNull(x);
             IsNotNull(y);
-            AreNotEqual(x.Id, y.Id, nameof(x.Id));
-            AreNotEqual(x.PatientsId, y.PatientsId, nameof(x.PatientsId));
-            AreNotEqual(x.DoctorsId, y.DoctorsId, nameof(x.DoctorsId));
-            AreNotEqual(x.DateTime, y.DateTime, nameof(x.DateTime));
-            AreNotEqual(x.DiagnosisId, y.DiagnosisId, nameof(x.DiagnosisId));
+            AreNotEqual(x?.Id, y?.Id, nameof(x.Id));
+            AreNotEqual(x?.PatientsId, y?.PatientsId, nameof(x.PatientsId));
+            AreNotEqual(x?.DoctorsId, y?.DoctorsId, nameof(x.DoctorsId));
+            AreNotEqual(x?.DateTime, y?.DateTime, nameof(x.DateTime));
+            AreNotEqual(x?.DiagnosisId, y?.DiagnosisId, nameof(x.DiagnosisId));
         }
     }
 }

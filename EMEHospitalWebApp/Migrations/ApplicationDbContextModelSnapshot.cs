@@ -44,6 +44,34 @@ namespace EMEHospitalWebApp.Migrations
                     b.ToTable("Appointments", "HospitalWebApp");
                 });
 
+            modelBuilder.Entity("EMEHospitalWebApp.Data.Party.CountryCurrencyData", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CountryId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CurrencyId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CountryCurrency", "HospitalWebApp");
+                });
+
             modelBuilder.Entity("EMEHospitalWebApp.Data.Party.CountryData", b =>
                 {
                     b.Property<string>("Id")
@@ -84,6 +112,34 @@ namespace EMEHospitalWebApp.Migrations
                     b.ToTable("Currencies", "HospitalWebApp");
                 });
 
+            modelBuilder.Entity("EMEHospitalWebApp.Data.Party.PatientAppointmentData", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("AppointmentId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PatientId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PatientAppointment", "HospitalWebApp");
+                });
+
             modelBuilder.Entity("EMEHospitalWebApp.Data.Party.PatientData", b =>
                 {
                     b.Property<string>("Id")
@@ -92,14 +148,14 @@ namespace EMEHospitalWebApp.Migrations
                     b.Property<DateTime?>("BirthDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Country")
+                    b.Property<string>("CountryId")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Gender")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("Gender")
+                        .HasColumnType("int");
 
                     b.Property<string>("IdCode")
                         .HasColumnType("nvarchar(max)");

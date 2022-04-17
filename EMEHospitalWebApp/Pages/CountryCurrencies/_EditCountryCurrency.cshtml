@@ -1,0 +1,8 @@
+﻿@using EMEHospitalWebApp.Pages.Extensions
+@model EMEHospitalWebApp.Pages.Party.CountryCurrenciesPage
+
+@Html.MyDropDownFor(x => x.Item.CountryId, Model.Countries)
+@Html.MyDropDownFor(x => x.Item.CurrencyId, Model.Currencies)
+@Html.MyEditorForCRUD(m => m.Item.Code)
+@Html.MyEditorForCRUD(m => m.Item.Name)
+@Html.MyEditorForCRUD(m => m.Item.Description)

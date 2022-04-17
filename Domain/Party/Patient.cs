@@ -1,4 +1,6 @@
-﻿using EMEHospitalWebApp.Data.Party;
+﻿using EMEHospitalWebApp.Aids;
+using EMEHospitalWebApp.Data;
+using EMEHospitalWebApp.Data.Party;
 
 namespace EMEHospitalWebApp.Domain.Party {
     public interface IPatientRepo : IRepo<Patient> { }
@@ -7,10 +9,11 @@ namespace EMEHospitalWebApp.Domain.Party {
         public Patient(PatientData d) : base(d) { }
         public string FirstName => getValue(Data?.FirstName);
         public string LastName => getValue(Data?.LastName);
-        public string Gender => getValue(Data?.Gender); 
-        public DateTime BirthDate => getValue(Data?.BirthDate);   
+        public IsoGender Gender => getValue(Data?.Gender); 
+        public DateTime BirthDate => getValue(Data?.BirthDate);
         public string IdCode => getValue(Data?.IdCode);
-        public string Country => getValue(Data?.Country);
-        public override string ToString() => $"{FirstName} {LastName} ({Gender}, {BirthDate})";
+        public string CountryId => getValue(Data?.CountryId);
+        public override string ToString() => $"{FirstName} {LastName} ({Gender.Description()}, {BirthDate})";
+        public Country? Country { get; set; }
     }
 }

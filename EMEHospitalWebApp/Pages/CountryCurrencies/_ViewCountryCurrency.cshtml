@@ -1,0 +1,8 @@
+﻿@using EMEHospitalWebApp.Pages.Extensions
+@model EMEHospitalWebApp.Pages.Party.CountryCurrenciesPage
+
+@Html.MyEditorForCRUD(m => m.Item.CountryId, Model.CountryName(Model.Item.CountryId))
+@Html.MyEditorForCRUD(m => m.Item.CurrencyId, Model.CurrencyName(Model.Item.CurrencyId))
+@Html.MyEditorForCRUD(m => m.Item.Code)
+@Html.MyEditorForCRUD(m => m.Item.Name)
+@Html.MyEditorForCRUD(m => m.Item.Description)

@@ -7,7 +7,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace EMEHospitalWebApp.Tests.Facade {
     [TestClass] public class BaseViewFactoryTests : AbstractClassTests {
         private class TestClass : BaseViewFactory<AppointmentView, Appointment, AppointmentData> {
-            protected override Appointment ToEntity(AppointmentData d) => new Appointment(d);
+            protected override Appointment ToEntity(AppointmentData d) => new(d);
         }
         protected override object CreateObj() => new TestClass();
     }

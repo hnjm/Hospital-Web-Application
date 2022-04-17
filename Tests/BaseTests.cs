@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.Reflection;
 using EMEHospitalWebApp.Aids;
 
@@ -24,8 +25,8 @@ namespace EMEHospitalWebApp.Tests {
             AreEqual(canWrite, !isReadOnly);
             return canWrite;
         }
-
-        private static T Random<T>() => GetRandom.Value<T>();
+        
+        private static T? Random<T>() => GetRandom.Value<T>();
 
         private static string GetCallingMember(string memberName) {
             var s = new StackTrace();
@@ -38,6 +39,20 @@ namespace EMEHospitalWebApp.Tests {
             }
 
             return string.Empty;
+        }
+        protected internal static void ArePropertiesEqual(object x, object y) {
+            var e = Array.Empty<PropertyInfo>();
+            var px = x?.GetType()?.GetProperties() ?? e;
+            var hasProperties = false;
+            foreach (var p in px) {
+                var a = p.GetValue(x, null);
+                var py = y?.GetType()?.GetProperty(p.Name);
+                if (py is null) continue;
+                var b = py?.GetValue(y, null);
+                AreEqual(a, b);
+                hasProperties = true;
+            }
+            IsTrue(hasProperties, $"No properties found for {x}");
         }
     }
 }

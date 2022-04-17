@@ -3,7 +3,7 @@
 
 @Html.MyEditorForCRUD(m => m.Item.FirstName)
 @Html.MyEditorForCRUD(m => m.Item.LastName)
-@Html.MyEditorForCRUD(m => m.Item.Gender)
+@Html.MyEditorForCRUD(m => m.Item.Gender, Model.GenderDescription(Model.Item.Gender))
 @Html.MyEditorForCRUD(m => m.Item.BirthDate)
 @Html.MyEditorForCRUD(m => m.Item.IdCode)
-@Html.MyEditorForCRUD(m => m.Item.Country, Model.CountryName(Model.Item.Country))
+@Html.MyEditorForCRUD(m => m.Item.CountryId, Model.CountryName(Model.Item.CountryId))

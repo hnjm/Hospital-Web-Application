@@ -6,6 +6,7 @@ namespace EMEHospitalWebApp.Domain
         public static string DefaultSrt => "Undefined";
         private static DateTime defaultDate => DateTime.MinValue;
         protected static string getValue(string? v) => v ?? DefaultSrt;
+        protected static IsoGender getValue(IsoGender? v) => v ?? IsoGender.NotApplicable;
         protected static DateTime getValue(DateTime? v) => v ?? defaultDate;
     }
     public abstract class UniqueEntity<TData> : UniqueEntity where TData : UniqueData, new() {

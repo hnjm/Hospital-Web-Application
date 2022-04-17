@@ -1,0 +1,8 @@
+﻿@using EMEHospitalWebApp.Pages.Extensions
+@model EMEHospitalWebApp.Pages.Party.PatientAppointmentsPage
+
+@Html.MyEditorForCRUD(m => m.Item.PatientId, Model.PatientName(Model.Item.PatientId))
+@Html.MyEditorForCRUD(m => m.Item.AppointmentId, Model.AppointmentName(Model.Item.AppointmentId))
+@Html.MyEditorForCRUD(m => m.Item.Code)
+@Html.MyEditorForCRUD(m => m.Item.Name)
+@Html.MyEditorForCRUD(m => m.Item.Description)

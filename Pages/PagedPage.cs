@@ -11,9 +11,6 @@ public abstract class PagedPage<TView, TEntity, TRepo> : OrderedPage<TView, TEnt
     where TEntity : UniqueEntity
     where TRepo : IPagedRepo<TEntity> {
     protected PagedPage(TRepo r) : base(r) { }
-
-    public string? SortOrder(string propertyName) => _repo.SortOrder(propertyName);
-
     public int PageIndex {
         get => _repo.PageIndex; 
         set => _repo.PageIndex = value;

@@ -1,0 +1,8 @@
+﻿@using EMEHospitalWebApp.Pages.Extensions
+@model EMEHospitalWebApp.Pages.Party.PatientAppointmentsPage
+
+@Html.MyDropDownFor(x => x.Item.PatientId, Model.Patients)
+@Html.MyDropDownFor(x => x.Item.AppointmentId, Model.Appointments)
+@Html.MyEditorForCRUD(m => m.Item.Code)
+@Html.MyEditorForCRUD(m => m.Item.Name)
+@Html.MyEditorForCRUD(m => m.Item.Description)

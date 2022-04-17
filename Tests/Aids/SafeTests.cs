@@ -1,17 +1,24 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using EMEHospitalWebApp.Aids;
 
 namespace EMEHospitalWebApp.Tests.Aids {
     [TestClass] public class SafeTests : IsTypeTested {
-        [TestMethod] public void RunTest() {
-            var list1 = new List<string>() { "test" };
-            var list2 = new List<string>();
-            Assert.AreEqual(true, Safe.Run(() => list1.Count == 1, true));
-            Assert.AreEqual(false, Safe.Run(() => list1.Count == 2, true));
-            Assert.AreEqual(false, Safe.Run(() => list2.First() == "test"));
+        private int expected;
+        private int def;
+        [TestInitialize] public void Init() {
+            expected = GetRandom.Int32();
+            def = GetRandom.Int32();
         }
+        [TestMethod] public void RunFuncTest() {
+            var actual = Safe.Run(() => expected, def);
+            AreEqual(expected, actual);
+        }
+        [TestMethod] public void RunFuncExceptionTest() {
+            var actual = Safe.Run(() => throw new Exception(), def);
+            AreEqual(def, actual);
+        }
+        [TestMethod] public void RunActionTest() => Safe.Run(() => throw new Exception(), def);
+        [TestMethod] public void RunTest() { }
     }
 }

@@ -18,12 +18,3 @@ public abstract class BaseInitializer<TData> where TData : UniqueData{
     protected abstract IEnumerable<TData> getEntities { get; }
     internal bool isCorrectIsoCode(string id) => !string.IsNullOrWhiteSpace(id) && char.IsLetter(id[0]);
 }
-
-public static class HospitalDbInitializer {
-    public static void Init(HospitalWebAppDb? db) {
-        new AppointmentsInitializer(db).Init();
-        new PatientsInitializer(db).Init();
-        new CountryInitializer(db).Init();
-        new CurrencyInitializer(db).Init();
-    }
-}

@@ -19,14 +19,16 @@ namespace EMEHospitalWebApp.Tests.Facade.Party {
             AreEqual(v.DiagnosisId, e.DiagnosisId);
         }
         [TestMethod] public void CreateEntityTest() {
-            var v = GetRandom.Value<AppointmentView>();
+            var v = GetRandom.Value<AppointmentView>() as AppointmentView;
             var e = new AppointmentViewFactory().Create(v);
             IsNotNull(e);
-            AreEqual(e.Id, v?.Id);
-            AreEqual(e.PatientsId, v?.PatientsId);
-            AreEqual(e.DoctorsId, v?.DoctorsId);
-            AreEqual(e.DateTime, v?.DateTime);
-            AreEqual(e.DiagnosisId, v?.DiagnosisId);
+            IsNotNull(v);
+            ArePropertiesEqual(e, v);
+            AreEqual(e.Id, v.Id);
+            AreEqual(e.PatientsId, v.PatientsId);
+            AreEqual(e.DoctorsId, v.DoctorsId);
+            AreEqual(e.DateTime, v.DateTime);
+            AreEqual(e.DiagnosisId, v.DiagnosisId);
         }
     }
 }

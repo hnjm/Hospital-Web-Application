@@ -1,10 +1,32 @@
 ﻿@page
+@using EMEHospitalWebApp.Facade.Party
 @model EMEHospitalWebApp.Pages.Party.CountriesPage
 
 @{
 	Layout = "_Details";
+	var columns = new[]{
+		nameof(CurrencyView.Code)
+		, nameof(CurrencyView.Name)
+		, nameof(CurrencyView.Description)
+	};
+
+	object? getValue<T>(string propertyName, T item){
+		var pi = typeof(T).GetProperty(propertyName);
+		return pi?.GetValue(item);
+	}
 }
 
 <body>
 	<partial name="_EditCountry" />
+	<br><h4>Currencies</h4><br>
+	<table class="table">
+		<thead>
+			<tr>@foreach(var name in columns) { <td>@Html.Raw(name)</td> }</tr>
+		</thead>
+		<tbody>
+			@foreach (var item in Model.Currencies){
+				<tr>@foreach (var name in columns){ <td>@Html.Raw(getValue(name, item))</td> }</tr>
+			}
+		</tbody>
+	</table>
 </body>

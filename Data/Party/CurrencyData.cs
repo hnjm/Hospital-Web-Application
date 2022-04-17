@@ -1,3 +1,5 @@
-﻿namespace EMEHospitalWebApp.Data.Party;
+﻿namespace EMEHospitalWebApp.Data.Party {
+    public sealed class CurrencyData : NamedData { }
+}
 
-public sealed class CurrencyData : NamedData {}
+

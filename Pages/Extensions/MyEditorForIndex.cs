@@ -1,5 +1,4 @@
-﻿using System.Linq.Expressions;
-using Microsoft.AspNetCore.Html;
+﻿using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using EMEHospitalWebApp.Facade;
 
@@ -41,7 +40,7 @@ namespace EMEHospitalWebApp.Pages.Extensions
             var pageName = m?.GetType()?.Name?.Replace("Page", "");
             var l = new List<object> {
                 new HtmlString("<th>"),
-                new HtmlString($"<a href=\"/{pageName}?"),
+                new HtmlString($"<a style=\"text-decoration:none;\" href=\"/{pageName}?"),
                 new HtmlString($"handler=Index&amp;"),
                 new HtmlString($"order={m?.SortOrder(name)}&amp;"),
                 new HtmlString($"idx={m?.PageIndex ?? 0}&amp;"),

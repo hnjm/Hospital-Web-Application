@@ -13,7 +13,7 @@ namespace EMEHospitalWebApp.Pages.Extensions
             return new HtmlContentBuilder(s);
         }
         public static IHtmlContentContainer MyEditorForCRUD<TModel, TResult>(
-            this IHtmlHelper<TModel> h, Expression<Func<TModel, TResult>> e, TResult value) {
+            this IHtmlHelper<TModel> h, Expression<Func<TModel, TResult>> e, dynamic value) {
             var s = HtmlStrings(h, e, value);
             return new HtmlContentBuilder(s);
         }
@@ -39,7 +39,7 @@ namespace EMEHospitalWebApp.Pages.Extensions
             l.Add(new HtmlString("</div>"));
             return l;
         }
-        private static List<object> HtmlStrings<TModel, TResult>(IHtmlHelper<TModel> h, Expression<Func<TModel, TResult>> e, TResult value) {
+        private static List<object> HtmlStrings<TModel, TResult>(IHtmlHelper<TModel> h, Expression<Func<TModel, TResult>> e, dynamic value) {
             var k = h.ViewContext.ActionDescriptor.DisplayName;
             var l = new List<object>
             {

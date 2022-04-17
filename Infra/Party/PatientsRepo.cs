@@ -9,13 +9,13 @@ namespace EMEHospitalWebApp.Infra.Party {
             var y = CurrentFilter;
             return string.IsNullOrWhiteSpace(y)
                 ? q : q.Where(
-                x => contains(x.FirstName, y)
-                     || contains(x.LastName, y)
-                     || contains(x.Id, y)
-                     || contains(x.Gender, y)
-                     || contains(x.IdCode, y)
-                     || contains(x.Country, y)
-                     || contains(x.BirthDate.ToString(), y));
+                x => x.FirstName.Contains(y)
+                     || x.LastName.Contains(y)
+                     || x.Id.Contains(y)
+                     || x.Gender.ToString().Contains(y)
+                     || x.IdCode.Contains(y)
+                     || x.CountryId.Contains(y)
+                     || x.BirthDate.ToString().Contains(y));
         }
     }
 }

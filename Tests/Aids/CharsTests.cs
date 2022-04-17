@@ -3,19 +3,26 @@ using EMEHospitalWebApp.Aids;
 
 namespace EMEHospitalWebApp.Tests.Aids {
     [TestClass] public class CharsTests : IsTypeTested {
+        private char letter;
+        private char digit;
+        [TestInitialize] public void Init() {
+            letter = GetRandom.Char('a', 'z');
+            digit = GetRandom.Char('0', '9');
+        }
         [TestMethod] public void IsNameCharTest() {
-            Assert.IsTrue(Chars.IsNameChar('a'));
-            Assert.IsTrue(Chars.IsNameChar('9'));
-            Assert.IsFalse(Chars.IsNameChar('.'));
-            Assert.IsFalse(Chars.IsNameChar('_'));
-            Assert.IsFalse(Chars.IsNameChar(':'));
+            Assert.IsTrue(letter.IsNameChar());
+            Assert.IsFalse(digit.IsNameChar());
+            Assert.IsFalse('.'.IsNameChar());
+            Assert.IsFalse('_'.IsNameChar());
+            Assert.IsFalse(':'.IsNameChar());
         }
         [TestMethod] public void IsFullNameCharTest() {
-            Assert.IsTrue(Chars.IsFullNameChar('a'));
-            Assert.IsTrue(Chars.IsFullNameChar('9'));
-            Assert.IsTrue(Chars.IsFullNameChar('.'));
-            Assert.IsFalse(Chars.IsFullNameChar('_'));
-            Assert.IsFalse(Chars.IsFullNameChar(':'));
+            Assert.IsTrue(letter.IsFullNameChar());
+            Assert.IsFalse(digit.IsFullNameChar());
+            Assert.IsTrue('.'.IsFullNameChar());
+            Assert.IsTrue('`'.IsFullNameChar());
+            Assert.IsFalse('_'.IsFullNameChar());
+            Assert.IsFalse(':'.IsFullNameChar());
         }
     }
 }

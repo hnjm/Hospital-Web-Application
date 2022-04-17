@@ -83,16 +83,52 @@ namespace EMEHospitalWebApp.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "CountryCurrency",
+                schema: "HospitalWebApp",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    CountryId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CurrencyId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Code = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CountryCurrency", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Currencies",
                 schema: "HospitalWebApp",
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Code = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Currencies", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PatientAppointment",
+                schema: "HospitalWebApp",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    PatientId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    AppointmentId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Code = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PatientAppointment", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -103,9 +139,10 @@ namespace EMEHospitalWebApp.Migrations
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Gender = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Gender = table.Column<int>(type: "int", nullable: true),
                     BirthDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    IdCode = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    IdCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CountryId = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -284,7 +321,15 @@ namespace EMEHospitalWebApp.Migrations
                 schema: "HospitalWebApp");
 
             migrationBuilder.DropTable(
+                name: "CountryCurrency",
+                schema: "HospitalWebApp");
+
+            migrationBuilder.DropTable(
                 name: "Currencies",
+                schema: "HospitalWebApp");
+
+            migrationBuilder.DropTable(
+                name: "PatientAppointment",
                 schema: "HospitalWebApp");
 
             migrationBuilder.DropTable(

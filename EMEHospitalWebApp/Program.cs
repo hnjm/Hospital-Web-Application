@@ -1,4 +1,5 @@
 using EMEHospitalWebApp.Data;
+using EMEHospitalWebApp.Domain;
 using EMEHospitalWebApp.Domain.Party;
 using EMEHospitalWebApp.Infra;
 using EMEHospitalWebApp.Infra.Initializers;
@@ -22,6 +23,8 @@ builder.Services.AddTransient<IAppointmentRepo, AppointmentsRepo>();
 builder.Services.AddTransient<IPatientRepo, PatientsRepo>();
 builder.Services.AddTransient<ICountriesRepo, CountriesRepo>();
 builder.Services.AddTransient<ICurrenciesRepo, CurrenciesRepo>();
+builder.Services.AddTransient<ICountryCurrencyRepo, CountryCurrencyRepo>();
+builder.Services.AddTransient<IPatientAppointmentRepo, PatientAppointmentRepo>();
 
 var app = builder.Build();
 
@@ -41,6 +44,7 @@ else
 }
 
 using (var scope = app.Services.CreateScope()) {
+    GetRepo.SetService(app.Services);
     var db = scope.ServiceProvider.GetService<HospitalWebAppDb>();
     db?.Database?.EnsureCreated();
     HospitalDbInitializer.Init(db);

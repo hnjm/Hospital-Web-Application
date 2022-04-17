@@ -8,6 +8,8 @@ namespace EMEHospitalWebApp.Infra {
         public DbSet<PatientData>? Patients { get; set; }
         public DbSet<CountryData>? Countries { get; set; }
         public DbSet<CurrencyData>? Currencies { get; set; }
+        public DbSet<CountryCurrencyData>? CountryCurrency { get; set; }
+        public DbSet<PatientAppointmentData>? PatientAppointment { get; set; }
         protected override void OnModelCreating(ModelBuilder b) {
             base.OnModelCreating(b);
             InitializeTables(b);
@@ -19,6 +21,8 @@ namespace EMEHospitalWebApp.Infra {
             _ = b?.Entity<PatientData>()?.ToTable(nameof(Patients), s);
             _ = b?.Entity<CountryData>()?.ToTable(nameof(Countries), s);
             _ = b?.Entity<CurrencyData>()?.ToTable(nameof(Currencies), s);
+            _ = b?.Entity<CountryCurrencyData>()?.ToTable(nameof(CountryCurrency), s);
+            _ = b?.Entity<PatientAppointmentData>()?.ToTable(nameof(PatientAppointment), s);
         }
     }
 }

@@ -1,47 +1,76 @@
-﻿using EMEHospitalWebApp.Aids;
+﻿using System;
+using System.Linq;
+using EMEHospitalWebApp.Aids;
+using EMEHospitalWebApp.Data;
+using EMEHospitalWebApp.Data.Party;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace EMEHospitalWebApp.Tests.Aids {
     [TestClass] public class TypesTests : IsTypeTested {
+        private Type type = typeof(object);
+        private string? nameSpace;
+        private string? fullName;
+        private string? name;
+        private string? randomStr;
+        [TestInitialize] public void Init() {
+            type = typeof(CountryData);
+            nameSpace = type.Namespace;
+            fullName = type.FullName;
+            name = type.Name;
+            randomStr = GetRandom.String();
+        }
         [TestMethod] public void BelongsToTest() {
-            var s = "test".GetType();
-            Assert.AreEqual(false, s.BelongsTo("test"));
+            IsTrue(type.BelongsTo(nameSpace));
+            IsFalse(type.BelongsTo(randomStr));
         }
         [TestMethod] public void NameIsTest() {
-            var s = "test".GetType();
-            Assert.AreEqual(false, s.NameIs("test"));
+            IsTrue(type.BelongsTo(fullName));
+            IsFalse(type.BelongsTo(randomStr));
         }
         [TestMethod] public void NameEndsTest() {
-            var s = "test".GetType();
-            Assert.AreEqual(false, s.NameEnds("test"));
+            IsTrue(type.NameEnds(name));
+            IsFalse(type.NameEnds(randomStr));
         }
         [TestMethod] public void NameStartsTest() {
-            var s = "test".GetType();
-            Assert.AreEqual(false, s.NameStarts("test"));
+            IsTrue(type.NameStarts(nameSpace));
+            IsFalse(type.NameStarts(randomStr));
         }
         [TestMethod] public void IsRealTypeTest() {
-            var s = "test".GetType();
-            Assert.AreEqual(true, s.IsRealType());
+            IsTrue(type.IsRealType());
+            IsTrue(typeof(NamedData).IsRealType());
+            var a = GetAssembly.OfType(this);
+            var allTypes = (a?.GetTypes() ?? Array.Empty<Type>()).ToList();
+            var realTypes = allTypes?.FindAll(t => t.IsRealType());
+            IsNotNull(realTypes);
+            IsTrue(realTypes.Count < (allTypes?.Count ?? 0));
+            IsTrue(realTypes.Count > 0);
         }
         [TestMethod] public void GetNameTest() {
-            var s = "test".GetType();
-            Assert.AreEqual("String", Types.GetName(s));
+            AreEqual(name, Types.GetName(type));
+            AreNotEqual(randomStr, Types.GetName(type));
         }
         [TestMethod] public void DeclaredMembersTest() {
-            var s = "test".GetType();
-            Assert.IsTrue(s.DeclaredMembers()!.Count != 0);
+            AreEqual(1, type.DeclaredMembers()?.Count);
+            var l = typeof(NamedData)?.DeclaredMembers();
+            AreEqual(9, l?.Count);
         }
         [TestMethod] public void IsInheritedTest() {
-            var s = "test".GetType();
-            Assert.AreEqual(false, s.IsInherited(s));
+            Type? nullType = null;
+            IsTrue(type.IsInherited(typeof(object)));
+            IsTrue(type.IsInherited(typeof(NamedData)));
+            IsFalse(type.IsInherited(nullType));
+            IsFalse(type.IsInherited(typeof(CurrencyData)));
         }
         [TestMethod] public void HasAttributeTest() {
-            var s = "test".GetType();
-            Assert.AreEqual(false, s.HasAttribute<TestClassAttribute>());
+            IsFalse(type.HasAttribute<TestClassAttribute>());
+            IsTrue(GetType().HasAttribute<TestClassAttribute>());
+            IsFalse(type.HasAttribute<TestMethodAttribute>());
+            IsFalse(GetType().HasAttribute<TestMethodAttribute>());
         }
         [TestMethod] public void MethodTest() {
-            var s = "test".GetType();
-            Assert.AreEqual(null, s.Method("test"));
+            var n = nameof(MethodTest);
+            var m = GetType().Method(n);
+            AreEqual(n, m?.Name);
         }
     }
 }

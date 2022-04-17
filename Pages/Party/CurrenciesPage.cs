@@ -3,8 +3,8 @@ using EMEHospitalWebApp.Facade.Party;
 
 namespace EMEHospitalWebApp.Pages.Party;
 
-public class CurrencyPage : PagedPage<CurrencyView, Currency, ICurrenciesRepo> {
-    public CurrencyPage(ICurrenciesRepo r) : base(r) { }
+public class CurrenciesPage : PagedPage<CurrencyView, Currency, ICurrenciesRepo> {
+    public CurrenciesPage(ICurrenciesRepo r) : base(r) { }
     protected override Currency ToObject(CurrencyView? item) => new CurrencyViewFactory().Create(item);
     protected override CurrencyView ToView(Currency? entity) => new CurrencyViewFactory().Create(entity);
     public override string[] IndexColumns { get; } = {
@@ -12,4 +12,5 @@ public class CurrencyPage : PagedPage<CurrencyView, Currency, ICurrenciesRepo> {
         nameof(CurrencyView.Name),
         nameof(CurrencyView.Description),
     };
+    public List<Country?> Countries => ToObject(Item).Countries;
 }

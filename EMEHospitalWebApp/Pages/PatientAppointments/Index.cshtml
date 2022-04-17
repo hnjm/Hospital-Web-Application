@@ -1,0 +1,11 @@
+﻿@page
+@using EMEHospitalWebApp.Pages.Extensions
+@model EMEHospitalWebApp.Pages.Party.PatientAppointmentsPage
+
+@{
+	Layout = "_Index";
+}
+
+<body>
+	@Html.ShowTable(Model.Items)
+</body>

@@ -1,24 +1,27 @@
 ﻿using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using EMEHospitalWebApp.Aids;
+using EMEHospitalWebApp.Data.Party;
 
 namespace EMEHospitalWebApp.Tests.Aids {
     [TestClass] public class ListsTests : IsTypeTested {
-        [TestMethod] public void GetFirstTest() {
-            Assert.AreEqual("test1", new List<string>() { "test1", "test2" }.GetFirst());
-            Assert.AreEqual(null, new List<string>().GetFirst());
-        }
+        private List<int> list = new ();
+        [TestInitialize] public void Init() => list = new List<int>() { 1, 2, 3, 4, 5, 6 };
+        [TestMethod] public void GetFirstTest() => AreEqual(1, list.GetFirst());
         [TestMethod] public void RemoveTest() {
-            Assert.AreEqual(true, new List<string>() { "test" }.Remove("test"));
-            Assert.AreEqual(false, new List<string>() { "test" }.Remove("tes"));
+            var cnt = list.Remove(x => x < 4);
+            AreEqual(3, cnt);
+            AreEqual(4, list.GetFirst());
         }
         [TestMethod] public void IsEmptyTest() {
-            Assert.AreEqual(false, new List<string>() { "test" }.IsEmpty());
-            Assert.AreEqual(true, new List<string>().IsEmpty());
+            List<CountryData>? countries = null;
+            IsFalse(list.IsEmpty());
+            IsTrue(countries.IsEmpty());
+            IsTrue(new List<string>().IsEmpty());
         }
         [TestMethod] public void ContainsItemTest() {
-            Assert.AreEqual(true, new List<string>() { "test1", "test2" }.ContainsItem(x => x == "test2"));
-            Assert.AreEqual(false, new List<string>() { "test1", "test3" }.ContainsItem(x => x == "test2"));
+            IsTrue(list.ContainsItem(x => x < 2));
+            IsFalse(list.ContainsItem(x => x > 6));
         }
     }
 }

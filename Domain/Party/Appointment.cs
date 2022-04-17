@@ -9,5 +9,6 @@ namespace EMEHospitalWebApp.Domain.Party {
         public string DoctorsId => getValue(Data?.DoctorsId);
         public DateTime DateTime => getValue(Data?.DateTime);
         public string DiagnosisId => getValue(Data?.DiagnosisId);
+        public override string ToString() => $"{PatientsId} {DoctorsId} {DateTime} {DiagnosisId}";
     }
 }

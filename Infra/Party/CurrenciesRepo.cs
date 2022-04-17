@@ -10,9 +10,9 @@ public class CurrenciesRepo : Repo<Currency, CurrencyData>, ICurrenciesRepo {
         var y = CurrentFilter;
         return string.IsNullOrWhiteSpace(y)
             ? q : q.Where(
-            x => contains(x.Code, y)
-                 || contains(x.Name, y)
-                 || contains(x.Id, y)
-                 || contains(x.Description, y));
+            x => x.Code.Contains(y)
+                 || x.Name.Contains(y)
+                 || x.Id.Contains(y)
+                 || x.Description.Contains(y));
     }
 }
