@@ -10,4 +10,5 @@ public abstract class FilteredRepo<TDomain, TData> : CrudRepo<TDomain, TData>
     public string? CurrentFilter { get; set; }
     protected internal override IQueryable<TData> createSql() => addFilter(base.createSql());
     internal virtual IQueryable<TData> addFilter(IQueryable<TData> q) => q;
+
 }
