@@ -3,7 +3,7 @@
 namespace EMEHospitalWebApp.Domain.Party;
 
 public interface ICountryCurrencyRepo : IRepo<CountryCurrency> { }
-public class CountryCurrency : NamedEntity<CountryCurrencyData> {
+public sealed class CountryCurrency : NamedEntity<CountryCurrencyData> {
     public CountryCurrency() : this(new CountryCurrencyData()) { }
     public CountryCurrency(CountryCurrencyData d) : base(d) { }
     public string CountryId => getValue(Data?.CountryId);

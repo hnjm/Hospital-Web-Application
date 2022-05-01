@@ -6,7 +6,7 @@ using EMEHospitalWebApp.Data.Party;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace EMEHospitalWebApp.Tests.Aids {
-    [TestClass] public class TypesTests : IsTypeTested {
+    [TestClass] public class TypesTests : TypeTests {
         private Type type = typeof(object);
         private string? nameSpace;
         private string? fullName;
@@ -20,57 +20,57 @@ namespace EMEHospitalWebApp.Tests.Aids {
             randomStr = GetRandom.String();
         }
         [TestMethod] public void BelongsToTest() {
-            IsTrue(type.BelongsTo(nameSpace));
-            IsFalse(type.BelongsTo(randomStr));
+            isTrue(type.BelongsTo(nameSpace));
+            isFalse(type.BelongsTo(randomStr));
         }
         [TestMethod] public void NameIsTest() {
-            IsTrue(type.BelongsTo(fullName));
-            IsFalse(type.BelongsTo(randomStr));
+            isTrue(type.BelongsTo(fullName));
+            isFalse(type.BelongsTo(randomStr));
         }
         [TestMethod] public void NameEndsTest() {
-            IsTrue(type.NameEnds(name));
-            IsFalse(type.NameEnds(randomStr));
+            isTrue(type.NameEnds(name));
+            isFalse(type.NameEnds(randomStr));
         }
         [TestMethod] public void NameStartsTest() {
-            IsTrue(type.NameStarts(nameSpace));
-            IsFalse(type.NameStarts(randomStr));
+            isTrue(type.NameStarts(nameSpace));
+            isFalse(type.NameStarts(randomStr));
         }
         [TestMethod] public void IsRealTypeTest() {
-            IsTrue(type.IsRealType());
-            IsTrue(typeof(NamedData).IsRealType());
+            isTrue(type.IsRealType());
+            isTrue(typeof(NamedData).IsRealType());
             var a = GetAssembly.OfType(this);
             var allTypes = (a?.GetTypes() ?? Array.Empty<Type>()).ToList();
             var realTypes = allTypes?.FindAll(t => t.IsRealType());
-            IsNotNull(realTypes);
-            IsTrue(realTypes.Count < (allTypes?.Count ?? 0));
-            IsTrue(realTypes.Count > 0);
+            isNotNull(realTypes);
+            isTrue(realTypes.Count < (allTypes?.Count ?? 0));
+            isTrue(realTypes.Count > 0);
         }
         [TestMethod] public void GetNameTest() {
-            AreEqual(name, Types.GetName(type));
-            AreNotEqual(randomStr, Types.GetName(type));
+            areEqual(name, Types.GetName(type));
+            areNotEqual(randomStr, Types.GetName(type));
         }
         [TestMethod] public void DeclaredMembersTest() {
-            AreEqual(1, type.DeclaredMembers()?.Count);
+            areEqual(1, type.DeclaredMembers()?.Count);
             var l = typeof(NamedData)?.DeclaredMembers();
-            AreEqual(9, l?.Count);
+            areEqual(9, l?.Count);
         }
         [TestMethod] public void IsInheritedTest() {
             Type? nullType = null;
-            IsTrue(type.IsInherited(typeof(object)));
-            IsTrue(type.IsInherited(typeof(NamedData)));
-            IsFalse(type.IsInherited(nullType));
-            IsFalse(type.IsInherited(typeof(CurrencyData)));
+            isTrue(type.IsInherited(typeof(object)));
+            isTrue(type.IsInherited(typeof(NamedData)));
+            isFalse(type.IsInherited(nullType));
+            isFalse(type.IsInherited(typeof(CurrencyData)));
         }
         [TestMethod] public void HasAttributeTest() {
-            IsFalse(type.HasAttribute<TestClassAttribute>());
-            IsTrue(GetType().HasAttribute<TestClassAttribute>());
-            IsFalse(type.HasAttribute<TestMethodAttribute>());
-            IsFalse(GetType().HasAttribute<TestMethodAttribute>());
+            isFalse(type.HasAttribute<TestClassAttribute>());
+            isTrue(GetType().HasAttribute<TestClassAttribute>());
+            isFalse(type.HasAttribute<TestMethodAttribute>());
+            isFalse(GetType().HasAttribute<TestMethodAttribute>());
         }
         [TestMethod] public void MethodTest() {
             var n = nameof(MethodTest);
             var m = GetType().Method(n);
-            AreEqual(n, m?.Name);
+            areEqual(n, m?.Name);
         }
     }
 }

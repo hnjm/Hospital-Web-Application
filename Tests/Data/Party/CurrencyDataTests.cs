@@ -1,6 +1,7 @@
-﻿using EMEHospitalWebApp.Data.Party;
+﻿using EMEHospitalWebApp.Data;
+using EMEHospitalWebApp.Data.Party;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace EMEHospitalWebApp.Tests.Data.Party;
 
-[TestClass] public class CurrencyDataTests : SealedClassTests<CurrencyData> { }
+[TestClass] public class CurrencyDataTests : SealedClassTests<CurrencyData, NamedData> { }

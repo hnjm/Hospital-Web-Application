@@ -4,10 +4,10 @@ using EMEHospitalWebApp.Data;
 
 namespace EMEHospitalWebApp.Tests.Aids {
     [TestClass]
-    public class EnumsTests : IsTypeTested {
+    public class EnumsTests : TypeTests {
         [TestMethod] public void DescriptionTest()
-            => AreEqual("Not applicable", IsoGender.NotApplicable.Description());
+            => areEqual("Not applicable", IsoGender.NotApplicable.Description());
         [TestMethod] public void ToStringTest()
-            => AreEqual("NotApplicable", IsoGender.NotApplicable.ToString());
+            => areEqual("NotApplicable", IsoGender.NotApplicable.ToString());
     }
 }

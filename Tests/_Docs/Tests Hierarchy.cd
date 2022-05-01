@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="EMEHospitalWebApp.Tests.AbstractClassTests&lt;TClass, TBaseClass&gt;">
+    <Position X="7" Y="5.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>AbstractClassTests.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EMEHospitalWebApp.Tests.AssemblyTests">
+    <Position X="0.5" Y="4.5" Width="2.25" />
+    <InheritanceLine Type="EMEHospitalWebApp.Tests.TestAsserts" FixedToPoint="true">
+      <Path>
+        <Point X="1.625" Y="4.142" />
+        <Point X="1.625" Y="4.5" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>ggBIAMgIAAEgAFCAGAQBwCAAgIApAQAwAAAEIAAgSAA=</HashCode>
+      <FileName>AssemblyTests.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EMEHospitalWebApp.Tests.TypeTests">
+    <Position X="4.75" Y="1.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>gABIAkgAAAAIABCAiAAA0AAQAYApAwCABAEEAAAgAAA=</HashCode>
+      <FileName>TypeTests.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EMEHospitalWebApp.Tests.TestAsserts">
+    <Position X="0.5" Y="1.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACAAABQAAAMAAAAABAACAAAAQAAAACAAAAAA=</HashCode>
+      <FileName>TestAsserts.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EMEHospitalWebApp.Tests.HostTests">
+    <Position X="3" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAQAAgABAAAAAI=</HashCode>
+      <FileName>HostTests.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EMEHospitalWebApp.Tests.BaseTests&lt;TClass, TBaseClass&gt;">
+    <Position X="7" Y="1.5" Width="5.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAAAAAIAABAACAABABAAAAAAESAAQIAAAAAAA=</HashCode>
+      <FileName>BaseTests.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EMEHospitalWebApp.Tests.SealedClassTests&lt;TClass, TBaseClass&gt;">
+    <Position X="10" Y="5.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAA=</HashCode>
+      <FileName>SealedClassTests.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

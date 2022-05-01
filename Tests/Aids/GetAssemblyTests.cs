@@ -6,7 +6,7 @@ using EMEHospitalWebApp.Data.Party;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace EMEHospitalWebApp.Tests.Aids {
-    [TestClass] public class GetAssemblyTests : IsTypeTested {
+    [TestClass] public class GetAssemblyTests : TypeTests {
         private string? assemblyName;
         private Assembly? assembly;
         private string[] typeNames = Array.Empty<string>();
@@ -17,8 +17,8 @@ namespace EMEHospitalWebApp.Tests.Aids {
                 nameof(Strings), nameof(Safe), nameof(Types) };
         }
         [TestCleanup] public void Clean() {
-            IsNotNull(assembly);
-            AreEqual(assemblyName, assembly.GetName().Name);
+            isNotNull(assembly);
+            areEqual(assemblyName, assembly.GetName().Name);
         }
         [TestMethod] public void ByNameTest() { }
         [TestMethod] public void OfTypeTest() {
@@ -28,16 +28,16 @@ namespace EMEHospitalWebApp.Tests.Aids {
         }
         [TestMethod] public void TypesTest() {
             var l = GetAssembly.Types(assembly);
-            IsTrue(typeNames.Length <= (l?.Count ?? -1));
+            isTrue(typeNames.Length <= (l?.Count ?? -1));
             foreach(var n in typeNames) 
-                AreEqual(l?.FirstOrDefault(x => x.Name == n)?.Name, n);
-            IsNull(l?.FirstOrDefault(x => x.Name == GetRandom.String()));
+                areEqual(l?.FirstOrDefault(x => x.Name == n)?.Name, n);
+            isNull(l?.FirstOrDefault(x => x.Name == GetRandom.String()));
         }
         [TestMethod] public void TypeTest() {
             var n = randomTypeName;
             var obj = GetAssembly.Type(assembly, n);
-            IsNotNull(obj);
-            AreEqual(n, obj.Name);
+            isNotNull(obj);
+            areEqual(n, obj.Name);
         }
         private string randomTypeName => typeNames[GetRandom.Int32(0, typeNames.Length)];
     }

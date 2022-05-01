@@ -3,11 +3,11 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace EMEHospitalWebApp.Tests.Aids {
     [TestClass]
-    public class MethodsTests : IsTypeTested {
+    public class MethodsTests : TypeTests {
         [TestMethod] public void HasAttributeTest() {
             var m = GetType().GetMethod(nameof(HasAttributeTest));
-            IsTrue(m.HasAttribute<TestMethodAttribute>());
-            IsFalse(m.HasAttribute<TestInitializeAttribute>());
+            isTrue(m.HasAttribute<TestMethodAttribute>());
+            isFalse(m.HasAttribute<TestInitializeAttribute>());
         }
     }
 }

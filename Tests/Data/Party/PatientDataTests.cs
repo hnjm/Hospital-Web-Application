@@ -5,14 +5,14 @@ using EMEHospitalWebApp.Data;
 
 namespace EMEHospitalWebApp.Tests.Data.Party
 {
-    [TestClass] public class PatientDataTests : SealedClassTests<PatientData>
+    [TestClass] public class PatientDataTests : SealedClassTests<PatientData, UniqueData>
     {
-        [TestMethod] public void IdTest() => IsProperty<string>();
-        [TestMethod] public void FirstNameTest() => IsProperty<string?>();
-        [TestMethod] public void LastNameTest() => IsProperty<string?>();
-        [TestMethod] public void GenderTest() => IsProperty<IsoGender?>();
-        [TestMethod] public void BirthDateTest() => IsProperty<DateTime?>();
-        [TestMethod] public void IdCodeTest() => IsProperty<string?>();
-        [TestMethod] public void CountryIdTest() => IsProperty<string?>();
+        [TestMethod] public void IdTest() => isProperty<string>();
+        [TestMethod] public void FirstNameTest() => isProperty<string?>();
+        [TestMethod] public void LastNameTest() => isProperty<string?>();
+        [TestMethod] public void GenderTest() => isProperty<IsoGender?>();
+        [TestMethod] public void BirthDateTest() => isProperty<DateTime?>();
+        [TestMethod] public void IdCodeTest() => isProperty<string?>();
+        [TestMethod] public void CountryIdTest() => isProperty<string?>();
     }
 }

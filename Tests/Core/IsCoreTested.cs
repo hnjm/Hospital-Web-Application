@@ -1,5 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace EMEHospitalWebApp.Tests.Core {
-    [TestClass] public class IsCoreTested : IsAssemblyTested { }
+    [TestClass] public class IsCoreTested : AssemblyTests { }
 }

@@ -13,5 +13,5 @@ public class CountryCurrencyView : NamedView {
 }
 
 public sealed class CountryCurrencyViewFactory : BaseViewFactory<CountryCurrencyView, CountryCurrency, CountryCurrencyData> {
-    protected override CountryCurrency ToEntity(CountryCurrencyData d) => new(d);
+    protected override CountryCurrency toEntity(CountryCurrencyData d) => new(d);
 }

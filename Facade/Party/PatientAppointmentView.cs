@@ -12,5 +12,5 @@ public class PatientAppointmentView : NamedView {
 }
 
 public sealed class PatientAppointmentViewFactory : BaseViewFactory<PatientAppointmentView, PatientAppointment, PatientAppointmentData> {
-    protected override PatientAppointment ToEntity(PatientAppointmentData d) => new(d);
+    protected override PatientAppointment toEntity(PatientAppointmentData d) => new(d);
 }

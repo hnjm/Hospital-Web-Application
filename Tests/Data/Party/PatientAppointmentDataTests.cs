@@ -1,9 +1,10 @@
-﻿using EMEHospitalWebApp.Data.Party;
+﻿using EMEHospitalWebApp.Data;
+using EMEHospitalWebApp.Data.Party;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace EMEHospitalWebApp.Tests.Data.Party;
 
-[TestClass] public class PatientAppointmentDataTests : SealedClassTests<PatientAppointmentData> {
-    [TestMethod] public void PatientIdTest() => IsProperty<string>();
-    [TestMethod] public void AppointmentIdTest() => IsProperty<string>();
+[TestClass] public class PatientAppointmentDataTests : SealedClassTests<PatientAppointmentData, NamedData> {
+    [TestMethod] public void PatientIdTest() => isProperty<string>();
+    [TestMethod] public void AppointmentIdTest() => isProperty<string>();
 }

@@ -16,7 +16,7 @@ namespace EMEHospitalWebApp.Facade.Party {
     }
 
     public sealed class PatientViewFactory : BaseViewFactory<PatientView, Patient, PatientData> {
-        protected override Patient ToEntity(PatientData d) => new(d);
+        protected override Patient toEntity(PatientData d) => new(d);
         public override Patient Create(PatientView? v) {
             v ??= new PatientView();
             v.Gender ??= IsoGender.NotApplicable;

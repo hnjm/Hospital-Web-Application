@@ -2,23 +2,24 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace EMEHospitalWebApp.Tests.Aids {
-    [TestClass] public class StringsTests : IsTypeTested {
+    [TestClass] public class StringsTests : TypeTests {
         private string? testStr;
         [TestInitialize] public void Init() => testStr = "a1b1c1.d1e1f1.g1h1i1";
-        [TestMethod] public void RemoveTest() => AreEqual("abc.def.ghi", testStr.Remove("1"));
+        [TestMethod] public void RemoveTest() => areEqual("abc.def.ghi", testStr.Remove("1"));
         [TestMethod] public void IsTypeNameTest() {
-            IsFalse(testStr.IsTypeName());
+            isFalse(testStr.IsTypeName());
             var s = testStr.Remove("1");
-            IsFalse(s.IsTypeName());
+            isFalse(s.IsTypeName());
             s = s.RemoveTail();
-            IsFalse(s.IsTypeName());
+            isFalse(s.IsTypeName());
             s = s.RemoveTail();
-            IsTrue(s.IsTypeName());
+            isTrue(s.IsTypeName());
         }
         [TestMethod] public void IsTypeFullNameTest() {
-            IsFalse(testStr.IsTypeFullName());
-            IsTrue(testStr.Remove("1").IsTypeFullName());
+            isTrue(testStr.IsTypeFullName());
+            isTrue(testStr.Remove("1").IsTypeFullName());
         }
-        [TestMethod] public void RemoveTailTest() => AreEqual("a1b1c1.d1e1f1", testStr.RemoveTail());
+        [TestMethod] public void RemoveTailTest() => areEqual("a1b1c1.d1e1f1", testStr.RemoveTail());
+        [TestMethod] public void RemoveHeadTest() => areEqual("d1e1f1.g1h1i1", testStr.RemoveHead());
     }
 }

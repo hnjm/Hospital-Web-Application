@@ -6,5 +6,5 @@ namespace EMEHospitalWebApp.Facade.Party;
 public sealed class CountryView : IsoNamedView {}
 
 public sealed class CountryViewFactory : BaseViewFactory<CountryView, Country, CountryData> {
-    protected override Country ToEntity(CountryData d) => new(d);
+    protected override Country toEntity(CountryData d) => new(d);
 }

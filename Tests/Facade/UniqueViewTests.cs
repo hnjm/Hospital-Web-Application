@@ -2,8 +2,8 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace EMEHospitalWebApp.Tests.Facade {
-    [TestClass] public class BaseViewTests : AbstractClassTests {
+    [TestClass] public class UniqueViewTests : AbstractClassTests<UniqueView, object> {
         private class TestClass : UniqueView { }
-        protected override object CreateObj() => new TestClass();
+        protected override UniqueView createObj() => new TestClass();
     }
 }

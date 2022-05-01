@@ -3,7 +3,7 @@
 namespace EMEHospitalWebApp.Domain.Party;
 
 public interface ICurrenciesRepo : IRepo<Currency> { }
-public class Currency : NamedEntity<CurrencyData> {
+public sealed class Currency : NamedEntity<CurrencyData> {
     public Currency() : this(new CurrencyData()) { }
     public Currency(CurrencyData d) : base(d) { }
     public List<CountryCurrency> CountryCurrencies
@@ -11,5 +11,8 @@ public class Currency : NamedEntity<CurrencyData> {
             .GetAll(x => x.CurrencyId)?
             .Where(x => x.CurrencyId == Id)?
             .ToList() ?? new List<CountryCurrency>();
-    public List<Country?> Countries => CountryCurrencies.Select(x => x.Country).ToList();
+    public List<Country?> Countries 
+        => CountryCurrencies
+            .Select(x => x.Country)
+            .ToList();
 }

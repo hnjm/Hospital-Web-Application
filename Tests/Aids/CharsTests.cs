@@ -2,7 +2,7 @@
 using EMEHospitalWebApp.Aids;
 
 namespace EMEHospitalWebApp.Tests.Aids {
-    [TestClass] public class CharsTests : IsTypeTested {
+    [TestClass] public class CharsTests : TypeTests {
         private char letter;
         private char digit;
         [TestInitialize] public void Init() {
@@ -11,14 +11,15 @@ namespace EMEHospitalWebApp.Tests.Aids {
         }
         [TestMethod] public void IsNameCharTest() {
             Assert.IsTrue(letter.IsNameChar());
-            Assert.IsFalse(digit.IsNameChar());
+            Assert.IsTrue(digit.IsNameChar());
+            Assert.IsTrue('`'.IsNameChar());
             Assert.IsFalse('.'.IsNameChar());
             Assert.IsFalse('_'.IsNameChar());
             Assert.IsFalse(':'.IsNameChar());
         }
         [TestMethod] public void IsFullNameCharTest() {
             Assert.IsTrue(letter.IsFullNameChar());
-            Assert.IsFalse(digit.IsFullNameChar());
+            Assert.IsTrue(digit.IsFullNameChar());
             Assert.IsTrue('.'.IsFullNameChar());
             Assert.IsTrue('`'.IsFullNameChar());
             Assert.IsFalse('_'.IsFullNameChar());

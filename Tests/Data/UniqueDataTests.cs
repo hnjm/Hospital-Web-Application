@@ -3,14 +3,14 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace EMEHospitalWebApp.Tests.Data;
 
-[TestClass] public class UniqueDataTests : AbstractClassTests {
+[TestClass] public class UniqueDataTests : AbstractClassTests<UniqueData, object> {
     private class testClass : UniqueData { }
-    protected override object CreateObj() => new testClass();
+    protected override UniqueData createObj() => new testClass();
     [TestMethod] public void NewIdTest() {
-        IsNotNull(UniqueData.NewId);
-        AreNotEqual(UniqueData.NewId, UniqueData.NewId);
+        isNotNull(UniqueData.NewId);
+        areNotEqual(UniqueData.NewId, UniqueData.NewId);
         var pi = typeof(UniqueData).GetProperty(nameof(UniqueData.NewId));
-        IsFalse(pi?.CanWrite);
+        isFalse(pi?.CanWrite);
     }
-    [TestMethod] public void IdTest() => IsProperty<string>();
+    [TestMethod] public void IdTest() => isProperty<string>();
 }

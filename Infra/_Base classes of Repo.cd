@@ -1,44 +1,44 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="EMEHospitalWebApp.Infra.Repo&lt;TDomain, TData&gt;">
-    <Position X="1.5" Y="2" Width="1.5" />
+    <Position X="0.5" Y="2" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>ABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Repo.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="EMEHospitalWebApp.Infra.PagedRepo&lt;TDomain, TData&gt;">
-    <Position X="3.5" Y="2" Width="1.5" />
+    <Position X="2.75" Y="2" Width="2.25" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAIAAgAACAAABEAAAAAAEACUAAAAAAAAAAAAEABAAAI=</HashCode>
       <FileName>PagedRepo.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="EMEHospitalWebApp.Infra.OrderedRepo&lt;TDomain, TData&gt;">
-    <Position X="5.5" Y="2" Width="1.5" />
+    <Position X="5.25" Y="2" Width="2.25" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AEAABAEAAAAAAABAAACAQAAAAAAkAAAAAAAAAAJAAAA=</HashCode>
       <FileName>OrderedRepo.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="EMEHospitalWebApp.Infra.FilteredRepo&lt;TDomain, TData&gt;">
-    <Position X="7.5" Y="2" Width="1.5" />
+    <Position X="7.75" Y="2" Width="2.25" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAgAAAAAAgAAAAAAAAAAAAAAAAABAAAA=</HashCode>
       <FileName>FilteredRepo.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="EMEHospitalWebApp.Infra.CrudRepo&lt;TDomain, TData&gt;">
-    <Position X="9.5" Y="2" Width="1.5" />
+    <Position X="10.25" Y="2" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAYAAAAAAAAAAABAAAAAEAEAAAEAAAgAAAAAIAAAAIA=</HashCode>
+      <HashCode>AAYAAAAAAAAAAABAAAAAEAEAgAEAAAgAAgAAIABAAIA=</HashCode>
       <FileName>CrudRepo.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="EMEHospitalWebApp.Infra.BaseRepo&lt;TDomain, TData&gt;">
-    <Position X="9.5" Y="5.5" Width="1.5" />
+    <Position X="10.25" Y="6" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAYAAAAAAAAQAABAAAQAAAEAAAEAAAgAAAAAIAAAAIA=</HashCode>
+      <HashCode>AAYAAAAAAAAQAABAAAQAAAEAAAEAAAgAAgAAIAAAAIA=</HashCode>
       <FileName>BaseRepo.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />

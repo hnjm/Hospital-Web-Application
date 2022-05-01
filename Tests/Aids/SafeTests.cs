@@ -3,7 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using EMEHospitalWebApp.Aids;
 
 namespace EMEHospitalWebApp.Tests.Aids {
-    [TestClass] public class SafeTests : IsTypeTested {
+    [TestClass] public class SafeTests : TypeTests {
         private int expected;
         private int def;
         [TestInitialize] public void Init() {
@@ -12,11 +12,11 @@ namespace EMEHospitalWebApp.Tests.Aids {
         }
         [TestMethod] public void RunFuncTest() {
             var actual = Safe.Run(() => expected, def);
-            AreEqual(expected, actual);
+            areEqual(expected, actual);
         }
         [TestMethod] public void RunFuncExceptionTest() {
             var actual = Safe.Run(() => throw new Exception(), def);
-            AreEqual(def, actual);
+            areEqual(def, actual);
         }
         [TestMethod] public void RunActionTest() => Safe.Run(() => throw new Exception(), def);
         [TestMethod] public void RunTest() { }

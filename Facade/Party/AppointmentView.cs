@@ -12,6 +12,6 @@ namespace EMEHospitalWebApp.Facade.Party {
     }
 
     public sealed class AppointmentViewFactory : BaseViewFactory<AppointmentView, Appointment, AppointmentData> {
-        protected override Appointment ToEntity(AppointmentData d) => new(d);
+        protected override Appointment toEntity(AppointmentData d) => new(d);
     }
 }

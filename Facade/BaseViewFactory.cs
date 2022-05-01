@@ -8,8 +8,8 @@ namespace EMEHospitalWebApp.Facade {
         where TData : UniqueData, new()
         where TEntity : UniqueEntity<TData>
     {
-        protected abstract TEntity ToEntity(TData data);
-        protected virtual void Copy(object? from, object? to) {
+        protected abstract TEntity toEntity(TData data);
+        protected virtual void copy(object? from, object? to) {
             var tFrom = from?.GetType();
             var tTo = to?.GetType();
             foreach (var piFrom in tFrom?.GetProperties() ?? Array.Empty<PropertyInfo>()) {
@@ -20,13 +20,13 @@ namespace EMEHospitalWebApp.Facade {
         }
         public virtual TEntity Create(TView? v) {
             var d = new TData();
-            Copy(v, d);
-            return ToEntity(d);
+            copy(v, d);
+            return toEntity(d);
         }
         public virtual TView Create(TEntity? e) {
             var d = e?.Data;
             var v = new TView();
-            Copy(d, v);
+            copy(d, v);
             return v;
         }
     }

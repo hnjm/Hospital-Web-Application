@@ -1,8 +1,8 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace EMEHospitalWebApp.Tests.Soft {
-    [TestClass] public class IsSoftTested : IsAssemblyTested
+    [TestClass] public class IsSoftTested : AssemblyTests
     {
-        protected override void isAllTested() => IsInconclusive("Namespace has to be changed to \"EHEHospitalWebApp.Sentry\"");
+        protected override void isAllTested() => isInconclusive("Namespace has to be changed to \"EHEHospitalWebApp.Sentry\"");
     }
 }

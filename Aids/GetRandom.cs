@@ -42,38 +42,42 @@ public static class GetRandom {
         return s;
     }
     public static dynamic? Value<T>(T? min = default, T? max = default) {
-        if (typeof(T) == typeof(bool)) return Bool();
-        if (typeof(T) == typeof(bool?)) return Bool();
-        if (typeof(T) == typeof(DateTime)) return DateTime(Convert.ToDateTime(min), Convert.ToDateTime(max));
-        if (typeof(T) == typeof(DateTime?)) return DateTime(Convert.ToDateTime(min), Convert.ToDateTime(max));
-        if (typeof(T) == typeof(double)) return Double(Convert.ToDouble(min), Convert.ToDouble(max));
-        if (typeof(T) == typeof(double?)) return Double(Convert.ToDouble(min), Convert.ToDouble(max));
-        if (typeof(T) == typeof(long)) return Int64(Convert.ToInt64(min), Convert.ToInt64(max));
-        if (typeof(T) == typeof(long?)) return Int64(Convert.ToInt64(min), Convert.ToInt64(max));
-        if (typeof(T) == typeof(int)) return Int32(Convert.ToInt32(min), Convert.ToInt32(max));
-        if (typeof(T) == typeof(int?)) return Int32(Convert.ToInt32(min), Convert.ToInt32(max));
-        if (typeof(T) == typeof(char)) return Char(Convert.ToChar(min), Convert.ToChar(max));
-        if (typeof(T) == typeof(char?)) return Char(Convert.ToChar(min), Convert.ToChar(max));
-        if (typeof(T) == typeof(string)) return String();
+        var t = getUnderlyingType(typeof(T));
+        if (isEnum(t)) return EnumOf<T>();
+        if (t == typeof(bool)) return Bool();
+        if (t == typeof(DateTime)) return DateTime(Convert.ToDateTime(min), Convert.ToDateTime(max));
+        if (t == typeof(double)) return Double(Convert.ToDouble(min), Convert.ToDouble(max));
+        if (t == typeof(long)) return Int64(Convert.ToInt64(min), Convert.ToInt64(max));
+        if (t == typeof(int)) return Int32(Convert.ToInt32(min), Convert.ToInt32(max));
+        if (t == typeof(char)) return Char(Convert.ToChar(min), Convert.ToChar(max));
+        if (t == typeof(string)) return String();
         return TryGetObject<T>();
     }
-
-    public static dynamic? Value(Type t) {
-        if (t == typeof(bool)) return Bool();
-        if (t == typeof(bool?)) return Bool();
-        if (t == typeof(DateTime)) return DateTime();
-        if (t == typeof(DateTime?)) return DateTime();
-        if (t == typeof(double)) return Double();
-        if (t == typeof(double?)) return Double();
-        if (t == typeof(long)) return Int64();
-        if (t == typeof(long?)) return Int64();
-        if (t == typeof(int)) return Int32();
-        if (t == typeof(int?)) return Int32();
-        if (t == typeof(char)) return Char();
-        if (t == typeof(char?)) return Char();
-        return t == typeof(string) ? String() : null;
+    public static dynamic? EnumOf<T>() => EnumOf(typeof(T));
+    public static dynamic? EnumOf(Type t) {
+        if (!t.IsEnum) return null;
+        var values = Enum.GetValues(t);
+        var max = values.Length - 1;
+        var i = Int32(0, max);
+        return values.GetValue(i);
     }
-
+    internal static bool isEnum(Type t) => t.IsEnum;
+    internal static Type getUnderlyingType(Type t) {
+        var x = Nullable.GetUnderlyingType(t);
+        return x ?? t;
+    }
+    public static dynamic? Value(Type t) {
+        t = getUnderlyingType(t);
+        if (isEnum(t)) return EnumOf(t);
+        if (t == typeof(bool)) return Bool();
+        if (t == typeof(DateTime)) return DateTime();
+        if (t == typeof(double)) return Double();
+        if (t == typeof(long)) return Int64();
+        if (t == typeof(int)) return Int32();
+        if (t == typeof(char)) return Char();
+        if (t == typeof(string)) return String();
+        return null;
+    }
     private static T? TryGetObject<T>() {
         var o = TryCreate<T>();
         foreach (var pi in o?.GetType()?.GetProperties() ?? Array.Empty<PropertyInfo>()) {
