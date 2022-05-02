@@ -11,5 +11,9 @@ namespace EMEHospitalWebApp.Tests.Domain.Party;
     [TestMethod] public void CountryCurrenciesTest()
         => itemsTest<ICountryCurrencyRepo, CountryCurrency, CountryCurrencyData>(
             d => d.CurrencyId = obj.Id, d => new CountryCurrency(d), () => obj.CountryCurrencies);
-    [TestMethod] public void CountriesTest() => isInconclusive();
+    [TestMethod] public void CountriesTest()
+        => relatedItemsTest<ICountriesRepo, CountryCurrency, Country, CountryData>
+        (CountryCurrenciesTest, () => obj.CountryCurrencies, () => obj.Countries,
+            x => x.CountryId, d => new Country(d),
+            c => c?.Data, x => x?.Country?.Data);
 }

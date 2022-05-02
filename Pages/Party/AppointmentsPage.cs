@@ -1,8 +1,10 @@
 ﻿using EMEHospitalWebApp.Domain.Party;
 using EMEHospitalWebApp.Facade.Party;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace EMEHospitalWebApp.Pages.Party {
     public class AppointmentsPage : PagedPage<AppointmentView, Appointment, IAppointmentRepo> {
+        private readonly IPatientRepo patients;
         public AppointmentsPage(IAppointmentRepo r) : base(r) { }
         protected override Appointment ToObject(AppointmentView? item) => new AppointmentViewFactory().Create(item);
         protected override AppointmentView ToView(Appointment? entity) => new AppointmentViewFactory().Create(entity);

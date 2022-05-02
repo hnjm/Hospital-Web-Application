@@ -13,7 +13,7 @@ namespace EMEHospitalWebApp.Tests {
         protected static void areEqual(object? expected, object? actual, string? msg = null) => Assert.AreEqual(expected, actual, msg);
         protected static void areNotEqual(object? expected, object? actual, string? msg = null) => Assert.AreNotEqual(expected, actual, msg);
         protected static void isInstanceOfType(object o, Type expectedType, string? msg = null) => Assert.IsInstanceOfType(o, expectedType, msg);
-        protected virtual void areEqualProperties(object? a, object? b) {
+        protected virtual void arePropertiesEqual(object? a, object? b) {
             isNotNull(a);
             isNotNull(b);
             var tA = a?.GetType();

@@ -1,9 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
-namespace EMEHospitalWebApp.Facade;
-
-public abstract class IsoNamedView : NamedView {
-    [Display(Name = "ISO three-letter code")][Required] public new string? Code { get; set; }
-    [Display(Name = "English name")][Required] public new string? Name { get; set; }
-    [Display(Name = "Native name")] public new string? Description { get; set; }
+namespace EMEHospitalWebApp.Facade {
+    public abstract class IsoNamedView : NamedView {
+        [DisplayName("ISO three-letter code")][Required] public new string? Code { get; set; }
+        [DisplayName("English name")] public new string? Name { get; set; }
+        [DisplayName("Native name")] public new string? Description { get; set; }
+    }
 }

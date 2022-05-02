@@ -32,8 +32,6 @@ namespace EMEHospitalWebApp.Pages.Party {
             => (x ?? IsoGender.NotApplicable).Description();
         public override object? GetValue(string name, PatientView v) {
             var r = base.GetValue(name, v);
-            //if (name == "CountryId") return name == nameof(PatientView.CountryId) ? CountryName(r as string) : r;
-            //return name == nameof(PatientView.Gender) ? GenderDescription((IsoGender) r) : r;
             return name == nameof(PatientView.CountryId) ? CountryName(r as string)
                 : name == nameof(PatientView.Gender) ? GenderDescription((IsoGender)r)
                 : r;

@@ -9,11 +9,11 @@ namespace EMEHospitalWebApp.Infra.Party {
             var y = CurrentFilter;
             return string.IsNullOrWhiteSpace(y)
                 ? q : q.Where(
-                x => x.PatientsId.Contains(y)
-                     || x.DoctorsId.Contains(y)
-                     || x.Id.Contains(y)
-                     || x.DateTime.ToString().Contains(y)
-                     || x.DiagnosisId.Contains(y));
+                    x => x.PatientsId.Contains(y) 
+                         || x.DoctorsId.Contains(y) 
+                         || x.Id.Contains(y) 
+                         || x.DateTime.ToString().Contains(y)
+                         || x.DiagnosisId.Contains(y));
         }
     }
 }

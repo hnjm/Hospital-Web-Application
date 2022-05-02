@@ -11,7 +11,7 @@ namespace EMEHospitalWebApp.Facade.Party {
         [DisplayName("Gender")] public IsoGender? Gender { get; set; }
         [DisplayName("Birth Date")] public DateTime? BirthDate { get; set; }
         [DisplayName("ID code")] public string? IdCode { get; set; }
-        [DisplayName("CountryId")] public string? CountryId { get; set; }
+        [DisplayName("Country Id")] public string? CountryId { get; set; }
         [DisplayName("Full name")] public string? FullName { get; set; }
     }
 

@@ -1,6 +1,8 @@
 ﻿using EMEHospitalWebApp.Aids;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using System.Reflection;
 
@@ -10,23 +12,42 @@ namespace EMEHospitalWebApp.Tests {
         protected TClass obj;
         protected BaseTests() => obj = createObj();
         protected abstract TClass createObj();
+
         protected void isProperty<T>(T? value = default, bool isReadOnly = false, string? callingMethod = null) {
             callingMethod ??= nameof(isProperty);
             var actual = getProperty(ref value, isReadOnly, callingMethod);
             areEqual(value, actual);
         }
-        protected object? getProperty<T>(ref T? value, bool isReadOnly, string callingMethod) {
-            var memberName = getCallingMember(callingMethod).Replace("Test", string.Empty);
-            var propertyInfo = obj.GetType().GetProperty(memberName);
-            isNotNull(propertyInfo);
-            if (!isReadOnly && isNullOrDefault(value)) value = random<T>();
-            if (canWrite(propertyInfo, isReadOnly)) propertyInfo.SetValue(obj, value);
-            return propertyInfo.GetValue(obj);
+        protected PropertyInfo? isDisplayNamed<T>(string? displayName = null, T ? value = default, bool isReadOnly = false, string? callingMethod = null) {
+            callingMethod ??= nameof(isDisplayNamed);
+            var pi = getPropertyInfo(callingMethod);
+            isProperty(value, isReadOnly, callingMethod);
+            if (displayName is null) return pi;
+            var a = pi.GetAttribute<DisplayNameAttribute>();
+            areEqual(displayName, a?.DisplayName, nameof(DisplayNameAttribute));
+            return pi;
         }
+        protected void isRequired<T>(string? displayName = null, T? value = default, bool isReadOnly = false, string? callingMethod = null) {
+            var pi = isDisplayNamed(displayName, value, isReadOnly, nameof(isRequired));
+            isTrue(pi?.HasAttribute<RequiredAttribute>(), nameof(RequiredAttribute));
+        }
+
         protected void isReadOnly<T>(T? value) => isProperty(value, true, nameof(isReadOnly));
         protected override object? isReadOnly<T>(string? callingMethod = null) {
             var v = default(T);
             return getProperty<T>(ref v, true, callingMethod ?? nameof(isReadOnly));
+        }
+
+        protected PropertyInfo? getPropertyInfo(string callingMethod) {
+            var memberName = getCallingMember(callingMethod).Replace("Test", string.Empty);
+            return obj.GetType().GetProperty(memberName);
+        }
+        protected object? getProperty<T>(ref T? value, bool isReadOnly, string callingMethod) {
+            var propertyInfo = getPropertyInfo(callingMethod);
+            isNotNull(propertyInfo);
+            if (!isReadOnly && isNullOrDefault(value)) value = random<T>();
+            if (canWrite(propertyInfo, isReadOnly)) propertyInfo.SetValue(obj, value);
+            return propertyInfo.GetValue(obj);
         }
         private static bool isNullOrDefault<T>(T? value) => value?.Equals(default(T)) ?? true;
         private static bool canWrite(PropertyInfo i, bool isReadOnly) {
@@ -47,7 +68,7 @@ namespace EMEHospitalWebApp.Tests {
 
             return string.Empty;
         }
-        protected internal static void arePropertiesEqual(object x, object y) {
+        protected internal static void arePropertiesEqual(object? x, object? y) {
             var e = Array.Empty<PropertyInfo>();
             var px = x?.GetType()?.GetProperties() ?? e;
             var hasProperties = false;

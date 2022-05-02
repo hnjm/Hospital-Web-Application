@@ -1,4 +1,4 @@
-﻿using EMEHospitalWebApp.Data;
+﻿using EMEHospitalWebApp.Aids;
 using EMEHospitalWebApp.Data.Party;
 using EMEHospitalWebApp.Domain.Party;
 using EMEHospitalWebApp.Facade;
@@ -11,5 +11,17 @@ namespace EMEHospitalWebApp.Tests.Facade {
             protected override Appointment toEntity(AppointmentData d) => new(d);
         }
         protected override BaseViewFactory<AppointmentView, Appointment, AppointmentData> createObj() => new TestClass();
+        
+        [TestMethod] public void CreateTest() {}
+        [TestMethod] public void CreateViewTest() {
+            var v = GetRandom.Value<AppointmentView>();
+            var d = obj.Create(v);
+            arePropertiesEqual(v, d.Data);
+        }
+        [TestMethod] public void CreateObjectTest() {
+            var d = GetRandom.Value<AppointmentData>();
+            var v = obj.Create(new Appointment(d));
+            arePropertiesEqual(d, v);
+        }
     }
 }

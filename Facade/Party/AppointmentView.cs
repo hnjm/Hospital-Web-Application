@@ -9,6 +9,7 @@ namespace EMEHospitalWebApp.Facade.Party {
         [DisplayName("Doctors ID")] [Required] public string? DoctorsId { get; set; }
         [DisplayName("Date of appointment")] public DateTime? DateTime { get; set; }
         [DisplayName("Diagnosis ID")] public string? DiagnosisId { get; set; }
+        [DisplayName("Patients ID Code")] public string? Patient { get; set; }
     }
 
     public sealed class AppointmentViewFactory : BaseViewFactory<AppointmentView, Appointment, AppointmentData> {

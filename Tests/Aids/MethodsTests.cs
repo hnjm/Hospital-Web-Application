@@ -9,5 +9,10 @@ namespace EMEHospitalWebApp.Tests.Aids {
             isTrue(m.HasAttribute<TestMethodAttribute>());
             isFalse(m.HasAttribute<TestInitializeAttribute>());
         }
+        [TestMethod] public void GetAttributeTest() {
+            var m = GetType().GetMethod(nameof(GetAttributeTest));
+            isNotNull(m.GetAttribute<TestMethodAttribute>());
+            isNull(m.GetAttribute<TestInitializeAttribute>());
+        }
     }
 }
