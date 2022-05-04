@@ -2,9 +2,9 @@
 using EMEHospitalWebApp.Domain.Party;
 
 namespace EMEHospitalWebApp.Infra.Party {
-    public class PatientsRepo : Repo<Patient, PatientData>, IPatientRepo {
+    public sealed class PatientsRepo : Repo<Patient, PatientData>, IPatientRepo {
         public PatientsRepo(HospitalWebAppDb? db) : base(db, db?.Patients) { }
-        protected override Patient ToDomain(PatientData d) => new(d);
+        protected internal override Patient toDomain(PatientData d) => new(d);
         internal override IQueryable<PatientData> addFilter(IQueryable<PatientData> q) {
             var y = CurrentFilter;
             return string.IsNullOrWhiteSpace(y)

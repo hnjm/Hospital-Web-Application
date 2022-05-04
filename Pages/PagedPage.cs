@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Text.Json;
 using EMEHospitalWebApp.Aids;
 using EMEHospitalWebApp.Domain;
 using EMEHospitalWebApp.Facade;
@@ -27,6 +28,30 @@ public abstract class PagedPage<TView, TEntity, TRepo> : OrderedPage<TView, TEnt
         new { pageIndex = PageIndex,
             currentFilter = CurrentFilter,
             sortOrder = CurrentOrder});
+    protected override IActionResult redirectToEdit(TView v) {
+        TempData["Item"] = JsonSerializer.Serialize(v);
+        return RedirectToPage("./Edit", "Edit",
+            new {
+                id = v.Id,
+                pageIndex = PageIndex,
+                currentFilter = CurrentFilter,
+                sortOrder = CurrentOrder
+            });
+    }
+    protected override IActionResult redirectToDelete(string id) {
+        TempData["Error"] = "The record you attempted to to delete "
+                            + "was modified by another user after you selected delete. "
+                            + "The delete operation was canceled and the current values in the "
+                            + "database have been displayed. If you still want to delete this "
+                            + "record, click the Delete button again.";
+        return RedirectToPage("./Delete", "Delete",
+            new {
+                id = id,
+                pageIndex = PageIndex,
+                currentFilter = CurrentFilter,
+                sortOrder = CurrentOrder
+            });
+    }
     public virtual string[] IndexColumns => Array.Empty<string>();
     public virtual object? GetValue(string name, TView v) => Safe.Run(() => {
             var pi = v?.GetType()?.GetProperty(name);

@@ -21,7 +21,8 @@ namespace EMEHospitalWebApp.Migrations
                     PatientsId = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DoctorsId = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DateTime = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DiagnosisId = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    DiagnosisId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Token = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -73,6 +74,7 @@ namespace EMEHospitalWebApp.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Token = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: false),
                     Code = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true)
@@ -90,6 +92,7 @@ namespace EMEHospitalWebApp.Migrations
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     CountryId = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CurrencyId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Token = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: false),
                     Code = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true)
@@ -105,6 +108,7 @@ namespace EMEHospitalWebApp.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Token = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: false),
                     Code = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true)
@@ -122,6 +126,7 @@ namespace EMEHospitalWebApp.Migrations
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     PatientId = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     AppointmentId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Token = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: false),
                     Code = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true)
@@ -142,7 +147,8 @@ namespace EMEHospitalWebApp.Migrations
                     Gender = table.Column<int>(type: "int", nullable: true),
                     BirthDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     IdCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CountryId = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    CountryId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Token = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: false)
                 },
                 constraints: table =>
                 {

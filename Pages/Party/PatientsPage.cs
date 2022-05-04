@@ -2,12 +2,14 @@
 using EMEHospitalWebApp.Data;
 using EMEHospitalWebApp.Domain.Party;
 using EMEHospitalWebApp.Facade.Party;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace EMEHospitalWebApp.Pages.Party {
     // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
     // To protect from overposting attacks, enable the specific properties you want to bind to.
     // For more details, see https://aka.ms/RazorPagesCRUD.
+    [Authorize]
     public class PatientsPage : PagedPage<PatientView, Patient, IPatientRepo> {
         private readonly ICountriesRepo countries;
         public PatientsPage(IPatientRepo r, ICountriesRepo c) : base(r) => countries = c;

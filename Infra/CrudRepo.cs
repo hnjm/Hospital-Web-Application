@@ -11,10 +11,10 @@ public abstract class CrudRepo<TDomain, TData> : BaseRepo<TDomain, TData>
     public override bool Add(TDomain obj) => AddAsync(obj).GetAwaiter().GetResult();
     public override bool Delete(string id) => DeleteAsync(id).GetAwaiter().GetResult();
     public override List<TDomain> Get() => GetAsync().GetAwaiter().GetResult();
-    public override List<TDomain> GetAll<TKey>(Func<TDomain, TKey>? orderBy = null) {
+    public override List<TDomain> GetAll(Func<TDomain, dynamic>? orderBy = null) {
         var r = new List<TDomain>();
         if (set is null) return r;
-        foreach (var d in set) r.Add(ToDomain(d));
+        foreach (var d in set) r.Add(toDomain(d));
         return (orderBy is null) ? r : r.OrderBy(orderBy).ToList();
     }
     public override TDomain Get(string id) => GetAsync(id).GetAwaiter().GetResult();
@@ -45,7 +45,7 @@ public abstract class CrudRepo<TDomain, TData> : BaseRepo<TDomain, TData>
             var query = createSql();
             var list = await runSql(query);
             var items = new List<TDomain>();
-            foreach (var d in list) items.Add(ToDomain(d));
+            foreach (var d in list) items.Add(toDomain(d));
             return items;
         } catch { return new List<TDomain>(); }
     }
@@ -55,18 +55,20 @@ public abstract class CrudRepo<TDomain, TData> : BaseRepo<TDomain, TData>
         try {
             if (id == null) return new TDomain();
             var d = (set is null) ? null : await set.FirstOrDefaultAsync(x => x.Id == id);
-            return d == null ? new TDomain() : ToDomain(d);
+            return d == null ? new TDomain() : toDomain(d);
         } catch { return new TDomain(); }
     }
     public override async Task<bool> UpdateAsync(TDomain obj) {
         try {
+            if (db is null) return false;
+            db.ChangeTracker.Clear();
             var d = obj.Data;
-            if (db is not null) db.Attach(d).State = EntityState.Modified;
-            _ = (db is null) ? 0 : await db.SaveChangesAsync();
+            db.Attach(d).State = EntityState.Modified;
+            _ = await db.SaveChangesAsync();
             return true;
         } catch {
             return false;
         }
     }
-    protected abstract TDomain ToDomain(TData d);
+    protected internal abstract TDomain toDomain(TData d);
 }

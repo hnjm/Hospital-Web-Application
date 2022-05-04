@@ -13,7 +13,7 @@ namespace EMEHospitalWebApp.Tests.Facade.Party {
             var e = new Patient(d);
             var v = new PatientViewFactory().Create(e);
             isNotNull(v);
-            //arePropertiesEqual(v, e, nameof(v.FullName));
+            //areEqualProperties(v, e, nameof(v.FullName));
             areEqual(v.Id, e.Id);
             areEqual(v.FirstName, e.FirstName);
             areEqual(v.LastName, e.LastName);

@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 namespace EMEHospitalWebApp.Infra;
 
 public abstract class OrderedRepo<TDomain, TData> : FilteredRepo<TDomain, TData>
-    where TDomain : UniqueEntity<TData>, new () where TData : UniqueData, new () {
+    where TDomain : UniqueEntity<TData>, new() where TData : UniqueData, new() {
     protected OrderedRepo(DbContext? c, DbSet<TData>? s) : base(c, s) { }
     public string? CurrentOrder { get; set; }
     public static string DescendingString => "_desc";
@@ -15,8 +15,9 @@ public abstract class OrderedRepo<TDomain, TData> : FilteredRepo<TDomain, TData>
     internal IQueryable<TData> addSort(IQueryable<TData> q) {
         if (string.IsNullOrWhiteSpace(CurrentOrder)) return q;
         var e = lambdaExpression;
-        if (e == null) return q;
-        return isDescending ? q.OrderByDescending(e) : q.OrderBy(e);
+        return e == null ? q
+            : isDescending ? q.OrderByDescending(e)
+            : (IQueryable<TData>)q.OrderBy(e);
     }
     internal bool isDescending => CurrentOrder?.EndsWith(DescendingString) ?? false;
     internal bool isSameProperty(string s) => (!string.IsNullOrWhiteSpace(s) && (CurrentOrder?.StartsWith(s) ?? false));

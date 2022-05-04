@@ -1,8 +1,9 @@
 ﻿using EMEHospitalWebApp.Domain.Party;
 using EMEHospitalWebApp.Facade.Party;
-using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Authorization;
 
 namespace EMEHospitalWebApp.Pages.Party {
+    [Authorize]
     public class AppointmentsPage : PagedPage<AppointmentView, Appointment, IAppointmentRepo> {
         private readonly IPatientRepo patients;
         public AppointmentsPage(IAppointmentRepo r) : base(r) { }

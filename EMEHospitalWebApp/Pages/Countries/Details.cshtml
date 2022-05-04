@@ -24,7 +24,7 @@
 			<tr>@foreach(var name in columns) { <td>@Html.Raw(name)</td> }</tr>
 		</thead>
 		<tbody>
-			@foreach (var item in Model.Currencies){
+			@foreach (var item in Model.Currencies.Value){
 				<tr>@foreach (var name in columns){ <td>@Html.Raw(getValue(name, item))</td> }</tr>
 			}
 		</tbody>

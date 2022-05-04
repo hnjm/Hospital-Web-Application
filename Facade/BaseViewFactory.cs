@@ -1,4 +1,4 @@
-﻿using System.Reflection;
+﻿using EMEHospitalWebApp.Aids;
 using EMEHospitalWebApp.Data;
 using EMEHospitalWebApp.Domain;
 
@@ -9,15 +9,7 @@ namespace EMEHospitalWebApp.Facade {
         where TEntity : UniqueEntity<TData>
     {
         protected abstract TEntity toEntity(TData data);
-        protected virtual void copy(object? from, object? to) {
-            var tFrom = from?.GetType();
-            var tTo = to?.GetType();
-            foreach (var piFrom in tFrom?.GetProperties() ?? Array.Empty<PropertyInfo>()) {
-                var v = piFrom.GetValue(from, null);
-                var piTo = tTo?.GetProperty(piFrom.Name);
-                piTo?.SetValue(to, v, null);
-            }
-        }
+        protected virtual void copy(object? from, object? to) => Copy.Properties(from, to);
         public virtual TEntity Create(TView? v) {
             var d = new TData();
             copy(v, d);

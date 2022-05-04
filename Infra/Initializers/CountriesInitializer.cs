@@ -5,22 +5,22 @@ using EMEHospitalWebApp.Domain;
 
 namespace EMEHospitalWebApp.Infra.Initializers;
 
-public sealed class CurrencyInitializer : BaseInitializer<CurrencyData> {
-    public CurrencyInitializer(HospitalWebAppDb? db) : base(db, db?.Currencies) { }
-    protected override IEnumerable<CurrencyData> getEntities {
+public sealed class CountriesInitializer : BaseInitializer<CountryData> {
+    public CountriesInitializer(HospitalWebAppDb? db) : base(db, db?.Countries) { }
+    protected override IEnumerable<CountryData> getEntities {
         get {
-            var l = new List<CurrencyData>();
+            var l = new List<CountryData>();
             foreach (CultureInfo cul in CultureInfo.GetCultures(CultureTypes.SpecificCultures)) {
                 var c = new RegionInfo(new CultureInfo(cul.Name, false).LCID);
-                var id = c.ISOCurrencySymbol;
+                var id = c.ThreeLetterISORegionName;
                 if (!isCorrectIsoCode(id)) continue;
                 if (l.FirstOrDefault(x => x.Id == id) is not null) continue;
-                var d = createCountry(id, c.CurrencyEnglishName, c.CurrencyNativeName);
+                var d = createCountry(id, c.EnglishName, c.NativeName);
                 l.Add(d);
             }
             return l;
         }
     }
-    internal CurrencyData createCountry(string code, string name, string description) 
+    internal CountryData createCountry(string code, string name, string description) 
         => new() { Id = code ?? UniqueData.NewId, Code = code ?? UniqueEntity.DefaultSrt, Name = name, Description = description };
 }

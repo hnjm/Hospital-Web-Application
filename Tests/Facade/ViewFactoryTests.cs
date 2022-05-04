@@ -12,14 +12,12 @@ namespace EMEHospitalWebApp.Tests.Facade {
         where TData : UniqueData, new()
         where TObj : UniqueEntity<TData> {
         [TestMethod] public void CreateTest() { }
-        [TestMethod]
-        public void CreateViewTest() {
+        [TestMethod] public void CreateViewTest() {
             var v = GetRandom.Value<TView>();
             var o = obj.Create(v);
             arePropertiesEqual(v, o.Data);
         }
-        [TestMethod]
-        public void CreateEntityTest() {
+        [TestMethod] public void CreateEntityTest() {
             var d = GetRandom.Value<TData>();
             var v = obj.Create(toObject(d));
             arePropertiesEqual(d, v);

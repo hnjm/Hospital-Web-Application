@@ -16,12 +16,20 @@ builder.Services.AddDbContext<HospitalWebAppDb>(o => o.UseSqlServer(connectionSt
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddDefaultIdentity<IdentityUser>(o => o.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
-builder.Services.AddRazorPages();
+builder.Services.AddRazorPages(o =>
+{
+    o.Conventions.AuthorizePage("/Countries/Create");
+    o.Conventions.AuthorizePage("/Countries/Edit");
+    o.Conventions.AuthorizePage("/Countries/Delete");
+    o.Conventions.AuthorizePage("/Currencies/Create");
+    o.Conventions.AuthorizePage("/Currencies/Edit");
+    o.Conventions.AuthorizePage("/Currencies/Delete");
+});
 builder.Services.AddTransient<IAppointmentRepo, AppointmentsRepo>();
 builder.Services.AddTransient<IPatientRepo, PatientsRepo>();
 builder.Services.AddTransient<ICountriesRepo, CountriesRepo>();
 builder.Services.AddTransient<ICurrenciesRepo, CurrenciesRepo>();
-builder.Services.AddTransient<ICountryCurrencyRepo, CountryCurrencyRepo>();
+builder.Services.AddTransient<ICountryCurrencyRepo, CountryCurrenciesRepo>();
 builder.Services.AddTransient<IPatientAppointmentRepo, PatientAppointmentRepo>();
 
 var app = builder.Build();

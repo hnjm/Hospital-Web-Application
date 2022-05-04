@@ -16,7 +16,7 @@ public abstract class HostTests : TestAsserts {
     [TestInitialize] public virtual void TestInitialize() {
         (GetRepo.Instance<ICountriesRepo>() as CountriesRepo)?.clear();
         (GetRepo.Instance<ICurrenciesRepo>() as CurrenciesRepo)?.clear();
-        (GetRepo.Instance<ICountryCurrencyRepo>() as CountryCurrencyRepo)?.clear();
+        (GetRepo.Instance<ICountryCurrencyRepo>() as CountryCurrenciesRepo)?.clear();
         (GetRepo.Instance<IPatientRepo>() as PatientsRepo)?.clear();
         (GetRepo.Instance<IAppointmentRepo>() as AppointmentsRepo)?.clear();
         (GetRepo.Instance<IPatientAppointmentRepo>() as PatientAppointmentRepo)?.clear();
@@ -32,24 +32,34 @@ public abstract class HostTests : TestAsserts {
         isNotNull(c);
         isInstanceOfType(c, typeof(TObj));
         var r = GetRepo.Instance<TRepo>();
+        int cnt;
+        var d = addRandomItems(out cnt, toObj, id, r);
+        r.PageSize = 30;
+        areEqual(cnt, r.Get().Count);
+        areEqualProperties(d, getObj(), nameof(UniqueData.Token));
+    }
+
+    internal static TData? addRandomItems<TRepo, TObj, TData>(out int cnt, Func<TData, TObj> toObj, string? id = null, TRepo? r = null) 
+        where TRepo : class, IRepo<TObj>
+        where TObj : UniqueEntity {
+        r ??= GetRepo.Instance<TRepo>();
         var d = GetRandom.Value<TData>();
-        d.Id = id;
-        var cnt = GetRandom.Int32(5, 30);
+        if (id is not null && d is not null) d.Id = id;
+        cnt = GetRandom.Int32(5, 30);
         var idx = GetRandom.Int32(0, cnt);
         for (var i = 0; i < cnt; i++) {
             var x = (i == idx) ? d : GetRandom.Value<TData>();
             isNotNull(x);
             r?.Add(toObj(x));
         }
-        r.PageSize = 30;
-        areEqual(cnt, r.Get().Count);
-        arePropertiesEqual(d, getObj());
+        return d;
     }
+
     protected void itemsTest<TRepo, TObj, TData>(Action<TData> setId, Func<TData, TObj> toObj, Func<List<TObj>> getList)
         where TRepo : class, IRepo<TObj> where TObj : UniqueEntity<TData> where TData : UniqueData, new() {
         var o = isReadOnly<List<TObj>>(nameof(itemsTest));
         isNotNull(o);
-        isInstanceOfType(o, typeof(List<TObj>));
+        isInstanceOfType(o, o.GetType().Name.Contains("Lazy") ? typeof(Lazy<List<TObj>>) : typeof(List<TObj>));
         var r = GetRepo.Instance<TRepo>();
         isNotNull(r);
         var list = new List<TData>();
@@ -69,7 +79,7 @@ public abstract class HostTests : TestAsserts {
         foreach (var d in list) {
             var y = l.Find(z => z.Id == d.Id);
             isNotNull(y);
-            arePropertiesEqual(d, y);
+            areEqualProperties(d, y, nameof(UniqueData.Token));
         }
     }
 
@@ -96,7 +106,7 @@ public abstract class HostTests : TestAsserts {
         areEqual(l.Count, c.Count);
         foreach (var e in l) {
             var a = c.Find(x => x?.Id == detailId(e));
-            arePropertiesEqual(toData(a), relatedToData(e));
+            areEqualProperties(toData(a), relatedToData(e), nameof(UniqueData.Token));
         }
     }
 }

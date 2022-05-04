@@ -45,6 +45,7 @@ public static class GetRandom {
         var t = getUnderlyingType(typeof(T));
         if (isEnum(t)) return EnumOf<T>();
         if (t == typeof(bool)) return Bool();
+        if (t == typeof(byte[])) return ConcurrencyToken.ToByteArray(String(8, 8));
         if (t == typeof(DateTime)) return DateTime(Convert.ToDateTime(min), Convert.ToDateTime(max));
         if (t == typeof(double)) return Double(Convert.ToDouble(min), Convert.ToDouble(max));
         if (t == typeof(long)) return Int64(Convert.ToInt64(min), Convert.ToInt64(max));
@@ -70,6 +71,7 @@ public static class GetRandom {
         t = getUnderlyingType(t);
         if (isEnum(t)) return EnumOf(t);
         if (t == typeof(bool)) return Bool();
+        if (t == typeof(byte[])) return ConcurrencyToken.ToByteArray(String(8, 8));
         if (t == typeof(DateTime)) return DateTime();
         if (t == typeof(double)) return Double();
         if (t == typeof(long)) return Int64();

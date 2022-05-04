@@ -12,5 +12,5 @@ public class CurrenciesPage : PagedPage<CurrencyView, Currency, ICurrenciesRepo>
         nameof(CurrencyView.Name),
         nameof(CurrencyView.Description),
     };
-    public List<Country?> Countries => ToObject(Item).Countries;
+    public Lazy<List<Country?>> Countries => ToObject(Item).Countries;
 }

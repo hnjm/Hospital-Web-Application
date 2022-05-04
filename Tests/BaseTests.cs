@@ -10,9 +10,14 @@ namespace EMEHospitalWebApp.Tests {
     public abstract class BaseTests<TClass, TBaseClass> : TypeTests
         where TClass : class where TBaseClass : class {
         protected TClass obj;
+        private const BindingFlags allFlags = 
+            BindingFlags.Public 
+            | BindingFlags.NonPublic 
+            | BindingFlags.Instance 
+            | BindingFlags.Static;
+
         protected BaseTests() => obj = createObj();
         protected abstract TClass createObj();
-
         protected void isProperty<T>(T? value = default, bool isReadOnly = false, string? callingMethod = null) {
             callingMethod ??= nameof(isProperty);
             var actual = getProperty(ref value, isReadOnly, callingMethod);
@@ -31,16 +36,14 @@ namespace EMEHospitalWebApp.Tests {
             var pi = isDisplayNamed(displayName, value, isReadOnly, nameof(isRequired));
             isTrue(pi?.HasAttribute<RequiredAttribute>(), nameof(RequiredAttribute));
         }
-
         protected void isReadOnly<T>(T? value) => isProperty(value, true, nameof(isReadOnly));
         protected override object? isReadOnly<T>(string? callingMethod = null) {
             var v = default(T);
             return getProperty<T>(ref v, true, callingMethod ?? nameof(isReadOnly));
         }
-
         protected PropertyInfo? getPropertyInfo(string callingMethod) {
             var memberName = getCallingMember(callingMethod).Replace("Test", string.Empty);
-            return obj.GetType().GetProperty(memberName);
+            return obj.GetType().GetProperty(memberName, allFlags);
         }
         protected object? getProperty<T>(ref T? value, bool isReadOnly, string callingMethod) {
             var propertyInfo = getPropertyInfo(callingMethod);
@@ -83,5 +86,9 @@ namespace EMEHospitalWebApp.Tests {
             isTrue(hasProperties, $"No properties found for {x}");
         }
         [TestMethod] public void BaseClassTest() => areEqual(typeof(TClass).BaseType, typeof(TBaseClass));
+        protected void isAbstractMethod(string name, params Type[] args) {
+            var mi = typeof(TClass).GetMethod(name, args); 
+            areEqual(true, mi?.IsAbstract, name);
+        }
     }
 }
