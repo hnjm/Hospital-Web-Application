@@ -14,10 +14,9 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 builder.Services.AddDbContext<ApplicationDbContext>(o => o.UseSqlServer(connectionString));
 builder.Services.AddDbContext<HospitalWebAppDb>(o => o.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
-builder.Services.AddDefaultIdentity<IdentityUser>(o => o.SignIn.RequireConfirmedAccount = true)
+builder.Services.AddDefaultIdentity<IdentityUser>(o => o.SignIn.RequireConfirmedAccount = false)
     .AddEntityFrameworkStores<ApplicationDbContext>();
-builder.Services.AddRazorPages(o =>
-{
+builder.Services.AddRazorPages(o => {
     o.Conventions.AuthorizePage("/Countries/Create");
     o.Conventions.AuthorizePage("/Countries/Edit");
     o.Conventions.AuthorizePage("/Countries/Delete");
@@ -30,22 +29,19 @@ builder.Services.AddTransient<IPatientRepo, PatientsRepo>();
 builder.Services.AddTransient<ICountriesRepo, CountriesRepo>();
 builder.Services.AddTransient<ICurrenciesRepo, CurrenciesRepo>();
 builder.Services.AddTransient<ICountryCurrencyRepo, CountryCurrenciesRepo>();
-builder.Services.AddTransient<IPatientAppointmentRepo, PatientAppointmentRepo>();
+builder.Services.AddTransient<IPatientAppointmentRepo, PatientAppointmentsRepo>();
 
 var app = builder.Build();
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
+if (app.Environment.IsDevelopment()) {
     app.UseDeveloperExceptionPage();
     app.UseMigrationsEndPoint();
 }
-else
-{
+else {
     app.UseExceptionHandler("/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 

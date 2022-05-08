@@ -9,6 +9,5 @@ namespace EMEHospitalWebApp.Tests.Facade.Party {
         [TestMethod] public void DoctorsIdTest() => isRequired<string?>("Doctors ID");
         [TestMethod] public void DateTimeTest() => isDisplayNamed<DateTime?>("Date of appointment");
         [TestMethod] public void DiagnosisIdTest() => isDisplayNamed<string?>("Diagnosis ID");
-        [TestMethod] public void PatientTest() => isDisplayNamed<string?>("Patients ID Code");
     }
 }

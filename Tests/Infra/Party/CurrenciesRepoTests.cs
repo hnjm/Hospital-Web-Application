@@ -6,7 +6,7 @@ using EMEHospitalWebApp.Infra.Party;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace EMEHospitalWebApp.Tests.Infra.Party {
-    [TestClass] public class CurrenciesBaseTests
+    [TestClass] public class CurrenciesRepoTests
         : SealedRepoTests<CurrenciesRepo, Repo<Currency, CurrencyData>, Currency, CurrencyData> {
         protected override CurrenciesRepo createObj() => new(GetRepo.Instance<HospitalWebAppDb>());
         protected override object? getSet(HospitalWebAppDb db) => db.Currencies;

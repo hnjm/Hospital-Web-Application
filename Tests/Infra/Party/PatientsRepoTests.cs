@@ -6,7 +6,7 @@ using EMEHospitalWebApp.Infra.Party;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace EMEHospitalWebApp.Tests.Infra.Party {
-    [TestClass] public class PatientsBaseTests
+    [TestClass] public class PatientsRepoTests
         : SealedRepoTests<PatientsRepo, Repo<Patient, PatientData>, Patient, PatientData> {
         protected override PatientsRepo createObj() => new(GetRepo.Instance<HospitalWebAppDb>());
         protected override object? getSet(HospitalWebAppDb db) => db.Patients;

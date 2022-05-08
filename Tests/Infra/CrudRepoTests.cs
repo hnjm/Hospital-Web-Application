@@ -71,6 +71,18 @@ namespace EMEHospitalWebApp.Tests.Infra {
             var x = await obj.GetAsync(d.Id);
             isNotNull(x);
             areNotEqual(d.Id, x.Id);
+            var s = await obj.DeleteAsync(string.Empty);
+            isFalse(s);
+
+            var dX = GetRandom.Value<AppointmentData>() as AppointmentData;
+            isNotNull(d);
+            isNotNull(dX);
+            dX.Id = d.Id;
+            var aX = new Appointment(dX);
+            _ = obj.UpdateAsync(aX);
+            var id = dX.Id;
+            var y = await obj.DeleteAsync(id);
+            isFalse(y);
         }
         [TestMethod] public async Task GetTest() {
             isNotNull(d);

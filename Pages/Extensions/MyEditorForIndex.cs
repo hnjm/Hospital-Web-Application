@@ -2,8 +2,7 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 using EMEHospitalWebApp.Facade;
 
-namespace EMEHospitalWebApp.Pages.Extensions
-{
+namespace EMEHospitalWebApp.Pages.Extensions {
     public static class MyEditorForIndex
     {
         public static IHtmlContentContainer ShowTable<TModel, TView>(this IHtmlHelper<TModel> h, IList<TView>? items) 

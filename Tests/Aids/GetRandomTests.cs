@@ -84,6 +84,8 @@ namespace EMEHospitalWebApp.Tests.Aids {
             areNotEqual(x?.DoctorsId, y?.DoctorsId, nameof(x.DoctorsId));
             areNotEqual(x?.DateTime, y?.DateTime, nameof(x.DateTime));
             areNotEqual(x?.DiagnosisId, y?.DiagnosisId, nameof(x.DiagnosisId));
+            y = GetRandom.Value(typeof(Array));
+            isNull(y);
         }
 
         [TestMethod] public void EnumOfGenericTest() => test(() => GetRandom.EnumOf<IsoGender>());

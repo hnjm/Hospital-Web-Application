@@ -10,8 +10,6 @@ public static class Types {
         | BindingFlags.Static;
     public static bool BelongsTo(this Type? t, string? namespaceName)
         => (t is not null) && t.IsRealType() && t.NameStarts(namespaceName);
-    public static bool NameIs(this Type? t, string? name)
-        => Safe.Run(() => name is not null && (t?.FullName?.Equals(name) ?? false));
     public static bool NameEnds(this Type? t, string? name)
         => Safe.Run(() => name is not null && (t?.FullName?.EndsWith(name) ?? false));
     public static bool NameStarts(this Type? t, string? name)

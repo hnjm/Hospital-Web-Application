@@ -1,6 +1,4 @@
 ﻿using EMEHospitalWebApp.Data;
-using EMEHospitalWebApp.Data.Party;
-using EMEHospitalWebApp.Domain;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace EMEHospitalWebApp.Tests.Data;

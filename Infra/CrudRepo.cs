@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.Design;
-using EMEHospitalWebApp.Data;
+﻿using EMEHospitalWebApp.Data;
 using EMEHospitalWebApp.Domain;
 using Microsoft.EntityFrameworkCore;
 

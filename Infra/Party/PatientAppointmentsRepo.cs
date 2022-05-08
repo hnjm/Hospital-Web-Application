@@ -2,8 +2,8 @@
 using EMEHospitalWebApp.Domain.Party;
 
 namespace EMEHospitalWebApp.Infra.Party {
-    public sealed class PatientAppointmentRepo : Repo<PatientAppointment, PatientAppointmentData>, IPatientAppointmentRepo {
-        public PatientAppointmentRepo(HospitalWebAppDb? db) : base(db, db?.PatientAppointment) { }
+    public sealed class PatientAppointmentsRepo : Repo<PatientAppointment, PatientAppointmentData>, IPatientAppointmentRepo {
+        public PatientAppointmentsRepo(HospitalWebAppDb? db) : base(db, db?.PatientAppointment) { }
         protected internal override PatientAppointment toDomain(PatientAppointmentData d) => new(d);
         internal override IQueryable<PatientAppointmentData> addFilter(IQueryable<PatientAppointmentData> q) {
             var y = CurrentFilter;

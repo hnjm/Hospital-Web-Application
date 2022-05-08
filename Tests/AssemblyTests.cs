@@ -20,12 +20,15 @@ namespace EMEHospitalWebApp.Tests {
             testingAssembly = getAssembly(this);
             testingTypes = getTypes(testingAssembly);
             namespaceOfTest = getNamespace(this);
+            namespaceOfType = removeTestsTagFrom(namespaceOfTest);
+            //if (namespaceOfTest == "EMEHospitalWebApp.Tests.Soft") namespaceOfTest = "EMEHospitalWebApp.Tests.Pages";
             removeNotInNamespace(testingTypes, namespaceOfTest);
             removeNotInClassTests();
-            removeNotInCorrectTests();
+            if (namespaceOfTest != "EMEHospitalWebApp.Tests.Soft") removeNotInCorrectTests();
             namespaceOfType = removeTestsTagFrom(namespaceOfTest);
             assemblyToBeTested = getAssembly(namespaceOfType);
             typesToBeTested = getTypes(assemblyToBeTested);
+            if (namespaceOfType == "EMEHospitalWebApp.Soft") namespaceOfType = "EMEHospitalWebApp.Pages";
             removeNotInNamespace(typesToBeTested, namespaceOfType);
             removeInterfaces();
             removeNotNeedTesting();
@@ -34,8 +37,10 @@ namespace EMEHospitalWebApp.Tests {
             if (allAreTested()) return;
             reportNotAllIsTested();
         }
+
         private void removeInterfaces() => typesToBeTested.RemoveAll(t => t.IsInterface);
-        private void removeNotInNamespace(List<Type>? t, string? nameSpace) => t?.Remove(x => ! x.NameStarts(nameSpace));
+        private void removeNotInNamespace(List<Type>? t, string? nameSpace) => t?.Remove(x 
+            => ! x.NameStarts(nameSpace));
         private void removeNotInClassTests() => testingTypes.Remove(x => !x.NameEnds(testsStr));
         private void removeNotInCorrectTests() => testingTypes.Remove(x => !isCorrectTest(x));
         private static string? removeTestsTagFrom(string? s) => s?.Remove(testProjectStr);

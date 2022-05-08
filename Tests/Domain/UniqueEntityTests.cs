@@ -1,4 +1,5 @@
-﻿using EMEHospitalWebApp.Aids;
+﻿using System;
+using EMEHospitalWebApp.Aids;
 using EMEHospitalWebApp.Data.Party;
 using EMEHospitalWebApp.Domain;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -18,4 +19,5 @@ namespace EMEHospitalWebApp.Tests.Domain;
     [TestMethod] public void IdTest() => isReadOnly(obj.Data.Id);
     [TestMethod] public void DataTest() => isReadOnly(d);
     [TestMethod] public void DefaultSrtTest() => areEqual("Undefined", UniqueEntity.DefaultSrt);
+    [TestMethod] public void DefaultDateTest() => areEqual(new DateTime(), UniqueEntity.defaultDate);
 }

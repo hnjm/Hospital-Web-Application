@@ -13,8 +13,8 @@ namespace EMEHospitalWebApp.Tests.Aids {
             Assert.IsTrue(letter.IsNameChar());
             Assert.IsTrue(digit.IsNameChar());
             Assert.IsTrue('`'.IsNameChar());
-            Assert.IsFalse('.'.IsNameChar());
             Assert.IsFalse('_'.IsNameChar());
+            Assert.IsFalse('.'.IsNameChar());
             Assert.IsFalse(':'.IsNameChar());
         }
         [TestMethod] public void IsFullNameCharTest() {
@@ -22,8 +22,9 @@ namespace EMEHospitalWebApp.Tests.Aids {
             Assert.IsTrue(digit.IsFullNameChar());
             Assert.IsTrue('.'.IsFullNameChar());
             Assert.IsTrue('`'.IsFullNameChar());
-            Assert.IsFalse('_'.IsFullNameChar());
+            Assert.IsTrue('_'.IsFullNameChar());
             Assert.IsFalse(':'.IsFullNameChar());
+            Assert.IsFalse(';'.IsFullNameChar());
         }
     }
 }

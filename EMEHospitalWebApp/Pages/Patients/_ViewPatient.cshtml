@@ -3,6 +3,7 @@
 
 @Html.MyEditorForCRUD(m => m.Item.FirstName)
 @Html.MyEditorForCRUD(m => m.Item.LastName)
+@Html.MyEditorForCRUD(m => m.Item.FullName)
 @Html.MyEditorForCRUD(m => m.Item.Gender, Model.GenderDescription(Model.Item.Gender))
 @Html.MyEditorForCRUD(m => m.Item.BirthDate)
 @Html.MyEditorForCRUD(m => m.Item.IdCode)

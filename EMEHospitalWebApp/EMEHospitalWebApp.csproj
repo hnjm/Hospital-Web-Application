@@ -5,6 +5,8 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>aspnet-EMEHospitalWebApp-9D155230-D19D-44A5-B41B-004CAACD8DF5</UserSecretsId>
+    <AssemblyName>$(SolutionName.Replace(” ”, “_”)).Soft</AssemblyName>
+    <RootNamespace>$(MSBuildProjectName.Replace(" ", "_")).Soft</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

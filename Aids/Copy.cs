@@ -2,8 +2,7 @@
 
 namespace EMEHospitalWebApp.Aids {
     public static class Copy {
-        public static void Properties(object? from, object? to)
-        {
+        public static void Properties(object? from, object? to) {
             var tFrom = from?.GetType();
             var tTo = to?.GetType();
             foreach (var piFrom in tFrom?.GetProperties() ?? Array.Empty<PropertyInfo>()) {
