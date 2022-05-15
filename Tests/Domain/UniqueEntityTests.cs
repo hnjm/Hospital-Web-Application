@@ -17,7 +17,8 @@ namespace EMEHospitalWebApp.Tests.Domain;
         return new testClass(d);
     } 
     [TestMethod] public void IdTest() => isReadOnly(obj.Data.Id);
+    [TestMethod] public void TokenTest() => isReadOnly(obj.Data.Token);
     [TestMethod] public void DataTest() => isReadOnly(d);
     [TestMethod] public void DefaultSrtTest() => areEqual("Undefined", UniqueEntity.DefaultSrt);
-    [TestMethod] public void DefaultDateTest() => areEqual(new DateTime(), UniqueEntity.defaultDate);
+    [TestMethod] public void DefaultDateTest() => areEqual(new DateTime(), UniqueEntity.DefaultDate);
 }

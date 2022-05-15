@@ -11,7 +11,6 @@ namespace EMEHospitalWebApp.Tests.Facade {
             protected override Appointment toEntity(AppointmentData d) => new(d);
         }
         protected override BaseViewFactory<AppointmentView, Appointment, AppointmentData> createObj() => new TestClass();
-        
         [TestMethod] public void CreateTest() {}
         [TestMethod] public void CreateViewTest() {
             var v = GetRandom.Value<AppointmentView>();

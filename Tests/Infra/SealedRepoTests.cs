@@ -7,12 +7,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace EMEHospitalWebApp.Tests.Infra {
-    public abstract class SealedRepoTests<TClass, TBaseClass, TDomain, TData>
-    : SealedBaseTests<TClass, TBaseClass>
-    where TClass : FilteredRepo<TDomain, TData>
-    where TBaseClass : class
-    where TDomain : UniqueEntity<TData>, new()
-    where TData : UniqueData, new() {
+    public abstract class SealedRepoTests<TClass, TBaseClass, TDomain, TData> 
+        : SealedBaseTests<TClass, TBaseClass>
+        where TClass : FilteredRepo<TDomain, TData> 
+        where TBaseClass : class
+        where TDomain : UniqueEntity<TData>, new()
+        where TData : UniqueData, new() {
         private static Type universityType => typeof(HospitalWebAppDb);
         private static Type setType => typeof(DbSet<TData>);
         private HospitalWebAppDb universityDb {

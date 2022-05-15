@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace EMEHospitalWebApp.Pages.Party {
     [Authorize]
-    public class AppointmentsPage : PagedPage<AppointmentView, Appointment, IAppointmentRepo> {
+    public sealed class AppointmentsPage : PagedPage<AppointmentView, Appointment, IAppointmentRepo> {
         private readonly IPatientRepo patients;
         public AppointmentsPage(IAppointmentRepo r) : base(r) { }
         protected override Appointment ToObject(AppointmentView? item) => new AppointmentViewFactory().Create(item);

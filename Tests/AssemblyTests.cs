@@ -21,10 +21,9 @@ namespace EMEHospitalWebApp.Tests {
             testingTypes = getTypes(testingAssembly);
             namespaceOfTest = getNamespace(this);
             namespaceOfType = removeTestsTagFrom(namespaceOfTest);
-            //if (namespaceOfTest == "EMEHospitalWebApp.Tests.Soft") namespaceOfTest = "EMEHospitalWebApp.Tests.Pages";
             removeNotInNamespace(testingTypes, namespaceOfTest);
             removeNotInClassTests();
-            if (namespaceOfTest != "EMEHospitalWebApp.Tests.Soft") removeNotInCorrectTests();
+            if (namespaceOfTest is not null and not ("EMEHospitalWebApp.Tests.Soft" or "EMEHospitalWebApp.Tests.Pages")) removeNotInCorrectTests();
             namespaceOfType = removeTestsTagFrom(namespaceOfTest);
             assemblyToBeTested = getAssembly(namespaceOfType);
             typesToBeTested = getTypes(assemblyToBeTested);

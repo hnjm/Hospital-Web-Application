@@ -52,7 +52,7 @@ namespace EMEHospitalWebApp.Tests {
             r ??= GetRepo.Instance<TRepo>();
             var d = GetRandom.Value<TData>();
             if (id is not null && d is not null) d.Id = id;
-            cnt = GetRandom.Int32(5, 30);
+            cnt = GetRandom.Int32(5, 10);
             var idx = GetRandom.Int32(0, cnt);
             for (var i = 0; i < cnt; i++) {
                 var x = (i == idx) ? d : GetRandom.Value<TData>();

@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace EMEHospitalWebApp.Tests.Infra {
-    [TestClass] public class BasePageTests
+    [TestClass] public class BaseRepoTests
     : AbstractClassTests<BaseRepo<Appointment, AppointmentData>, object> {
         private class testClass : BaseRepo<Appointment, AppointmentData> {
             public testClass(DbContext? c, DbSet<AppointmentData>? s) : base(c, s) { }

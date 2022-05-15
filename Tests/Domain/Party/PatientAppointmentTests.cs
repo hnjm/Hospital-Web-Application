@@ -9,11 +9,9 @@ namespace EMEHospitalWebApp.Tests.Domain.Party {
         protected override PatientAppointment createObj() => new PatientAppointment(GetRandom.Value<PatientAppointmentData>());
         [TestMethod] public void PatientIdTest() => isReadOnly(obj.Data.PatientId);
         [TestMethod] public void AppointmentIdTest() => isReadOnly(obj.Data.AppointmentId);
-        [TestMethod]
-        public void PatientTest() => itemTest<IPatientRepo, Patient, PatientData>(
+        [TestMethod] public void PatientTest() => itemTest<IPatientRepo, Patient, PatientData>(
             obj.PatientId, d => new Patient(d), () => obj.Patient);
-        [TestMethod]
-        public void AppointmentTest() => itemTest<IAppointmentRepo, Appointment, AppointmentData>(
+        [TestMethod] public void AppointmentTest() => itemTest<IAppointmentRepo, Appointment, AppointmentData>(
             obj.AppointmentId, d => new Appointment(d), () => obj.Appointment);
     }
 }

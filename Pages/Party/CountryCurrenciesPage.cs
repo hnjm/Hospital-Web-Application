@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace EMEHospitalWebApp.Pages.Party;
 
-public class CountryCurrenciesPage : PagedPage<CountryCurrencyView, CountryCurrency, ICountryCurrencyRepo> {
+public sealed class CountryCurrenciesPage : PagedPage<CountryCurrencyView, CountryCurrency, ICountryCurrencyRepo> {
     private readonly ICountriesRepo country;
     private readonly ICurrenciesRepo currency;
     public CountryCurrenciesPage(ICountryCurrencyRepo r, ICountriesRepo co, ICurrenciesRepo cu) : base(r) {

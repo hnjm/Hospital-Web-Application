@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using EMEHospitalWebApp.Data.Party;
 using EMEHospitalWebApp.Domain;
 using EMEHospitalWebApp.Infra;
@@ -18,6 +19,11 @@ namespace EMEHospitalWebApp.Tests.Infra.Initializers {
             var set = db?.Appointments;
             return new testClass(db, set);
         }
-        [TestMethod] public void InitTest() => isInconclusive();
+        [TestMethod] public void InitTest() {
+            var db = GetRepo.Instance<HospitalWebAppDb>();
+            isFalse(db?.Appointments?.Any());
+            new AppointmentsInitializer(db).Init();
+            isTrue(db?.Appointments?.Any());
+        }
     }
 }

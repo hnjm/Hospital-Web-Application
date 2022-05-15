@@ -14,8 +14,7 @@ namespace EMEHospitalWebApp.Infra {
             base.OnModelCreating(b);
             InitializeTables(b);
         }
-        public static void InitializeTables(ModelBuilder b)
-        {
+        public static void InitializeTables(ModelBuilder b) {
             var s = nameof(HospitalWebAppDb)[..^2];
             _ = b?.Entity<AppointmentData>()?.ToTable(nameof(Appointments), s);
             _ = b?.Entity<PatientData>()?.ToTable(nameof(Patients), s);

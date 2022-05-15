@@ -5,7 +5,6 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using EMEHospitalWebApp.Aids;
 using EMEHospitalWebApp.Data;
-using EMEHospitalWebApp.Data.Party;
 using EMEHospitalWebApp.Domain;
 using EMEHospitalWebApp.Facade;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -18,7 +17,6 @@ namespace EMEHospitalWebApp.Tests.Soft {
         where TView : UniqueView, new()
     {
         protected TData? d;
-        protected CurrencyData? d2;
         protected TView? v;
         protected string id;
         protected List<string>? displayNameList;
@@ -49,6 +47,7 @@ namespace EMEHospitalWebApp.Tests.Soft {
             client ??= clientProduction;
             var page = await client.GetAsync(url);
             var html = await page.Content.ReadAsStringAsync();
+            isNotNull(html);
             return html;
         }
     }

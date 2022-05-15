@@ -16,13 +16,12 @@ public abstract class BasePage<TView, TEntity, TRepo> : PageModel
     protected abstract IActionResult redirectToIndex();
     protected abstract IActionResult redirectToEdit(TView v);
     protected abstract IActionResult redirectToDelete(string id);
-    [BindProperty] public TView Item { get; set; } = new TView();
+    [BindProperty] public TView Item { get; set; } = new ();
     public IList<TView> Items { get; set; } = new List<TView>();
     public string ItemId => Item?.Id ?? string.Empty;
     public string Token => ConcurrencyToken.ToStr(Item?.Token);
     public string? ErrorMessage { get; set; }
     protected BasePage(TRepo r) => _repo = r;
-    protected abstract IActionResult getCreate();
     protected abstract void setAttributes(int idx, string? filter, string? order);
     protected virtual async Task<IActionResult> perform(Func<Task<IActionResult>>f, 
         int idx, string? filter, string? order, bool removeKeys = false) {
@@ -30,6 +29,7 @@ public abstract class BasePage<TView, TEntity, TRepo> : PageModel
         if (removeKeys) removeKey(nameof(filter), nameof(order));
         return await f();
     }
+    protected abstract IActionResult getCreate();
     protected abstract Task<IActionResult> postCreateAsync();
     protected abstract Task<IActionResult> getDetailsAsync(string id);
     protected abstract Task<IActionResult> getDeleteAsync(string id);
@@ -48,7 +48,7 @@ public abstract class BasePage<TView, TEntity, TRepo> : PageModel
     }
     public async Task<IActionResult> OnPostCreateAsync(int idx = 0, string? filter = null, string? order = null)
         => await perform(postCreateAsync, idx, filter, order, true);
-    public async Task<IActionResult> OnGetDetailsAsync(string id, int idx = 0, string? filter = null, string? order = null) 
+    public async Task<IActionResult> OnGetDetailsAsync(string id, int idx = 0, string? filter = null, string? order = null)
         => await perform(() => getDetailsAsync(id), idx, filter, order);
     public async Task<IActionResult> OnGetDeleteAsync(string id, int idx = 0, string? filter = null, string? order = null)
         => await perform(() => getDeleteAsync(id), idx, filter, order);

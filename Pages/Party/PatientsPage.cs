@@ -10,7 +10,7 @@ namespace EMEHospitalWebApp.Pages.Party {
     // To protect from overposting attacks, enable the specific properties you want to bind to.
     // For more details, see https://aka.ms/RazorPagesCRUD.
     [Authorize]
-    public class PatientsPage : PagedPage<PatientView, Patient, IPatientRepo> {
+    public sealed class PatientsPage : PagedPage<PatientView, Patient, IPatientRepo> {
         private readonly ICountriesRepo countries;
         public PatientsPage(IPatientRepo r, ICountriesRepo c) : base(r) => countries = c;
         protected override Patient ToObject(PatientView? item) => new PatientViewFactory().Create(item);

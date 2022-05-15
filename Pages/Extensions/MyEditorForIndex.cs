@@ -3,8 +3,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using EMEHospitalWebApp.Facade;
 
 namespace EMEHospitalWebApp.Pages.Extensions {
-    public static class MyEditorForIndex
-    {
+    public static class MyEditorForIndex {
         public static IHtmlContentContainer ShowTable<TModel, TView>(this IHtmlHelper<TModel> h, IList<TView>? items) 
             where TModel : IIndexModel<TView> where TView : UniqueView {
             var s = HtmlStringsForIndex(h, items);

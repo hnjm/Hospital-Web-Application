@@ -1,7 +1,5 @@
 ﻿using EMEHospitalWebApp.Data.Party;
 
-
-
 namespace EMEHospitalWebApp.Domain.Party {
     public interface IPatientAppointmentRepo : IRepo<PatientAppointment> { }
     public sealed class PatientAppointment : NamedEntity<PatientAppointmentData> {

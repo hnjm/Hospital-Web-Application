@@ -1,23 +1,18 @@
 ﻿using System.Threading.Tasks;
-using EMEHospitalWebApp.Data.Party;
-using EMEHospitalWebApp.Domain.Party;
-using EMEHospitalWebApp.Facade.Party;
+using EMEHospitalWebApp.Aids;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace EMEHospitalWebApp.Tests.Soft.Pages.Shared {
-    [TestClass] public class Pages_Shared__LoginPartialTests : PagesTests<IAppointmentRepo, Appointment, AppointmentData, AppointmentView> {
-        [TestInitialize] public void Init() => Init(x => new Appointment(x));
-        private async Task CheckIfContains(string url, string? format = null) {
-            var html = await getHtmlPage(url);
-            isNotNull(html);
-            isNotNull(d);
-            isNotNull(d.Id);
-            isNotNull(d.PatientsId);
-            isNotNull(d.DoctorsId);
-            isNotNull(d.DiagnosisId);
-            if (displayNameList is null) return;
-            foreach (var name in displayNameList) isTrue(html.Contains(name));
+    [TestClass] public class Pages_Shared__LoginPartialTests : SharedCRUDTests {
+        [TestMethod] public async Task SharedIndexTest() {
+            var pageIdx = GetRandom.Int32(1, 10);
+            var html = await getHtmlPage($"/Appointments?idx={pageIdx}&handler=Index");
+            isTrue(html.Contains("Find by name"));
+            isTrue(html.Contains("First"));
+            isTrue(html.Contains("Previous"));
+            isTrue(html.Contains("Next"));
+            isTrue(html.Contains("Last"));
+            isTrue(html.Contains($"Page {pageIdx + 1} of total pages "));
         }
-        [TestMethod] public async Task IndexTest() => await CheckIfContains("/Appointments?handler=Index");
     }
 }

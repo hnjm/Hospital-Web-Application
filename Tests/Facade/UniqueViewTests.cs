@@ -9,5 +9,9 @@ namespace EMEHospitalWebApp.Tests.Facade {
             isProperty<string>();
             isRequired<string>();
         }
+        [TestMethod] public void TokenTest() {
+            isProperty<byte[]>();
+            isRequired<byte[]>();
+        }
     }
 }

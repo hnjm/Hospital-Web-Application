@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace EMEHospitalWebApp.Pages.Party;
 
-public class PatientAppointmentsPage : PagedPage<PatientAppointmentView, PatientAppointment, IPatientAppointmentRepo> {
+public sealed class PatientAppointmentsPage : PagedPage<PatientAppointmentView, PatientAppointment, IPatientAppointmentRepo> {
     private readonly IAppointmentRepo appointment;
     private readonly IPatientRepo patient;
     public PatientAppointmentsPage(IPatientAppointmentRepo r, IAppointmentRepo a, IPatientRepo p) : base(r) {

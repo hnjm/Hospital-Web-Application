@@ -11,18 +11,16 @@ namespace EMEHospitalWebApp.Tests.Soft.Pages.Currencies {
         [TestInitialize] public void Init() => Init(x => new Currency(x));
         protected override void Init(Func<CurrencyData, Currency> toObj) {
             base.Init(toObj);
-            var cc = addItems<ICountryCurrencyRepo, CountryCurrency, CountryCurrencyData>(out _, ss => new CountryCurrency(ss), id);
+            _ = addItems<ICountryCurrencyRepo, CountryCurrency, CountryCurrencyData>(out _, ss => new CountryCurrency(ss), id);
             c = addRandomItems<ICountriesRepo, Country, CountryData>(out _, x => new Country(x), id);
         }
-        private async Task CheckIfContains(string url) {
+        protected async Task CheckIfContains(string url) {
             var html = await getHtmlPage(url);
-            isNotNull(html);
             isNotNull(d);
             isNotNull(d.Name);
             isNotNull(d.Description);
-            if (displayNameList is null) return;
-            foreach (var name in displayNameList) isTrue(html.Contains(name));
-            if (!url.Contains("Create") && !url.Contains("Index")) {
+            if (displayNameList is not null) foreach (var name in displayNameList) isTrue(html.Contains(name));
+            if (!url.Contains("Create")) {
                 isTrue(html.Contains(d.Id));
                 isTrue(html.Contains(d.Code));
                 isTrue(html.Contains(d.Name));
@@ -34,10 +32,5 @@ namespace EMEHospitalWebApp.Tests.Soft.Pages.Currencies {
                 isTrue(html.Contains(c.Description));
             }
         }
-        [TestMethod] public async Task IndexTest() => await CheckIfContains("/Currencies?handler=Index");
-        [TestMethod] public async Task CreateTest() => await CheckIfContains($"/Currencies/Create?handler=Create&id={id}&order=&idx=0&filter=");
-        [TestMethod] public async Task DetailsTest() => await CheckIfContains($"/Currencies/Details?handler=Details&id={id}&order=&idx=0&filter=");
-        [TestMethod] public async Task EditTest() => await CheckIfContains($"/Currencies/Edit?handler=Edit&id={id}&order=&idx=0&filter=");
-        [TestMethod] public async Task DeleteTest() => await CheckIfContains($"/Currencies/Delete?handler=Delete&id={id}&order=&idx=0&filter=");
     }
 }
