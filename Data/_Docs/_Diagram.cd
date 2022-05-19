@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="EMEHospitalWebApp.Data.UniqueData">
+    <Position X="6.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAABAAAAAAAAAACAAAAAAAAAAAAAAABAAA=</HashCode>
+      <FileName>UniqueData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EMEHospitalWebApp.Data.Party.AppointmentData">
+    <Position X="5" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAACBAAAAAAAAAAAAAQAAAAABAAAAAA=</HashCode>
+      <FileName>Party\AppointmentData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EMEHospitalWebApp.Data.Party.PatientData">
+    <Position X="6.75" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAACAAAAAABQAAAAQAAAAAAAAAAAAAAg=</HashCode>
+      <FileName>Party\PatientData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EMEHospitalWebApp.Data.NamedData">
+    <Position X="8.5" Y="6" Width="1.5" />
+    <InheritanceLine Type="EMEHospitalWebApp.Data.UniqueData" FixedToPoint="true">
+      <Path>
+        <Point X="7.5" Y="5.18" />
+        <Point X="7.5" Y="5.625" />
+        <Point X="9.25" Y="5.625" />
+        <Point X="9.25" Y="6" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAAAAAAAgAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>NamedData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EMEHospitalWebApp.Data.Party.CountryData" Collapsed="true">
+    <Position X="8.5" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Party\CountryData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EMEHospitalWebApp.Data.Party.CurrencyData" Collapsed="true">
+    <Position X="10.25" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Party\CurrencyData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EMEHospitalWebApp.Data.Party.CountryCurrencyData">
+    <Position X="6.5" Y="8.75" Width="1.75" />
+    <InheritanceLine Type="EMEHospitalWebApp.Data.NamedData" FixedToPoint="true">
+      <Path>
+        <Point X="9.25" Y="7.617" />
+        <Point X="9.25" Y="8.375" />
+        <Point X="7.375" Y="8.375" />
+        <Point X="7.375" Y="8.75" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Party\CountryCurrencyData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EMEHospitalWebApp.Data.Party.PatientAppointmentData">
+    <Position X="4.25" Y="8.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Party\PatientAppointmentData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="EMEHospitalWebApp.Data.IsoGender">
+    <Position X="8.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAA=</HashCode>
+      <FileName>IsoGender.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

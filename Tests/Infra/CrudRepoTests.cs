@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using EMEHospitalWebApp.Aids;
 using EMEHospitalWebApp.Data.Party;
@@ -71,9 +72,9 @@ namespace EMEHospitalWebApp.Tests.Infra {
             var x = await obj.GetAsync(d.Id);
             isNotNull(x);
             areNotEqual(d.Id, x.Id);
-            var s = await obj.DeleteAsync(string.Empty);
-            isFalse(s);
-
+            isFalse(await obj.DeleteAsync(""));
+        }
+        [TestMethod] public async Task DeleteAsyncExceptionTest() {
             var dX = GetRandom.Value<AppointmentData>() as AppointmentData;
             isNotNull(d);
             isNotNull(dX);
@@ -133,6 +134,10 @@ namespace EMEHospitalWebApp.Tests.Infra {
             await AddTest();
             var x = await obj.GetAsync(d.Id);
             arePropertiesEqual(d, x.Data);
+            x = await obj.GetAsync(null);
+            var y = new Appointment(new AppointmentData() { Id = x.Id });
+            arePropertiesEqual(y.Data, x.Data);
+            x = await obj.GetAsync("");
         }
         [TestMethod] public async Task GetListAsyncTest() {
             var l = await obj.GetAsync();
@@ -147,7 +152,7 @@ namespace EMEHospitalWebApp.Tests.Infra {
             var aX = new Appointment(dX);
             _ = obj.Update(aX);
             var x = await obj.GetAsync(d.Id);
-            arePropertiesEqual(dX, x.Data);
+            areEqualProperties(dX, x.Data);
         }
         [TestMethod] public async Task UpdateAsyncTest() {
             await GetTest();
@@ -155,10 +160,24 @@ namespace EMEHospitalWebApp.Tests.Infra {
             isNotNull(d);
             isNotNull(dX);
             dX.Id = d.Id;
+            dX.Token = d.Token;
             var aX = new Appointment(dX);
             _ = await obj.UpdateAsync(aX);
             var x = await obj.GetAsync(d.Id);
-            arePropertiesEqual(dX, x.Data);
+            areEqualProperties(dX, x.Data);
+        }
+        [TestMethod] public async Task UpdateAsyncConcurrencyExceptionConflictTest() {
+            isNotNull(d);
+            isNotNull(db);
+            var ad = new AppointmentData() { Id = d.Id, Token = new byte[] { 1, 2 } };
+            db.Add(ad);
+            await db.SaveChangesAsync();
+            var e = new Appointment(new AppointmentData() { Id = d.Id, Token = new byte[] { 1, 3 } });
+            isFalse(await obj.UpdateAsync(e));
+        }
+        [TestMethod] public async Task UpdateAsyncConcurrencyExceptionNotExistTest() {
+            var e = new Appointment(new AppointmentData());
+            isFalse(await obj.UpdateAsync(e));
         }
     }
 }

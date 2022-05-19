@@ -55,6 +55,7 @@ namespace EMEHospitalWebApp.Tests.Pages {
         private AppointmentView? v;
         private AppointmentsPage? p;
         private int testIdx = 2;
+        private string testIdStr = "123";
         private string testFilterStr = "Name";
         private string testOrderStr = "_desc";
         [TestInitialize] public void Init() {
@@ -88,12 +89,12 @@ namespace EMEHospitalWebApp.Tests.Pages {
             areEqual(testOrderStr, p.CurrentOrder);
         }
         [TestMethod] public void OnGetCreateTest() => checkIfSavedProperties(p?.OnGetCreate(testIdx, testFilterStr, testOrderStr));
-        [TestMethod] public void OnGetDetailsAsyncTest() => checkIfSavedProperties(p?.OnGetDetailsAsync("123", testIdx, testFilterStr, testOrderStr));
+        [TestMethod] public void OnGetDetailsAsyncTest() => checkIfSavedProperties(p?.OnGetDetailsAsync(testIdStr, testIdx, testFilterStr, testOrderStr));
         [TestMethod] public void OnPostCreateAsyncTest() => checkIfSavedProperties(p?.OnPostCreateAsync(testIdx, testFilterStr, testOrderStr));
-        [TestMethod] public void OnGetEditAsyncTest() => checkIfSavedProperties(p?.OnGetEditAsync("123", testIdx, testFilterStr, testOrderStr));
+        [TestMethod] public void OnGetEditAsyncTest() => checkIfSavedProperties(p?.OnGetEditAsync(testIdStr, testIdx, testFilterStr, testOrderStr));
         [TestMethod] public void OnPostEditAsyncTest() => checkIfSavedProperties(p?.OnPostEditAsync(testIdx, testFilterStr, testOrderStr));
-        [TestMethod] public void OnGetDeleteAsyncTest() => checkIfSavedProperties(p?.OnGetDeleteAsync("123", testIdx, testFilterStr, testOrderStr));
-        [TestMethod] public void OnPostDeleteAsyncTest() => checkIfSavedProperties(p?.OnPostDeleteAsync("123", testIdx, testFilterStr, testOrderStr));
+        [TestMethod] public void OnGetDeleteAsyncTest() => checkIfSavedProperties(p?.OnGetDeleteAsync(testIdStr, testIdx, testFilterStr, testOrderStr));
+        [TestMethod] public void OnPostDeleteAsyncTest() => checkIfSavedProperties(p?.OnPostDeleteAsync(testIdStr, testIdx, testFilterStr, testOrderStr));
         [TestMethod] public void OnGetIndexAsyncTest() => checkIfSavedProperties(p?.OnGetIndexAsync(testIdx, testFilterStr, testOrderStr));
     }
 }

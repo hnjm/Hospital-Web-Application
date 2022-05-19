@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="EMEHospitalWebApp.Infra.Repo&lt;TDomain, TData&gt;">
+    <Position X="6" Y="6.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Repo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EMEHospitalWebApp.Infra.PagedRepo&lt;TDomain, TData&gt;">
+    <Position X="1" Y="4" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAIAAgAACAAABEAAAAAAEACUAAAAAAAAAAAAEABAAAI=</HashCode>
+      <FileName>PagedRepo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EMEHospitalWebApp.Infra.OrderedRepo&lt;TDomain, TData&gt;">
+    <Position X="3.5" Y="4" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AEAABAEAAAAAAABAAACAQAAAAAAkAAAAAAAAAAJAAAA=</HashCode>
+      <FileName>OrderedRepo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EMEHospitalWebApp.Infra.FilteredRepo&lt;TDomain, TData&gt;">
+    <Position X="6" Y="4" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAAAAgAAAAAAAAAAAAAAAAABAAAA=</HashCode>
+      <FileName>FilteredRepo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EMEHospitalWebApp.Infra.CrudRepo&lt;TDomain, TData&gt;">
+    <Position X="8.5" Y="4" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAYAAAAAAAAAAABAAAAAAAEAgBEAAAgAAgAAIABAAIA=</HashCode>
+      <FileName>CrudRepo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EMEHospitalWebApp.Infra.BaseRepo&lt;TDomain, TData&gt;">
+    <Position X="10.75" Y="4" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AEYAAAAAAAAQAABAAAQAAAEAAAEAAAgAAgAAIAAAAIA=</HashCode>
+      <FileName>BaseRepo.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="EMEHospitalWebApp.Infra.Party.AppointmentsRepo">
+    <Position X="1" Y="8.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAAAAAAAAABAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Party\AppointmentsRepo.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="EMEHospitalWebApp.Infra.Party.CountriesRepo">
+    <Position X="9.5" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAAAAAAAAABAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Party\CountriesRepo.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="EMEHospitalWebApp.Infra.Party.CountryCurrenciesRepo">
+    <Position X="7.25" Y="8.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAAAAAAAAABAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Party\CountryCurrenciesRepo.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="EMEHospitalWebApp.Infra.Party.CurrenciesRepo">
+    <Position X="11.25" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAAAAAAAAABAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Party\CurrenciesRepo.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.15" />
+  </Class>
+  <Class Name="EMEHospitalWebApp.Infra.Party.PatientAppointmentsRepo">
+    <Position X="4.75" Y="8.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAAAAAAAAABAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Party\PatientAppointmentsRepo.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="EMEHospitalWebApp.Infra.Party.PatientsRepo">
+    <Position X="3" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAAAAAAAAABAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Party\PatientsRepo.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

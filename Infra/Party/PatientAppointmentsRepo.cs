@@ -8,7 +8,8 @@ namespace EMEHospitalWebApp.Infra.Party {
         internal override IQueryable<PatientAppointmentData> addFilter(IQueryable<PatientAppointmentData> q) {
             var y = CurrentFilter;
             return string.IsNullOrWhiteSpace(y)
-                ? q : q.Where(
+                ? q 
+                : q.Where(
                     x => x.Id.Contains(y)
                          || x.PatientId.Contains(y)
                          || x.AppointmentId.Contains(y)

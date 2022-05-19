@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using EMEHospitalWebApp.Data;
+using EMEHospitalWebApp.Domain;
 using EMEHospitalWebApp.Infra;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
@@ -25,22 +26,11 @@ namespace EMEHospitalWebApp.Tests {
         }
         private static void ensureCreated(IServiceCollection s, params Type[] types) {
             s.AddRazorPages(o => {
-                o.Conventions.AllowAnonymousToPage("/Appointments/Index");
-                o.Conventions.AllowAnonymousToPage("/Appointments/Create");
-                o.Conventions.AllowAnonymousToPage("/Appointments/Details");
-                o.Conventions.AllowAnonymousToPage("/Appointments/Edit");
-                o.Conventions.AllowAnonymousToPage("/Appointments/Delete");
-                o.Conventions.AllowAnonymousToPage("/Patients/Index");
-                o.Conventions.AllowAnonymousToPage("/Patients/Create");
-                o.Conventions.AllowAnonymousToPage("/Patients/Details");
-                o.Conventions.AllowAnonymousToPage("/Patients/Edit");
-                o.Conventions.AllowAnonymousToPage("/Patients/Delete");
-                o.Conventions.AllowAnonymousToPage("/Countries/Create");
-                o.Conventions.AllowAnonymousToPage("/Countries/Edit");
-                o.Conventions.AllowAnonymousToPage("/Countries/Delete");
-                o.Conventions.AllowAnonymousToPage("/Currencies/Create");
-                o.Conventions.AllowAnonymousToPage("/Currencies/Edit");
-                o.Conventions.AllowAnonymousToPage("/Currencies/Delete");
+                var db = GetRepo.Instance<HospitalWebAppDb>();
+                var a = new [] { "Index", "Create", "Details", "Edit", "Delete" };
+                foreach (var model in db?.Model.GetEntityTypes()!) {
+                    Array.ForEach(a, x => o.Conventions.AllowAnonymousToPage($"/{model.GetTableName()}/{x}"));
+                }
             });
             var sp = s.BuildServiceProvider();
             using var scope = sp.CreateScope();

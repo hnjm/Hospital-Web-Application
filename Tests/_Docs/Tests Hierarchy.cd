@@ -1,18 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="EMEHospitalWebApp.Tests.AbstractClassTests&lt;TClass, TBaseClass&gt;">
-    <Position X="7" Y="6.75" Width="2.75" />
+    <Position X="10.5" Y="1.5" Width="2.75" />
     <TypeIdentifier>
       <HashCode>AIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>AbstractClassTests.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="EMEHospitalWebApp.Tests.AssemblyTests">
-    <Position X="0.5" Y="4.5" Width="2.25" />
+    <Position X="5.75" Y="4.5" Width="2.25" />
     <InheritanceLine Type="EMEHospitalWebApp.Tests.TestAsserts" FixedToPoint="true">
       <Path>
-        <Point X="1.625" Y="4.142" />
-        <Point X="1.625" Y="4.5" />
+        <Point X="6.875" Y="4.142" />
+        <Point X="6.875" Y="4.5" />
       </Path>
     </InheritanceLine>
     <TypeIdentifier>
@@ -21,37 +21,50 @@
     </TypeIdentifier>
   </Class>
   <Class Name="EMEHospitalWebApp.Tests.TypeTests">
-    <Position X="4.75" Y="1.5" Width="2" />
+    <Position X="8.25" Y="5.75" Width="2" />
     <TypeIdentifier>
       <HashCode>gABIAkgAAAAIABCAiAAA0AAQAYApAwCABAEEAAAgAAA=</HashCode>
       <FileName>TypeTests.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="EMEHospitalWebApp.Tests.TestAsserts">
-    <Position X="0.5" Y="1.5" Width="2.25" />
+    <Position X="5.75" Y="1.5" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAACAAABQAAAMAAAAABAACAAAAQAAAACAAAAAA=</HashCode>
       <FileName>TestAsserts.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="EMEHospitalWebApp.Tests.HostTests">
-    <Position X="3" Y="1.5" Width="1.5" />
+    <Position X="8.25" Y="1.5" Width="2" />
     <TypeIdentifier>
       <HashCode>AQAAAACAAAAAAABAAAAAQKAAAAAAAAAQQAgAAAAAAAI=</HashCode>
       <FileName>HostTests.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="EMEHospitalWebApp.Tests.BaseTests&lt;TClass, TBaseClass&gt;">
-    <Position X="7" Y="1.5" Width="5.5" />
+    <Position X="10.5" Y="5.75" Width="5.5" />
     <TypeIdentifier>
       <HashCode>AAAIABAAAAABIAABAACAABABAAAAIAESAAQIAgAAACA=</HashCode>
       <FileName>BaseTests.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="EMEHospitalWebApp.Tests.SealedClassTests&lt;TClass, TBaseClass&gt;">
-    <Position X="10" Y="6.75" Width="2.5" />
+    <Position X="13.5" Y="1.5" Width="2.5" />
+    <InheritanceLine Type="EMEHospitalWebApp.Tests.SealedBaseTests&lt;TClass, TBaseClass&gt;" FixedFromPoint="true">
+      <Path>
+        <Point X="14.75" Y="3.5" />
+        <Point X="14.75" Y="2.733" />
+      </Path>
+    </InheritanceLine>
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAA=</HashCode>
+      <FileName>SealedClassTests.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EMEHospitalWebApp.Tests.SealedBaseTests&lt;TClass, TBaseClass&gt;">
+    <Position X="13.5" Y="3.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>SealedClassTests.cs</FileName>
     </TypeIdentifier>
   </Class>

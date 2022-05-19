@@ -82,10 +82,14 @@ public static class GetRandom {
     }
     private static T? TryGetObject<T>() {
         var o = TryCreate<T>();
-        foreach (var pi in o?.GetType()?.GetProperties() ?? Array.Empty<PropertyInfo>()) {
-            if (!pi.CanWrite) continue;
-            var v = Value(pi.PropertyType);
-            pi.SetValue(o, v, null);
+        var p = o?.GetType();
+        var pp = p?.GetProperties();
+        foreach (var pi in pp ?? Array.Empty<PropertyInfo>()) {
+            try {
+                if (!pi.CanWrite) continue;
+                var v = Value(pi.PropertyType);
+                pi.SetValue(o, v, null);
+            } catch { /*ignore*/ }
         }
         return o;
     }

@@ -5,6 +5,7 @@ using EMEHospitalWebApp.Facade.Party;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace EMEHospitalWebApp.Tests.Soft.Pages.Appointments {
+
     [TestClass] public class AppointmentsTests : PagesTests<IAppointmentRepo, Appointment, AppointmentData, AppointmentView> {
         [TestInitialize] public void Init() => Init(x => new Appointment(x));
         protected async Task CheckIfContains(string url, string? format = null) {

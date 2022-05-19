@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using EMEHospitalWebApp.Aids;
 using EMEHospitalWebApp.Data;
@@ -10,11 +11,9 @@ namespace EMEHospitalWebApp.Tests.Aids {
         private void Test<T>(T min, T max) where T : IComparable<T> {
             var x = GetRandom.Value(min, max);
             var y = GetRandom.Value(min, max);
-            var i = 0;
             while (x == y) {
+                if (Equals(min, max)) min = GetRandom.Value(typeof(T));
                 y = GetRandom.Value(min, max);
-                if (i == 2) areNotEqual(x, y);
-                i++;
             }
             isInstanceOfType(x, typeof(T));
             isInstanceOfType(y, typeof(T));
@@ -31,6 +30,7 @@ namespace EMEHospitalWebApp.Tests.Aids {
         [DataRow(0L, 1000L)]
         [DataRow(long.MaxValue - 1000L, long.MaxValue)]
         [DataRow(long.MinValue, long.MinValue + 1000L)]
+        [DataRow(null, null)]
         [TestMethod] public void Int64Test(long min, long max) => Test(min, max);
 
         [DataRow(-1000, 1000)]
@@ -39,6 +39,7 @@ namespace EMEHospitalWebApp.Tests.Aids {
         [DataRow(0, 1000)]
         [DataRow(int.MaxValue - 100, int.MaxValue)]
         [DataRow(int.MinValue, int.MinValue + 100)]
+        [DataRow(1, 1)]
         [TestMethod] public void Int32Test(int min, int max) => Test(min, max);
 
         [DataRow(-1000.0, 1000.0)]
@@ -47,6 +48,7 @@ namespace EMEHospitalWebApp.Tests.Aids {
         [DataRow(0.0, 1000.0)]
         [DataRow(double.MaxValue - 1.0E+308, double.MaxValue)]
         [DataRow(double.MinValue, double.MinValue + 1.0E+308)]
+        [DataRow(1.1, 1.1)]
         [TestMethod] public void DoubleTest(double min, double max) => Test(min, max);
 
         [DataRow(char.MinValue, char.MaxValue)]
@@ -86,6 +88,14 @@ namespace EMEHospitalWebApp.Tests.Aids {
             areNotEqual(x?.DiagnosisId, y?.DiagnosisId, nameof(x.DiagnosisId));
             y = GetRandom.Value(typeof(Array));
             isNull(y);
+            y = GetRandom.Value(typeof(bool));
+            isTrue(y?.GetType() == typeof(bool));
+            y = GetRandom.Value<bool>();
+            isTrue(y?.GetType() == typeof(bool));
+            y = GetRandom.Value(typeof(char));
+            isTrue(y?.GetType() == typeof(char));
+            y = GetRandom.Value<StringBuilder>();
+            isTrue(y?.GetType() == typeof(StringBuilder));
         }
 
         [TestMethod] public void EnumOfGenericTest() => test(() => GetRandom.EnumOf<IsoGender>());

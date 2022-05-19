@@ -14,6 +14,15 @@ namespace EMEHospitalWebApp.Domain.Party {
         public string IdCode => getValue(Data?.IdCode);
         public string CountryId => getValue(Data?.CountryId);
         public override string ToString() => $"{FirstName} {LastName} ({Gender.Description()}, {BirthDate}) {Country?.Name}";
+        public List<PatientAppointment> PatientAppointments
+            => GetRepo.Instance<IPatientAppointmentRepo>()?
+                .GetAll(x => x.AppointmentId)?
+                .Where(x => x.AppointmentId == Id)?
+                .ToList() ?? new List<PatientAppointment>();
+        public List<Appointment?> Appointments
+            => PatientAppointments
+                .Select(x => x.Appointment)
+                .ToList() ?? new List<Appointment?>();
         public Country? Country => GetRepo.Instance<ICountriesRepo>()?.Get(CountryId);
     }
 }

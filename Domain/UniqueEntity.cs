@@ -12,8 +12,7 @@ namespace EMEHospitalWebApp.Domain {
     }
     public abstract class UniqueEntity<TData> : UniqueEntity where TData : UniqueData, new() {
         public TData Data { get; }
-        public UniqueEntity() : this(new TData()) { }
-        public UniqueEntity(TData d) => Data = d;
+        protected UniqueEntity(TData d) => Data = d;
         public override string Id => getValue(Data?.Id);
         public override byte[] Token => Data?.Token ?? Array.Empty<byte>();
     }

@@ -1,5 +1,5 @@
-﻿using EMEHospitalWebApp.Aids;
-using EMEHospitalWebApp.Data.Party;
+﻿using System.Linq;
+using EMEHospitalWebApp.Aids;
 using EMEHospitalWebApp.Domain;
 using EMEHospitalWebApp.Infra;
 using Microsoft.EntityFrameworkCore;
@@ -26,8 +26,10 @@ namespace EMEHospitalWebApp.Tests.Infra {
         [TestMethod] public void PatientAppointmentTest() => dbTest(db?.PatientAppointment);
         [TestMethod] public void InitializeTablesTest() {
             var b = new ModelBuilder();
-            var t = b?.Entity<AppointmentData>()?.ToTable("Appointments", nameof(HospitalWebAppDb)[..^2]);
-            areEqual("Appointments", t?.Metadata.GetTableName());
+            HospitalWebAppDb.InitializeTables(b);
+            foreach (var e in db?.Model.GetEntityTypes()!) {
+                isTrue(b.Model.GetEntityTypes().Any(x => x.GetTableName() == e.GetTableName()));
+            }
         }
     }
 }

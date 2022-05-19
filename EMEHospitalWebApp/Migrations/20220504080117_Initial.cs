@@ -3,20 +3,16 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace EMEHospitalWebApp.Migrations
-{
-    public partial class Initial : Migration
-    {
-        protected override void Up(MigrationBuilder migrationBuilder)
-        {
+namespace EMEHospitalWebApp.Migrations {
+    public partial class Initial : Migration {
+        protected override void Up(MigrationBuilder migrationBuilder) {
             migrationBuilder.EnsureSchema(
                 name: "HospitalWebApp");
 
             migrationBuilder.CreateTable(
                 name: "Appointments",
                 schema: "HospitalWebApp",
-                columns: table => new
-                {
+                columns: table => new {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     PatientsId = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DoctorsId = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -24,29 +20,23 @@ namespace EMEHospitalWebApp.Migrations
                     DiagnosisId = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Token = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: false)
                 },
-                constraints: table =>
-                {
+                constraints: table => {
                     table.PrimaryKey("PK_Appointments", x => x.Id);
                 });
-
             migrationBuilder.CreateTable(
                 name: "AspNetRoles",
-                columns: table => new
-                {
+                columns: table => new {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
+                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true)},
+                constraints: table => {
                     table.PrimaryKey("PK_AspNetRoles", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "AspNetUsers",
-                columns: table => new
-                {
+                columns: table => new {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -61,86 +51,67 @@ namespace EMEHospitalWebApp.Migrations
                     TwoFactorEnabled = table.Column<bool>(type: "bit", nullable: false),
                     LockoutEnd = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
                     LockoutEnabled = table.Column<bool>(type: "bit", nullable: false),
-                    AccessFailedCount = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
+                    AccessFailedCount = table.Column<int>(type: "int", nullable: false)},
+                constraints: table => {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
                 });
-
             migrationBuilder.CreateTable(
                 name: "Countries",
                 schema: "HospitalWebApp",
-                columns: table => new
-                {
+                columns: table => new {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Token = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: false),
                     Code = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
-                constraints: table =>
-                {
+                constraints: table => {
                     table.PrimaryKey("PK_Countries", x => x.Id);
                 });
-
             migrationBuilder.CreateTable(
                 name: "CountryCurrency",
                 schema: "HospitalWebApp",
-                columns: table => new
-                {
+                columns: table => new {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     CountryId = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CurrencyId = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Token = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: false),
                     Code = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true)},
+                constraints: table => {
                     table.PrimaryKey("PK_CountryCurrency", x => x.Id);
                 });
-
             migrationBuilder.CreateTable(
                 name: "Currencies",
                 schema: "HospitalWebApp",
-                columns: table => new
-                {
+                columns: table => new {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Token = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: false),
                     Code = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true)},
+                constraints: table => {
                     table.PrimaryKey("PK_Currencies", x => x.Id);
                 });
-
             migrationBuilder.CreateTable(
                 name: "PatientAppointment",
                 schema: "HospitalWebApp",
-                columns: table => new
-                {
+                columns: table => new {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     PatientId = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     AppointmentId = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Token = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: false),
                     Code = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true)},
+                constraints: table => {
                     table.PrimaryKey("PK_PatientAppointment", x => x.Id);
                 });
-
             migrationBuilder.CreateTable(
                 name: "Patients",
                 schema: "HospitalWebApp",
-                columns: table => new
-                {
+                columns: table => new {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -148,25 +119,19 @@ namespace EMEHospitalWebApp.Migrations
                     BirthDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     IdCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CountryId = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Token = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: false)
-                },
-                constraints: table =>
-                {
+                    Token = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: false)},
+                constraints: table => {
                     table.PrimaryKey("PK_Patients", x => x.Id);
                 });
-
             migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
-                columns: table => new
-                {
+                columns: table => new {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     RoleId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     ClaimType = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ClaimValue = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
+                    ClaimValue = table.Column<string>(type: "nvarchar(max)", nullable: true)},
+                constraints: table => {
                     table.PrimaryKey("PK_AspNetRoleClaims", x => x.Id);
                     table.ForeignKey(
                         name: "FK_AspNetRoleClaims_AspNetRoles_RoleId",
@@ -175,19 +140,15 @@ namespace EMEHospitalWebApp.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
-
             migrationBuilder.CreateTable(
                 name: "AspNetUserClaims",
-                columns: table => new
-                {
+                columns: table => new {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     ClaimType = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ClaimValue = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
+                    ClaimValue = table.Column<string>(type: "nvarchar(max)", nullable: true)},
+                constraints: table => {
                     table.PrimaryKey("PK_AspNetUserClaims", x => x.Id);
                     table.ForeignKey(
                         name: "FK_AspNetUserClaims_AspNetUsers_UserId",

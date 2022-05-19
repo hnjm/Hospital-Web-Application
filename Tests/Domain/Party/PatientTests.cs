@@ -17,6 +17,12 @@ namespace EMEHospitalWebApp.Tests.Domain.Party {
             var expected = $"{obj.FirstName} {obj.LastName} ({obj.Gender.Description()}, {obj.BirthDate}) {obj.Country?.Name}";
             areEqual(expected, obj.ToString());
         }
+        [TestMethod] public void PatientAppointmentsTest()
+            => itemsTest<IPatientAppointmentRepo, PatientAppointment, PatientAppointmentData>(
+                d => d.AppointmentId = obj.Id, d => new PatientAppointment(d), () => obj.PatientAppointments);
+        [TestMethod] public void AppointmentsTest() => relatedItemsTest<IAppointmentRepo, PatientAppointment, Appointment, AppointmentData>
+        (PatientAppointmentsTest, () => obj.PatientAppointments, () => obj.Appointments,
+            x => x.AppointmentId, d => new Appointment(d), c => c?.Data, x => x?.Appointment?.Data);
         [TestMethod] public void CountryTest() => itemTest<ICountriesRepo, Country, CountryData>(
             obj.CountryId, d => new Country(d), () => obj.Country);
     }
