@@ -10,6 +10,7 @@ namespace EMEHospitalWebApp.Tests.Infra {
         private HospitalWebAppDb? db;
         protected override HospitalWebAppDb createObj() {
             db = GetRepo.Instance<HospitalWebAppDb>();
+            isNotNull(db);
             return db;
         }
         private void dbTest<TData>(DbSet<TData>? set) where TData : class, new() {

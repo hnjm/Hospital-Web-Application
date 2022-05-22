@@ -33,8 +33,8 @@ namespace EMEHospitalWebApp.Tests.Pages {
             var db = GetRepo.Instance<HospitalWebAppDb>();
             return new testClass(new AppointmentsRepo(db));
         }
-        private AppointmentsRepo r;
-        private AppointmentsPage p;
+        private AppointmentsRepo? r;
+        private AppointmentsPage? p;
         private string? dName;
         private string? vName;
         [TestInitialize] public void Init() {
@@ -44,13 +44,16 @@ namespace EMEHospitalWebApp.Tests.Pages {
             vName = new AppointmentView()?.GetType()?.GetProperty(dName)?.GetCustomAttribute<DisplayNameAttribute>()?.DisplayName;
         }
         [TestMethod] public void CurrentOrderTest() {
+            isNotNull(r);
             r.CurrentOrder = dName;
-            areEqual(vName, p.CurrentOrder);
+            areEqual(vName, p?.CurrentOrder);
+            isNotNull(p);
             p.CurrentOrder = dName + "_desc";
             areEqual(vName + "_desc", p.CurrentOrder);
         }
         [TestMethod] public void SortOrderTest() {
             isNotNull(vName);
+            isNotNull(p);
             var n = p.SortOrder(vName);
             areEqual(dName + "_desc", n);
         }

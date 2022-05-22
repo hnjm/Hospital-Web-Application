@@ -8,11 +8,11 @@ using EMEHospitalWebApp.Data.Party;
 
 namespace EMEHospitalWebApp.Tests.Aids {
     [TestClass] public class GetRandomTests : TypeTests {
-        private void Test<T>(T min, T max) where T : IComparable<T> {
+        private static void Test<T>(T min, T max) where T : IComparable<T> {
             var x = GetRandom.Value(min, max);
             var y = GetRandom.Value(min, max);
             while (x == y) {
-                if (Equals(min, max)) min = GetRandom.Value(typeof(T));
+                if (Equals(min, max)) min = GetRandom.Value(typeof(T)) ?? new Random().Next();
                 y = GetRandom.Value(min, max);
             }
             isInstanceOfType(x, typeof(T));
@@ -107,7 +107,7 @@ namespace EMEHospitalWebApp.Tests.Aids {
             var x = f();
             var y = f();
             var i = 0;
-            while (x.Equals(y)) {
+            while (x != null && x.Equals(y)) {
                 y = f();
                 if (i == count) areNotEqual(x, y);
                 i++;

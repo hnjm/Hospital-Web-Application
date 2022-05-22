@@ -18,7 +18,7 @@ namespace EMEHospitalWebApp.Tests.Soft {
     {
         protected TData? d;
         protected TView? v;
-        protected string id;
+        protected string? id;
         protected List<string>? displayNameList;
         protected Dictionary<string, string>? genderDictionary;
         protected virtual void Init(Func<TData, TObj> toObj) {

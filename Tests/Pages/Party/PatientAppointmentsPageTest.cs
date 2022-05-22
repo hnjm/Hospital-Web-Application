@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using EMEHospitalWebApp.Aids;
 using EMEHospitalWebApp.Data.Party;
 using EMEHospitalWebApp.Domain;
 using EMEHospitalWebApp.Domain.Party;
@@ -19,17 +20,17 @@ namespace EMEHospitalWebApp.Tests.Pages.Party {
         }
         private HospitalWebAppDb? db;
         private PatientAppointmentsPage? p;
-        private string id;
+        private string? id;
         [TestInitialize] public void Init() {
             db = GetRepo.Instance<HospitalWebAppDb>();
             p = new PatientAppointmentsPage(new PatientAppointmentsRepo(db), new AppointmentsRepo(db), new PatientsRepo(db));
             id = "12321";
-            db.Add(new PatientData() { Id = id, FirstName = "Henri", LastName = "Haugas" });
-            db.Add(new PatientData() { FirstName = "Martin", LastName = "Herem" });
-            db.Add(new AppointmentData() { Id = id, PatientsId = "Henri", DoctorsId = "Haugas" });
-            db.Add(new AppointmentData() { PatientsId = "Martin", DoctorsId = "Herem" });
-            db.Add(new PatientAppointmentData() { Id = id, PatientId = "Martin", AppointmentId = "Herem" });
-            db.SaveChanges();
+            db?.Add(new PatientData() { Id = id, FirstName = "Henri", LastName = "Haugas" });
+            db?.Add(new PatientData() { FirstName = "Martin", LastName = "Herem" });
+            db?.Add(new AppointmentData() { Id = id, PatientsId = "Henri", DoctorsId = "Haugas" });
+            db?.Add(new AppointmentData() { PatientsId = "Martin", DoctorsId = "Herem" });
+            db?.Add(new PatientAppointmentData() { Id = id, PatientId = "Martin", AppointmentId = "Herem" });
+            db?.SaveChanges();
         }
         [TestMethod] public void IndexColumnsTest() => isReadOnly<string[]>();
         [TestMethod] public void PatientNameTest() 
@@ -52,8 +53,9 @@ namespace EMEHospitalWebApp.Tests.Pages.Party {
         }
         [TestMethod] public void ErrorTest() {
             p?.ModelState.AddModelError("key", "error message");
-            var d = new PatientAppointmentData() { Id = id, PatientId = "Martin", AppointmentId = "Herem", Code = "EST", Description = "Euro", Name = "Estonia", Token = new byte[] {1, 2}};
+            var d = new PatientAppointmentData() { Id = id ?? GetRandom.Int32(1, 20).ToString(), PatientId = "Martin", AppointmentId = "Herem", Code = "EST", Description = "Euro", Name = "Estonia", Token = new byte[] {1, 2}};
             var v = new PatientAppointmentViewFactory().Create(new PatientAppointment(d));
+            isNotNull(p);
             p.Item = v;
             p.Items = new List<PatientAppointmentView>() { v };
             //p?.OnGetEditAsync(id);

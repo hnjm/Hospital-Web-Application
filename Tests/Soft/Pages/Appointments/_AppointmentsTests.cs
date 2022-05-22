@@ -19,6 +19,7 @@ namespace EMEHospitalWebApp.Tests.Soft.Pages.Appointments {
                 isTrue(html.Contains(d.Id));
                 isTrue(html.Contains(d.PatientsId));
                 isTrue(html.Contains(d.DoctorsId));
+                isNotNull(d.DateTime);
                 isTrue(html.Contains(d.DateTime.Value.ToString(format)));
                 isTrue(html.Contains(d.DiagnosisId));
             }

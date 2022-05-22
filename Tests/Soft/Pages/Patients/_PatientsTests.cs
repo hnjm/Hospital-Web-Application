@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using EMEHospitalWebApp.Data.Party;
 using EMEHospitalWebApp.Domain.Party;
 using EMEHospitalWebApp.Facade.Party;
@@ -16,12 +17,14 @@ namespace EMEHospitalWebApp.Tests.Soft.Pages.Patients {
             isNotNull(d.Gender);
             isNotNull(d.IdCode);
             if (displayNameList is not null) foreach (var name in displayNameList) isTrue(html.Contains(name));
-            foreach (var genderValue in genderDictionary.Keys) if (genderValue == d.Gender.Value.ToString()) gender = genderDictionary[genderValue];
+            if (genderDictionary?.Keys is not null) foreach (var genderValue in genderDictionary.Keys.Where(genderValue 
+                                                                 => genderValue == d.Gender.Value.ToString())) gender = genderDictionary[genderValue];
             if (!url.Contains("Create")) {
                 isTrue(html.Contains(d.Id));
                 isTrue(html.Contains(d.FirstName));
                 isTrue(html.Contains(d.LastName));
-                isTrue(html.Contains(gender));
+                isTrue(html.Contains(gender)); 
+                isNotNull(d.BirthDate);
                 isTrue(html.Contains(d.BirthDate.Value.ToString(format)));
                 //isTrue(html.Contains(d.CountryId)); TODO
             }

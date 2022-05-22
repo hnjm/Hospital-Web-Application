@@ -9,10 +9,10 @@ namespace EMEHospitalWebApp.Tests.Aids {
             var v = GetRandom.Value<AppointmentView>();
             var d = new AppointmentData();
             Copy.Properties(v, d);
-            areEqual(v.Id, d.Id);
-            areEqual(v.PatientsId, d.PatientsId);
-            areEqual(v.DoctorsId, d.DoctorsId);
-            areEqual(v.DateTime, d.DateTime);
+            areEqual(v?.Id, d.Id);
+            areEqual(v?.PatientsId, d.PatientsId);
+            areEqual(v?.DoctorsId, d.DoctorsId);
+            areEqual(v?.DateTime, d.DateTime);
         }
     }
 }

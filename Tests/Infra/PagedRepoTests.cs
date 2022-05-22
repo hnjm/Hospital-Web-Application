@@ -24,7 +24,7 @@ namespace EMEHospitalWebApp.Tests.Infra {
         }
         [TestInitialize] public void Init() {
             db = GetRepo.Instance<HospitalWebAppDb>();
-            set = db.Appointments;
+            set = db?.Appointments;
             r = new AppointmentsRepo(db);
         }
         [TestMethod] public void PageIndexTest() => isProperty<int>();

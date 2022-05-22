@@ -37,7 +37,7 @@ namespace EMEHospitalWebApp.Tests {
             reportNotAllIsTested();
         }
 
-        private void removeInterfaces() => typesToBeTested.RemoveAll(t => t.IsInterface);
+        private void removeInterfaces() => typesToBeTested?.RemoveAll(t => t.IsInterface);
         private void removeNotInNamespace(List<Type>? t, string? nameSpace) => t?.Remove(x 
             => ! x.NameStarts(nameSpace));
         private void removeNotInClassTests() => testingTypes.Remove(x => !x.NameEnds(testsStr));

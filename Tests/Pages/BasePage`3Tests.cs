@@ -61,8 +61,8 @@ namespace EMEHospitalWebApp.Tests.Pages {
         [TestInitialize] public void Init() {
             var d = new AppointmentData() { Id = "123", Token = new byte[] { 1, 2 } };
             db = GetRepo.Instance<HospitalWebAppDb>();
-            db.Add(d);
-            db.SaveChanges();
+            db?.Add(d);
+            db?.SaveChanges();
             v = new AppointmentViewFactory().Create(new Appointment(d));
             p = new AppointmentsPage(new AppointmentsRepo(db));
         }
