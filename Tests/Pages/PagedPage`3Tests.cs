@@ -76,6 +76,7 @@ namespace EMEHospitalWebApp.Tests.Pages {
             areEqual(true, p?.HasPreviousPage);
         }
         [TestMethod] public void IndexColumnsTest() {
+            isNotNull(obj.IndexColumns);
             var ic = p?.IndexColumns;
             var d = new AppointmentData();
             var piL = new AppointmentData().GetType().GetProperties();

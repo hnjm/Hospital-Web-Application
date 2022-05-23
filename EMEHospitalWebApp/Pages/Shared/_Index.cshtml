@@ -4,7 +4,7 @@
 	var firstDisabled = (Model?.PageIndex != 0) ? "" : "disabled";
 	var prevDisabled = (Model?.HasPreviousPage) ? "" : "disabled";
 	var nextDisabled = (Model?.HasNextPage) ? "" : "disabled";
-	var lastDisabled = (Model?.PageIndex != Model?.TotalPages - 1) ? "" : "disabled";
+	var lastDisabled = (Model?.PageIndex != Model?.TotalPages - 1 && Model?.TotalPages != 0) ? "" : "disabled";
 	var showMessage = $"Page {Model?.PageIndex + 1} of total pages {Model?.TotalPages}";
 }
 
